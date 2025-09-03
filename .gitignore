@@ -1,3 +1,6 @@
+# TODO: .gitignore 파일 수정
+# 나중에 vite ignore template 공부하면 수정할 예정
+
 # Logs
 logs
 *.log
