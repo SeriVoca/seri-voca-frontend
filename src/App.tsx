@@ -1,9 +1,8 @@
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
+
 function App() {
-  return (
-    <div className="flex cursor-pointer flex-col p-4 pt-2 text-xl text-red-500">
-      Seri Voca Code Rabbit Test
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
