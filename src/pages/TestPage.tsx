@@ -10,10 +10,17 @@ const TestPage = () => {
         <main className="flex h-11/12 w-full flex-col items-center justify-end p-4">
           <div className="mb-4 flex w-full flex-1 flex-col items-center justify-center rounded-xl bg-[#f2f4f0]"></div>
           <div className="flex w-full items-center justify-between">
-            <Button onClick={() => alert('Test Button Clicked!')}>제출하기</Button>
-            <Button variant="secondary" onClick={() => alert('Test Button Clicked!')}>
-              취소
-            </Button>
+            <Button
+              content="제출하기"
+              variant="primary"
+              onClick={() => alert('Test Button Clicked!')}
+            />
+            <Button
+              content="취소"
+              variant="disabled"
+              onClick={() => alert('Test Button Clicked!')}
+            />
+            <Button content="테스트" className="bg-red-500 px-10" />
           </div>
         </main>
       </div>
