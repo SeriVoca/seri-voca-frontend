@@ -8,7 +8,7 @@ const BottomNavbar = () => {
   return (
     <div className="flex h-[4rem] items-center justify-around">
       <BottomNavItem active={path === '/'} navKey="home" />
-      <BottomNavItem active={path === '/word-book'} navKey="word-book" />
+      <BottomNavItem active={path === '/wordbook'} navKey="word-book" />
       <BottomNavItem active={path === '/setting'} navKey="setting" />
     </div>
   );

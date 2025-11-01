@@ -26,7 +26,7 @@ export const BOTTOM_NAV_MAPPER: Record<BOTTOMM_NAV_KEY, BOTTOM_NAV_ITEM> = {
   },
   'word-book': {
     navKey: 'word-book',
-    path: '/word-book',
+    path: '/wordbook',
     status: 'ready',
     icon: 'BookOpen',
   },
