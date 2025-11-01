@@ -6,7 +6,7 @@ const BottomNavbar = () => {
   const path = location.pathname;
   console.log('Current path:', path);
   return (
-    <div className="flex justify-around">
+    <div className="flex h-[4rem] items-center justify-around">
       <BottomNavItem active={path === '/'} navKey="home" />
       <BottomNavItem active={path === '/word-book'} navKey="word-book" />
       <BottomNavItem active={path === '/setting'} navKey="setting" />
