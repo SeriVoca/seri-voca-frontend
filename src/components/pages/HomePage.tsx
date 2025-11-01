@@ -1,10 +1,10 @@
-import { BottomNavItem } from '../atoms/BottomNav/BottomNavItem';
+import BottomNavbar from '../organisms/BottomNavBar/BottomNavbar';
 
 const HomePage = () => {
   return (
     <div>
       <h1>Home Page</h1>
-      <BottomNavItem navKey="home" />
+      <BottomNavbar />
     </div>
   );
 };

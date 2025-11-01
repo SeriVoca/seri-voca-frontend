@@ -28,12 +28,12 @@ export const BOTTOM_NAV_MAPPER: Record<BOTTOMM_NAV_KEY, BOTTOM_NAV_ITEM> = {
     navKey: 'word-book',
     path: '/word-book',
     status: 'ready',
-    icon: 'Lock',
+    icon: 'BookOpen',
   },
   setting: {
     navKey: 'setting',
     path: '/setting',
     status: 'ready',
-    icon: 'Lock',
+    icon: 'User',
   },
 };

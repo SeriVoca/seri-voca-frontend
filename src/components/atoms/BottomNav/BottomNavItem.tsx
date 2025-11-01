@@ -3,15 +3,22 @@ import * as Icons from '@mynaui/icons-react';
 
 type BottomNavItemProps = {
   navKey: Key;
+  active: boolean;
 };
 
-export const BottomNavItem = ({ navKey }: BottomNavItemProps) => {
+export const BottomNavItem = ({ navKey, active }: BottomNavItemProps) => {
   const iconName = Mapper[navKey].icon as keyof typeof Icons;
   const Icon = Icons[iconName] as React.ComponentType<{ size?: number; color?: string }>;
 
+  const IconBg = active ? 'bg-green-300' : '';
+  const IconColor = active ? 'white' : 'black';
+
+  console.log('Rendering BottomNavItem:', { navKey, active, iconName });
   return (
-    <div className="flex h-3 w-4.5 items-center justify-center">
-      {Icon ? <Icon size={20} /> : null}
+    <div
+      className={`${IconBg} flex h-[3rem] w-[4.5rem] items-center justify-center rounded-[2rem]`}
+    >
+      {Icon ? <Icon size={20} color={IconColor} /> : null}
     </div>
   );
 };
