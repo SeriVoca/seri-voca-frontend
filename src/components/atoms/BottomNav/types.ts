@@ -2,8 +2,16 @@ import * as Icons from '@mynaui/icons-react';
 
 export type BOTTOMM_NAV_KEY = 'home' | 'word-book' | 'setting';
 
+/*
+  @param
+  - navKey : 네비게이션 아이템 키
+  - path : 네비게이션 경로
+  - status : 네비게이션 활성화 여부
+  - icon : 네비게이션 아이콘 이름
+*/
+
 export type BOTTOM_NAV_ITEM = {
-  key: BOTTOMM_NAV_KEY;
+  navKey: BOTTOMM_NAV_KEY;
   path: string;
   status?: 'ready' | 'disabled';
   icon: keyof typeof Icons;
@@ -11,19 +19,19 @@ export type BOTTOM_NAV_ITEM = {
 
 export const BOTTOM_NAV_MAPPER: Record<BOTTOMM_NAV_KEY, BOTTOM_NAV_ITEM> = {
   home: {
-    key: 'home',
+    navKey: 'home',
     path: '/',
     status: 'ready',
     icon: 'Lock',
   },
   'word-book': {
-    key: 'word-book',
+    navKey: 'word-book',
     path: '/word-book',
     status: 'ready',
     icon: 'Lock',
   },
   setting: {
-    key: 'setting',
+    navKey: 'setting',
     path: '/setting',
     status: 'ready',
     icon: 'Lock',

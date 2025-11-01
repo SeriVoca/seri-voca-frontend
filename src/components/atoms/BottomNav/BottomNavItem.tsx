@@ -1,16 +1,17 @@
-import * as Icons from '@mynaui/icons-react';
 import { BOTTOM_NAV_MAPPER as Mapper, type BOTTOMM_NAV_KEY as Key } from './types';
+import * as Icons from '@mynaui/icons-react';
 
 type BottomNavItemProps = {
-  key: Key;
+  navKey: Key;
 };
 
-export const BottomNavItem = ({ key }: BottomNavItemProps) => {
-  const IconComponent = Icons[Mapper[key].icon] as React.ComponentType<{ size: number }>;
+export const BottomNavItem = ({ navKey }: BottomNavItemProps) => {
+  const iconName = Mapper[navKey].icon as keyof typeof Icons;
+  const Icon = Icons[iconName] as React.ComponentType<{ size?: number; color?: string }>;
 
   return (
     <div className="flex h-3 w-4.5 items-center justify-center">
-      <IconComponent size={24} />
+      {Icon ? <Icon size={20} /> : null}
     </div>
   );
 };
