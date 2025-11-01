@@ -20,7 +20,6 @@ export const BottomNavItem = ({ navKey, active }: BottomNavItemProps) => {
     navigate(Mapper[navKey].path);
   };
 
-  console.log('Rendering BottomNavItem:', { navKey, active, iconName });
   return (
     <button
       className={`${IconBg} flex h-[3rem] w-[4.5rem] items-center justify-center rounded-[2rem]`}

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 const BottomNavbar = () => {
   const location = useLocation();
   const path = location.pathname;
-  console.log('Current path:', path);
+
   return (
     <div className="flex h-[4rem] items-center justify-around">
       <BottomNavItem active={path === '/'} navKey="home" />
