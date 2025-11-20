@@ -1,0 +1,16 @@
+import { BottomNavItem } from '../../atoms/BottomNav/BottomNavItem';
+import { useLocation } from 'react-router-dom';
+
+const BottomNavbar = () => {
+  const location = useLocation();
+  const path = location.pathname;
+
+  return (
+    <div className="flex h-[4rem] items-center justify-around">
+      <BottomNavItem active={path === '/'} navKey="home" />
+      <BottomNavItem active={path === '/wordbook'} navKey="word-book" />
+      <BottomNavItem active={path === '/setting'} navKey="setting" />
+    </div>
+  );
+};
+export default BottomNavbar;

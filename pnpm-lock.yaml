@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@mynaui/icons-react':
+        specifier: ^0.3.9
+        version: 0.3.9(react@19.1.1)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -410,6 +413,11 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@mynaui/icons-react@0.3.9':
+    resolution: {integrity: sha512-xUCDqnFm4kM3MFNcVFxWrLho1L1iI5/S9601vnsITM5F/mGQFJupk1SY2YsBCwGjNZlmYkBzJx3sJVV9Wb4TbA==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2371,6 +2379,11 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@mynaui/icons-react@0.3.9(react@19.1.1)':
+    dependencies:
+      prop-types: 15.8.1
+      react: 19.1.1
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
