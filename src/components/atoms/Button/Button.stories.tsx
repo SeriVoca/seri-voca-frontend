@@ -1,9 +1,8 @@
-// src/shared/ui/Button.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
-  title: 'Shared/UI/Button',
+  title: 'Atoms/Button/Button',
   component: Button,
   tags: ['autodocs'],
 };
@@ -33,6 +32,7 @@ export const Disabled: Story = {
   },
 };
 
+// custom 가능
 export const CustomClasses: Story = {
   args: {
     content: 'Custom Styled',
