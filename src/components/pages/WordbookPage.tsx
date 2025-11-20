@@ -21,12 +21,3 @@ const tabs = [
   { id: 1, label: '커리큘럼' },
   { id: 2, label: '내 단어장' },
 ];
-const WordbookPage = () => {
-  return (
-    <div>
-      <h1>Wordbook Page</h1>
-    </div>
-  );
-};
-
-export default WordbookPage;
