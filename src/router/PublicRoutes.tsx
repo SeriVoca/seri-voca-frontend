@@ -10,10 +10,6 @@ export const publicRoutes: RouteObject[] = [
         path: '/login',
         element: <LoginPage />, // TODO: public layout 추가
       },
-      {
-        path: '/login',
-        element: <LoginPage />, // TODO: public layout 추가
-      },
     ],
   },
 ];
