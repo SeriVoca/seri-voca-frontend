@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 // @ts-nocheck
 
 // defineConfig 는 TypeScript 전용이므로 제거합니다.
@@ -15,7 +18,6 @@ export default [
   {
     ignores: ['dist', 'build', 'coverage', 'node_modules'],
   },
-
   {
     languageOptions: {
       globals: {
@@ -23,15 +25,9 @@ export default [
         ...globals.node,
       },
     },
-  },
-
-  // JS 권장 설정
-  js.configs.recommended,
-
-  // TS 권장 설정
-  ...tseslint.configs.recommended,
-
-  // React, React Hooks, JSX-A11y 규칙
+  }, // JS 권장 설정
+  js.configs.recommended, // TS 권장 설정
+  ...tseslint.configs.recommended, // React, React Hooks, JSX-A11y 규칙
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     plugins: {
@@ -53,8 +49,7 @@ export default [
       'react/jsx-uses-react': 'off',
       'react/prop-types': 'off', // TypeScript 를 사용하므로 prop-types 는 필요 없음
     },
-  },
-
-  // Prettier 규칙
+  }, // Prettier 규칙
   configPrettier,
+  ...storybook.configs['flat/recommended'],
 ];
