@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { BOTTOM_NAV_MAPPER as Mapper, type BOTTOMM_NAV_KEY as Key } from './types';
+import { BOTTOM_NAV_MAPPER as Mapper, type BOTTOM_NAV_KEY as Key } from './types';
 import * as Icons from '@mynaui/icons-react';
 
 type BottomNavItemProps = {
