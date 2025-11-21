@@ -1,4 +1,5 @@
 import * as Icons from '@mynaui/icons-react';
+import type { ComponentType } from 'react';
 
 type IconItemProps = {
   name: string; // 아이콘 name
@@ -15,7 +16,7 @@ export const IconItem = ({ name, size = 20, color = 'black', className = '' }: I
     return null;
   }
 
-  const Icon = IconComponent as React.ComponentType<{
+  const Icon = IconComponent as ComponentType<{
     size?: number;
     color?: string;
   }>;
