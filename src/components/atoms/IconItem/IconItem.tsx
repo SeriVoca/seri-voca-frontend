@@ -4,18 +4,10 @@ type IconItemProps = {
   name: string; // 아이콘 name
   size?: number; // 크기
   color?: string; // 색상
-  className?: string; // optional wrapper 스타일
-  onClick?: () => void; // 클릭 핸들러
+  className?: string; // wrapper 스타일
 };
 
-export const IconItem = ({
-  name,
-  size = 20,
-  color = 'black',
-  className = '',
-  onClick,
-}: IconItemProps) => {
-  // name → 실제 아이콘 컴포넌트 찾기
+export const IconItem = ({ name, size = 20, color = 'black', className = '' }: IconItemProps) => {
   const IconComponent = (Icons as Record<string, unknown>)[name];
 
   if (!IconComponent) {
@@ -23,11 +15,14 @@ export const IconItem = ({
     return null;
   }
 
-  const Icon = IconComponent as React.ComponentType<{ size?: number; color?: string }>;
+  const Icon = IconComponent as React.ComponentType<{
+    size?: number;
+    color?: string;
+  }>;
 
   return (
-    <button className={`flex items-center justify-center ${className}`} onClick={onClick}>
+    <span className={`inline-flex items-center justify-center ${className}`}>
       <Icon size={size} color={color} />
-    </button>
+    </span>
   );
 };
