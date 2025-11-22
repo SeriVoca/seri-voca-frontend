@@ -1,3 +1,4 @@
+import Header from '../organisms/Header/Header';
 import TabSwitcher from '../organisms/TabSwitcher';
 import { useState } from 'react';
 
@@ -6,7 +7,7 @@ const WordbooksPage = () => {
 
   return (
     <div className="flex w-full flex-col items-center bg-gray-50">
-      <h1>Wordbook Page</h1>
+      <Header title="Wordbooks Page" variant="basic" />
       <main className="flex w-full flex-col items-center px-5">
         <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
       </main>
