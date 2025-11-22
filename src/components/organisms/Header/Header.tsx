@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react';
-import { IconItem } from '../../atoms/IconItem/IconItem';
+import { Icon } from '../../atoms/Icon/Icon';
 
 export type HeaderProps = {
   title: string;
@@ -28,13 +28,11 @@ const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps
   if (variant === 'LCTA') {
     return (
       <Wrapper>
-        <button onClick={onLCTAClick}>{LCTAIcon && <IconItem name={LCTAIcon} />}</button>
+        <button onClick={onLCTAClick}>{LCTAIcon && <Icon name={LCTAIcon} />}</button>
 
         <h1 className="flex-1 text-center text-lg font-semibold">{title}</h1>
 
-        <div className="pointer-events-none opacity-0">
-          {LCTAIcon && <IconItem name={LCTAIcon} />}
-        </div>
+        <div className="pointer-events-none opacity-0">{LCTAIcon && <Icon name={LCTAIcon} />}</div>
       </Wrapper>
     );
   }

@@ -8,7 +8,7 @@ type IconItemProps = {
   className?: string; // wrapper 스타일
 };
 
-export const IconItem = ({ name, size = 20, color = 'black', className = '' }: IconItemProps) => {
+export const Icon = ({ name, size = 20, color = 'black', className = '' }: IconItemProps) => {
   const IconComponent = (Icons as Record<string, unknown>)[name];
 
   if (!IconComponent) {
