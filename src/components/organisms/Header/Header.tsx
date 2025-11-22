@@ -28,7 +28,9 @@ const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps
   if (variant === 'LCTA') {
     return (
       <Wrapper>
-        <button onClick={onLCTAClick}>{LCTAIcon && <Icon name={LCTAIcon} />}</button>
+        <button className="flex cursor-pointer items-center" onClick={onLCTAClick}>
+          {LCTAIcon && <Icon name={LCTAIcon} />}
+        </button>
 
         <h1 className="flex-1 text-center text-lg font-semibold">{title}</h1>
 
