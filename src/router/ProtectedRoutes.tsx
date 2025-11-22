@@ -10,15 +10,15 @@ export const protectedRoutes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <HomePage />, // TODO: protected layout 추가
+        element: <HomePage />,
       },
       {
         path: '/wordbook',
-        element: <WordbookPage />, // TODO: protected layout 추가
+        element: <WordbookPage />,
       },
       {
         path: '/setting',
-        element: <SettingPage />, // TODO: protected layout 추가
+        element: <SettingPage />,
       },
     ],
   },
