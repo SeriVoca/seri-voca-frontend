@@ -3,6 +3,7 @@ import HomePage from '../components/pages/HomePage';
 import WordbookPage from '../components/pages/WordbookPage';
 import Layout from '../layouts/Layout';
 import SettingPage from '../components/pages/SettingPage';
+import { WordbookDetailPage } from '../components/pages/WordbookDetailPage';
 
 export const protectedRoutes: RouteObject[] = [
   {
@@ -14,7 +15,16 @@ export const protectedRoutes: RouteObject[] = [
       },
       {
         path: '/wordbook',
-        element: <WordbookPage />,
+        children: [
+          {
+            index: true,
+            element: <WordbookPage />,
+          },
+          {
+            path: ':day/wordbook-detail',
+            element: <WordbookDetailPage />,
+          },
+        ],
       },
       {
         path: '/setting',
