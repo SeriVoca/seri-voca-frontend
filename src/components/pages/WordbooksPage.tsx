@@ -1,7 +1,7 @@
 import TabSwitcher from '../organisms/TabSwitcher';
 import { useState } from 'react';
 
-const WordbookPage = () => {
+const WordbooksPage = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
 
   return (
@@ -14,7 +14,7 @@ const WordbookPage = () => {
   );
 };
 
-export default WordbookPage;
+export default WordbooksPage;
 
 // 정적 데이터
 const tabs = [
