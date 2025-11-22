@@ -1,13 +1,14 @@
 import { type RouteObject } from 'react-router-dom';
 import HomePage from '../components/pages/HomePage';
 import WordbookPage from '../components/pages/WordbookPage';
-import Layout from '../layouts/Layout';
+import BottomNavLayout from '../layouts/BottomNavLayout';
 import SettingPage from '../components/pages/SettingPage';
 import { WordbookDetailPage } from '../components/pages/WordbookDetailPage';
+import BasicLayout from '../layouts/BasicLayout';
 
 export const protectedRoutes: RouteObject[] = [
   {
-    element: <Layout />,
+    element: <BottomNavLayout />,
     children: [
       {
         path: '/',
@@ -15,20 +16,20 @@ export const protectedRoutes: RouteObject[] = [
       },
       {
         path: '/wordbook',
-        children: [
-          {
-            index: true,
-            element: <WordbookPage />,
-          },
-          {
-            path: ':day/wordbook-detail',
-            element: <WordbookDetailPage />,
-          },
-        ],
+        element: <WordbookPage />,
       },
       {
         path: '/setting',
         element: <SettingPage />,
+      },
+    ],
+  },
+  {
+    element: <BasicLayout />,
+    children: [
+      {
+        path: '/wordbook/:wordbookId/wordbook-detail',
+        element: <WordbookDetailPage />,
       },
     ],
   },

@@ -1,10 +1,10 @@
 import { type RouteObject } from 'react-router-dom';
 import LoginPage from '../components/pages/LoginPage';
-import Layout from '../layouts/Layout';
+import BottomNavLayout from '../layouts/BottomNavLayout';
 
 export const publicRoutes: RouteObject[] = [
   {
-    element: <Layout />,
+    element: <BottomNavLayout />,
     children: [
       {
         path: '/login',
