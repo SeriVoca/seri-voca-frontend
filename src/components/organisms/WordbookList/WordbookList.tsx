@@ -13,7 +13,7 @@ type Props = {
 
 export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-[1rem]">
       {wordbooks.map((wordbook) => (
         <WordbookItem
           key={wordbook.id}
