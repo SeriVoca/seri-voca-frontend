@@ -12,7 +12,7 @@ const WordbooksPage = () => {
     navigate(`/wordbooks/${id}/wordbook-detail`);
   };
   return (
-    <div className="flex min-h-0 w-full flex-col items-center bg-gray-100">
+    <div className="flex h-full w-full flex-col items-center bg-gray-100">
       <Header title="Wordbooks Page" variant="basic" />
       <main className="mt-[2.25rem] flex min-h-0 w-full flex-1 flex-col items-center px-[1.25rem]">
         <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
