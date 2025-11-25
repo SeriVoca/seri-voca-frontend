@@ -8,7 +8,7 @@ type Props = {
 
 export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) => {
   return (
-    <div className="flex h-18 items-center justify-between rounded-4xl bg-white pr-3 pl-6">
+    <div className="flex h-[4.5rem] shrink-0 items-center justify-between rounded-4xl bg-white pr-[0.75rem] pl-[1.5rem]">
       {/* Text */}
       <div className="flex flex-col">
         <div className="text-xl">{name}</div>
