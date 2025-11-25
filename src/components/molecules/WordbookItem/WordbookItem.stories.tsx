@@ -19,7 +19,7 @@ type Story = StoryObj<typeof WordbookItem>;
 
 export const Default: Story = {
   args: {
-    name: 'Day 1 Vocabulary',
+    title: 'Day 1 Vocabulary',
     caption: '기초 단어 20개 정리',
     handleNavigate: () => {
       console.log('Navigate: Day 1 Vocabulary');
@@ -29,7 +29,7 @@ export const Default: Story = {
 
 export const LongText: Story = {
   args: {
-    name: 'Advanced Vocabulary Collection',
+    title: 'Advanced Vocabulary Collection',
     caption: '긴 캡션 테스트용입니다. 여러 줄 설명을 렌더링하여 UI가 깨지지 않는지 확인하세요.',
     handleNavigate: () => {
       console.log('Navigate: Advanced Vocabulary');
@@ -39,7 +39,7 @@ export const LongText: Story = {
 
 export const Another: Story = {
   args: {
-    name: '영어 회화 주제별 단어장',
+    title: '영어 회화 주제별 단어장',
     caption: '카페/식당/여행 관련 주제별 단어 목록',
     handleNavigate: () => {
       console.log('Navigate: Conversation Wordbook');

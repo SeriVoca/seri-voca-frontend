@@ -1,12 +1,12 @@
 import { Icon } from '../../atoms/Icon/Icon';
 
 type Props = {
-  name: string;
+  title: string;
   caption: string;
   handleNavigate: () => void;
 };
 
-export const WordbookItem = ({ name, caption, handleNavigate }: Props) => {
+export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) => {
   return (
     <div className="flex h-18 items-center justify-between rounded-4xl bg-white pr-3 pl-6">
       {/* Text */}
