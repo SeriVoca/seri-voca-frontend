@@ -16,7 +16,7 @@ const WordbooksPage = () => {
       <Header title="Wordbooks Page" variant="basic" />
       <main className="mt-[2.25rem] flex min-h-0 w-full flex-1 flex-col items-center px-[1.25rem]">
         <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
-        <div className="w-full flex-1 overflow-y-auto py-[1.25rem]">
+        <div className="mt-[1.25rem] mb-[2.25rem] w-full flex-1 overflow-y-auto">
           <WordbookList wordbooks={mockBooks} handleNavigate={handleNavigate} />
         </div>
       </main>
