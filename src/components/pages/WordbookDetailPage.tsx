@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../organisms/Header/Header';
-import type { WordDetailProps } from '../organisms/Word/WordDetail';
-import { WordList } from '../organisms/Word/WordList';
+import type { WordDetailProps } from '../molecules/WordDetail/WordDetail';
+import { WordList } from '../organisms/WordList/WordList';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();

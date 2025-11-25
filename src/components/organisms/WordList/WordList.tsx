@@ -1,4 +1,4 @@
-import { WordDetail, type WordDetailProps } from './WordDetail';
+import { WordDetail, type WordDetailProps } from '../../molecules/WordDetail/WordDetail';
 
 type Props = {
   words: WordDetailProps[];
