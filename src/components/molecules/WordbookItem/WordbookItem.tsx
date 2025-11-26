@@ -16,7 +16,7 @@ export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) =>
       </div>
       {/* Action */}
       <div>
-        <button onClick={() => handleNavigate}>
+        <button onClick={handleNavigate}>
           <Icon name="ChevronRight" color="#B4E35A" />
         </button>
       </div>

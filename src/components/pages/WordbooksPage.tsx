@@ -11,6 +11,7 @@ const WordbooksPage = () => {
   const handleNavigate = (id: number) => {
     navigate(`/wordbooks/${id}/wordbook-detail`);
   };
+
   return (
     <div className="flex h-full w-full flex-col items-center bg-gray-100">
       <Header title="Wordbooks Page" variant="basic" />
@@ -32,6 +33,7 @@ const tabs = [
   { id: 2, label: '내 단어장' },
 ];
 
+// mock data
 const mockBooks = [
   { id: 1, title: 'Day 1 - Basic Vocabulary', caption: '기초 단어 20개 학습' },
   { id: 2, title: 'Day 2 - Essential Verbs', caption: '기초 동사 중심 단어장' },

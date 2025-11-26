@@ -4,11 +4,13 @@ import { WordbookList } from './WordbookList';
 const meta: Meta<typeof WordbookList> = {
   title: 'Components/WordbookList',
   component: WordbookList,
-  decorators: (Story) => (
-    <div style={{ background: '#EEEEEE' }}>
-      <Story />
-    </div>
-  ),
+  decorators: [
+    (Story) => (
+      <div style={{ background: '#EEEEEE' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
