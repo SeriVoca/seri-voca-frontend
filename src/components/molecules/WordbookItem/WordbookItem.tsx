@@ -23,8 +23,3 @@ export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) =>
     </div>
   );
 };
-
-/*
-  # 개선 여지
-  - handleClick 의 조립 위치 -> 상위 컴포넌트로 이동 가능
-*/
