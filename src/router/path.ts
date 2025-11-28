@@ -5,5 +5,6 @@
 export const ROUTES = {
   HOME: '/',
   WORDBOOKS: '/wordbooks',
+  WORDBOOK_DETAIL: '/wordbook/wordbookId/wordbook-detail',
   SETTING: '/setting',
 };

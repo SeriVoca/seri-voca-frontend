@@ -3,13 +3,15 @@ import TabSwitcher from '../organisms/TabSwitcher';
 import { useState } from 'react';
 import { WordbookList } from '../organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../router/path';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
 
   const handleNavigate = (id: number) => {
-    navigate(`/wordbooks/${id}/wordbook-detail`);
+    const path = ROUTES.WORDBOOK_DETAIL.replace('wordbookId', String(id));
+    navigate(path);
   };
 
   return (
