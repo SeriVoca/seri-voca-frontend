@@ -4,7 +4,7 @@ const BasicLayout = () => {
   return (
     <div className="flex justify-center bg-gray-100">
       <div className="flex h-dvh w-dvw flex-col bg-white sm:w-[360px]">
-        <main className="flex h-full w-full flex-1">
+        <main className="flex min-h-0 flex-1 flex-col">
           <Outlet />
         </main>
       </div>

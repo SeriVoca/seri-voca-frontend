@@ -1,25 +1,28 @@
+import { ROUTES } from './path';
 import { type RouteObject } from 'react-router-dom';
-import HomePage from '../components/pages/HomePage';
-import WordbookPage from '../components/pages/WordbookPage';
+
+import BasicLayout from '../layouts/BasicLayout';
 import BottomNavLayout from '../layouts/BottomNavLayout';
+
+import HomePage from '../components/pages/HomePage';
+import WordbooksPage from '../components/pages/WordbooksPage';
 import SettingPage from '../components/pages/SettingPage';
 import { WordbookDetailPage } from '../components/pages/WordbookDetailPage';
-import BasicLayout from '../layouts/BasicLayout';
 
 export const protectedRoutes: RouteObject[] = [
   {
     element: <BottomNavLayout />,
     children: [
       {
-        path: '/',
+        path: ROUTES.HOME,
         element: <HomePage />,
       },
       {
-        path: '/wordbook',
-        element: <WordbookPage />,
+        path: ROUTES.WORDBOOKS,
+        element: <WordbooksPage />,
       },
       {
-        path: '/setting',
+        path: ROUTES.SETTING,
         element: <SettingPage />,
       },
     ],

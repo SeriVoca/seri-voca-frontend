@@ -1,4 +1,5 @@
 import * as Icons from '@mynaui/icons-react';
+import { ROUTES } from '../../../router/path';
 
 export type BOTTOM_NAV_KEY = 'home' | 'word-book' | 'setting';
 
@@ -20,19 +21,19 @@ export type BOTTOM_NAV_ITEM = {
 export const BOTTOM_NAV_MAPPER: Record<BOTTOM_NAV_KEY, BOTTOM_NAV_ITEM> = {
   home: {
     navKey: 'home',
-    path: '/',
+    path: ROUTES.HOME,
     status: 'ready',
     icon: 'Lock',
   },
   'word-book': {
     navKey: 'word-book',
-    path: '/wordbook',
+    path: ROUTES.WORDBOOKS,
     status: 'ready',
     icon: 'BookOpen',
   },
   setting: {
     navKey: 'setting',
-    path: '/setting',
+    path: ROUTES.SETTING,
     status: 'ready',
     icon: 'User',
   },
