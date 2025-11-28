@@ -13,7 +13,7 @@ export const WordbookDetailPage = () => {
         LCTAIcon="ChevronLeft"
         onLCTAClick={() => navigate(-1)}
       />
-      <div className="flex h-full w-full flex-1 flex-col overflow-y-auto">
+      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={mockWordList} />
       </div>
     </div>
