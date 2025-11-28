@@ -2,16 +2,23 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../organisms/Header/Header';
 import type { WordDetailProps } from '../molecules/WordDetail/WordDetail';
 import { WordList } from '../organisms/WordList/WordList';
+import { ROUTES } from '../../router/path';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    const path = ROUTES.WORDBOOKS;
+    navigate(path);
+  };
+
   return (
     <div className="flex h-full w-full flex-col">
       <Header
         title="단어장 상세 페이지"
         variant="LCTA"
         LCTAIcon="ChevronLeft"
-        onLCTAClick={() => navigate(-1)}
+        onLCTAClick={handleNavigate}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={mockWordList} />
