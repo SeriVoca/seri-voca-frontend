@@ -10,7 +10,7 @@ const WordbooksPage = () => {
   const [activeTab, setActiveTab] = useState<number>(1);
 
   const handleNavigate = (id: number) => {
-    const path = ROUTES.WORDBOOK_DETAIL.replace('wordbookId', String(id));
+    const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));
     navigate(path);
   };
 

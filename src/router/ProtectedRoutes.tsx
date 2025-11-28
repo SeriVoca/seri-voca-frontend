@@ -31,7 +31,7 @@ export const protectedRoutes: RouteObject[] = [
     element: <BasicLayout />,
     children: [
       {
-        path: '/wordbook/:wordbookId/wordbook-detail',
+        path: ROUTES.WORDBOOK_DETAIL,
         element: <WordbookDetailPage />,
       },
     ],
