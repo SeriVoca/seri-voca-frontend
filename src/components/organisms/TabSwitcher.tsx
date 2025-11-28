@@ -17,7 +17,7 @@ type Props = {
 
 const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
   return (
-    <div className="flex h-[40px] w-full items-center justify-center gap-[12px] rounded-full bg-white px-[12px] py-[6px]">
+    <div className="flex h-[2.5rem] w-full items-center justify-center gap-[0.75rem] rounded-full bg-white px-[0.75rem] py-[o.375rem]">
       {tabs.map((tab, index) => (
         <TabItem
           key={index}
