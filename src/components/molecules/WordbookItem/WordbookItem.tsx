@@ -16,15 +16,10 @@ export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) =>
       </div>
       {/* Action */}
       <div>
-        <button onClick={() => handleNavigate}>
+        <button onClick={handleNavigate}>
           <Icon name="ChevronRight" color="#B4E35A" />
         </button>
       </div>
     </div>
   );
 };
-
-/*
-  # 개선 여지
-  - handleClick 의 조립 위치 -> 상위 컴포넌트로 이동 가능
-*/
