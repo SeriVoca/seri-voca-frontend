@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { UserProfileCard } from './UserProfileCard';
 
 const meta: Meta<typeof UserProfileCard> = {
-  title: 'Components/UserProfileCard',
+  title: 'Organisms/UserProfileCard',
   component: UserProfileCard,
   tags: ['autodocs'],
   args: {
