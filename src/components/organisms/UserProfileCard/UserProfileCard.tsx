@@ -6,7 +6,7 @@ type Props = {
 
 export const UserProfileCard = ({ profileImage, name, email }: Props) => {
   return (
-    <section className="flex px-[1.75rem] py-[1.25rem]">
+    <section className="flex w-full bg-white px-[1.75rem] py-[1.25rem]">
       <div className="flex items-center gap-[1.75rem]">
         <div className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-full">
           {profileImage ? (
