@@ -1,9 +1,10 @@
 import Header from '../organisms/Header/Header';
 import TabSwitcher from '../organisms/TabSwitcher';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { WordbookList } from '../organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/path';
+import { getWordbookList } from '../../apis/getData';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();
@@ -13,6 +14,14 @@ const WordbooksPage = () => {
     const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));
     navigate(path);
   };
+
+  useEffect(() => {
+    async function fetchWordbookList() {
+      const data = await getWordbookList();
+      console.log(data);
+    }
+    fetchWordbookList();
+  }, []);
 
   return (
     <div className="flex h-full w-full flex-col items-center bg-gray-100">
