@@ -1,14 +1,17 @@
 import { WordbookItem } from '../../molecules/WordbookItem/WordbookItem';
 
 type WordbookLabel = {
-  id: number;
-  title: string;
-  caption: string;
+  order_index: number;
+  wordbook: {
+    id: string;
+    title: string;
+    description: string;
+  };
 };
 
 type Props = {
   wordbooks: WordbookLabel[];
-  handleNavigate: (id: number) => void;
+  handleNavigate: (id: string) => void;
 };
 
 export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {
@@ -16,10 +19,10 @@ export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {
     <div className="flex w-full flex-col gap-[1rem]">
       {wordbooks.map((wordbook) => (
         <WordbookItem
-          key={wordbook.id}
-          title={wordbook.title}
-          caption={wordbook.caption}
-          handleNavigate={() => handleNavigate(wordbook.id)}
+          key={wordbook.wordbook.id}
+          title={wordbook.wordbook.title}
+          caption={wordbook.wordbook.description}
+          handleNavigate={() => handleNavigate(wordbook.wordbook.id)}
         />
       ))}
     </div>
