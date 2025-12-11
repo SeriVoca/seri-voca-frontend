@@ -5,11 +5,12 @@ import { WordbookList } from '../organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/path';
 import { getWordbookList } from '../../apis/getData';
+import { type getWordbookListResponse } from '../../apis/types';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
-  const [wordbooks, setWordbooks] = useState([]);
+  const [wordbooks, setWordbooks] = useState<getWordbookListResponse>([]);
 
   const handleNavigate = (id: string) => {
     const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));
@@ -20,7 +21,6 @@ const WordbooksPage = () => {
     async function fetchWordbookList() {
       const data = await getWordbookList();
       console.log(data);
-      console.log(data[0].wordbook);
       setWordbooks(data);
     }
     fetchWordbookList();
