@@ -3,6 +3,7 @@ import AuthGuard from './guards/AuthGuard'; // 경로에 맞게 수정
 import GuestGuard from './guards/GuestGuard'; // 경로에 맞게 수정
 import { publicRoutes } from './PublicRoutes';
 import { protectedRoutes } from './ProtectedRoutes';
+import { ROUTES } from './path';
 
 const router = createBrowserRouter([
   // 1. 로그인한 유저는 접근 못하는 페이지 (로그인 페이지 등)
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
   // 3. 인증 여부 상관없이 접근 가능한 페이지 (소개 페이지, 404 등)
   {
     path: '*',
-    element: <Navigate to="/" replace />, // TODO: <NotFoundPage />
+    element: <Navigate to={ROUTES.WORDBOOKS} replace />, // TODO: <NotFoundPage /> 로 바꾸기
   },
 ]);
 
