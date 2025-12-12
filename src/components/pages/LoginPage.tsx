@@ -1,12 +1,16 @@
 import supabase from '../../apis/supabaseInstance';
+import { ROUTES } from '../../router/path';
 import KakaoLoginButton from '../molecules/KakaoLoginButton/KakaoLoginButton';
 
+const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL!;
+
 const LoginPage = () => {
+  // TODO : api 컨벤션 논의
   const signInWithKakao = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: 'http://localhost:5173/wordbooks',
+        redirectTo: BASE_URL + ROUTES.WORDBOOKS,
       },
     });
     console.log(data, error);
