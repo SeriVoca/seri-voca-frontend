@@ -18,6 +18,11 @@ const LoginPage = () => {
       },
     });
     console.log(data, error);
+    if (error) {
+      // TODO : 로그인 실패 UX 기획 필요
+      console.error('[ERROR] 로그인 실패: ', error);
+      alert('로그인에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (
