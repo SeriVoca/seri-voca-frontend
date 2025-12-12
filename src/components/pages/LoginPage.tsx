@@ -2,7 +2,11 @@ import supabase from '../../apis/supabaseInstance';
 import { ROUTES } from '../../router/path';
 import KakaoLoginButton from '../molecules/KakaoLoginButton/KakaoLoginButton';
 
-const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL!;
+const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL;
+
+if (!BASE_URL) {
+  throw new Error('VITE_CLIENT_BASE_URL 환경 변수가 설정되지 않았습니다.');
+}
 
 const LoginPage = () => {
   // TODO : api 컨벤션 논의
