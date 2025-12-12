@@ -25,9 +25,11 @@
   },
   "dependencies": {
     "@mynaui/icons-react": "^0.3.9",
+    "@supabase/supabase-js": "^2.87.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.1",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "4.1.3",
