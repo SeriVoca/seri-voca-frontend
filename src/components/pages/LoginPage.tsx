@@ -11,13 +11,12 @@ if (!BASE_URL) {
 const LoginPage = () => {
   // TODO : api 컨벤션 논의
   const signInWithKakao = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
         redirectTo: BASE_URL + ROUTES.WORDBOOKS,
       },
     });
-    console.log(data, error);
     if (error) {
       // TODO : 로그인 실패 UX 기획 필요
       console.error('[ERROR] 로그인 실패: ', error);
