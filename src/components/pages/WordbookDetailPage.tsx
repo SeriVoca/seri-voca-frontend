@@ -1,16 +1,28 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../organisms/Header/Header';
-import type { WordDetailProps } from '../molecules/WordDetail/WordDetail';
 import { WordList } from '../organisms/WordList/WordList';
 import { ROUTES } from '../../router/path';
+import { useEffect, useState } from 'react';
+import type { Word } from '../../domain/word';
+import { getWordList } from '../../api/word/getWordList';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
+  const [words, setWords] = useState<Word[]>([]);
+  const { wordbookId } = useParams<{ wordbookId: string }>();
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
     navigate(path);
   };
+
+  useEffect(() => {
+    async function fetchWordList() {
+      const data = await getWordList(wordbookId!);
+      setWords(data);
+    }
+    fetchWordList();
+  }, [wordbookId]);
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -21,26 +33,8 @@ export const WordbookDetailPage = () => {
         onLCTAClick={handleNavigate}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={mockWordList} />
+        <WordList words={words} />
       </div>
     </div>
   );
 };
-
-export const mockWordList: WordDetailProps[] = [
-  { engWord: 'abstract', korWord: '추상적인' },
-  { engWord: 'benevolent', korWord: '자애로운' },
-  { engWord: 'contemplate', korWord: '숙고하다' },
-  { engWord: 'diligent', korWord: '성실한' },
-  { engWord: 'elevate', korWord: '향상시키다' },
-  { engWord: 'abstract', korWord: '추상적인' },
-  { engWord: 'benevolent', korWord: '자애로운' },
-  { engWord: 'contemplate', korWord: '숙고하다' },
-  { engWord: 'diligent', korWord: '성실한' },
-  { engWord: 'elevate', korWord: '향상시키다' },
-  { engWord: 'abstract', korWord: '추상적인' },
-  { engWord: 'benevolent', korWord: '자애로운' },
-  { engWord: 'contemplate', korWord: '숙고하다' },
-  { engWord: 'diligent', korWord: '성실한' },
-  { engWord: 'elevate', korWord: '향상시키다' },
-];
