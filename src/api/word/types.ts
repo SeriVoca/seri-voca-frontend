@@ -6,6 +6,5 @@ export interface WordResponse {
     part_of_speech: string;
     meaning: string;
     order_index: number;
-    created_at: string;
   }[];
 }
