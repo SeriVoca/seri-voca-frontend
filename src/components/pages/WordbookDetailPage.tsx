@@ -17,11 +17,17 @@ export const WordbookDetailPage = () => {
   };
 
   useEffect(() => {
-    async function fetchWordList() {
-      const data = await getWordList(wordbookId!);
-      setWords(data);
-    }
-    fetchWordList();
+    if (!wordbookId) return;
+
+    const fetchWords = async () => {
+      try {
+        const data = await getWordList(wordbookId!);
+        setWords(data);
+      } catch (error) {
+        console.error('Failed to fetch words:', error);
+      }
+    };
+    fetchWords();
   }, [wordbookId]);
 
   return (
