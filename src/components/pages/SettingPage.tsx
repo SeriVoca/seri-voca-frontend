@@ -1,4 +1,4 @@
-import supabase from '../../apis/supabaseInstance';
+import supabase from '../../apis/supabase';
 import Header from '../organisms/Header/Header';
 import { SettingList } from '../organisms/SettingList/SettingList';
 import { UserProfileCard } from '../organisms/UserProfileCard/UserProfileCard';
