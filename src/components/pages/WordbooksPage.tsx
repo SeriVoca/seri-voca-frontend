@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { WordbookList } from '../organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../router/path';
-import { getWordbookList } from '../../apis/getData';
-import { type getWordbookListResponse } from '../../apis/types';
+import { getWordbookList } from '../../apis/wordbook';
+import type { Wordbook } from '../../domain/wordbook';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
-  const [wordbooks, setWordbooks] = useState<getWordbookListResponse>([]);
+  const [wordbooks, setWordbooks] = useState<Wordbook[]>([]); // TODO : Api 응답 전용 타입 말고 클라이언트 전용 타입으로 교체
 
   const handleNavigate = (id: string) => {
     const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));

@@ -1,14 +1,8 @@
+import type { Wordbook } from '../../../domain/wordbook';
 import { WordbookItem } from '../../molecules/WordbookItem/WordbookItem';
 
-type WordbookLabel = {
-  order_index: number;
-  id: string;
-  title: string;
-  description: string;
-};
-
 type Props = {
-  wordbooks: WordbookLabel[];
+  wordbooks: Wordbook[];
   handleNavigate: (id: string) => void;
 };
 
