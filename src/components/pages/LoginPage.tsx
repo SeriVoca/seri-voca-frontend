@@ -1,4 +1,4 @@
-import supabase from '../../apis/supabaseInstance';
+import supabase from '../../apis/supabase';
 import { ROUTES } from '../../router/path';
 import KakaoLoginButton from '../molecules/KakaoLoginButton/KakaoLoginButton';
 
