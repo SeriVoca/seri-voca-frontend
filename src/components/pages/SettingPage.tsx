@@ -1,10 +1,12 @@
+import supabase from '../../apis/supabaseInstance';
 import Header from '../organisms/Header/Header';
 import { SettingList } from '../organisms/SettingList/SettingList';
 import { UserProfileCard } from '../organisms/UserProfileCard/UserProfileCard';
 
 const SettingPage = () => {
-  const handleLogout = () => {
-    console.log('[미구현] 로그아웃 액션');
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    console.log(error);
   };
 
   const handleAccountDeletion = () => {
