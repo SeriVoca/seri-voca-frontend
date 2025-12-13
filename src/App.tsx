@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import supabase from './apis/supabaseInstance'; // 경로 확인
 import { useAuthStore } from './store/useAuthStore';
 import router from './router';
+import { authTokenStore } from './store/authTokenStore';
 
 function App() {
   const { setLogin, setLogout } = useAuthStore();
@@ -13,8 +14,10 @@ function App() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         setLogin(session.user);
+        authTokenStore.set(session.access_token);
       } else {
         setLogout();
+        authTokenStore.set(null);
       }
       setIsAuthInitialized(true); // 초기화 완료
     });
@@ -25,8 +28,10 @@ function App() {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         setLogin(session.user); // 스토어 업데이트
+        authTokenStore.set(session.access_token);
       } else {
         setLogout(); // 스토어 초기화
+        authTokenStore.set(null);
       }
       setIsAuthInitialized(true);
     });
