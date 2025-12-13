@@ -19,9 +19,14 @@ const WordbooksPage = () => {
 
   useEffect(() => {
     async function fetchWordbookList() {
-      const data = await getWordbookList();
-      console.log(data);
-      setWordbooks(data);
+      try {
+        const data = await getWordbookList();
+        setWordbooks(data);
+      } catch (_) {
+        // TODO : 에러 발생 시 UI/UX 기획 필요
+        alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+        // setError(true);
+      }
     }
     fetchWordbookList();
   }, []);
