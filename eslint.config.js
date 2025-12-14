@@ -48,6 +48,14 @@ export default [
       'react/react-in-jsx-scope': 'off', // Vite + React 17+ 환경에서는 React 를 import 할 필요 없음
       'react/jsx-uses-react': 'off',
       'react/prop-types': 'off', // TypeScript 를 사용하므로 prop-types 는 필요 없음
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   }, // Prettier 규칙
   configPrettier,

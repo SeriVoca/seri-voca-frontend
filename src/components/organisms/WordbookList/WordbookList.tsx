@@ -1,14 +1,9 @@
+import type { Wordbook } from '../../../domain/wordbook';
 import { WordbookItem } from '../../molecules/WordbookItem/WordbookItem';
 
-type WordbookLabel = {
-  id: number;
-  title: string;
-  caption: string;
-};
-
 type Props = {
-  wordbooks: WordbookLabel[];
-  handleNavigate: (id: number) => void;
+  wordbooks: Wordbook[];
+  handleNavigate: (id: string) => void;
 };
 
 export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {
@@ -18,7 +13,7 @@ export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {
         <WordbookItem
           key={wordbook.id}
           title={wordbook.title}
-          caption={wordbook.caption}
+          caption={wordbook.description}
           handleNavigate={() => handleNavigate(wordbook.id)}
         />
       ))}
