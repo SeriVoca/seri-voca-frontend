@@ -4,7 +4,7 @@ import { WordList } from '../organisms/WordList/WordList';
 import { ROUTES } from '../../router/path';
 import { useEffect, useState } from 'react';
 import type { Word } from '../../domain/word';
-import { getWordList } from '../../api/word/getWordList';
+import { getWordList } from '../../api/word';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
