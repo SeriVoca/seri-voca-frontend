@@ -23,12 +23,16 @@ export const WordbookDetailPage = () => {
       try {
         const data = await getWordList(wordbookId!);
         setWords(data);
-      } catch (error) {
-        console.error('Failed to fetch words:', error);
+      } catch (_) {
+        // TODO: 에러 발생 시 UI/UX 기획 필요
+        alert('단어 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
       }
     };
     fetchWords();
   }, [wordbookId]);
+
+  // TODO: 로딩 처리
+  if (!words) return null;
 
   return (
     <div className="flex h-full w-full flex-col">
