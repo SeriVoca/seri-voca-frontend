@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { WordList } from './WordList';
-import type { WordDetailProps } from '../../molecules/WordDetail/WordDetail';
+import type { Word } from '../../../domain/word';
 
 const meta: Meta<typeof WordList> = {
   title: 'Organisms/WordList',
@@ -12,12 +12,57 @@ export default meta;
 
 type Story = StoryObj<typeof WordList>;
 
-const mockWords: WordDetailProps[] = [
-  { engWord: 'apple', korWord: '사과' },
-  { engWord: 'banana', korWord: '바나나' },
-  { engWord: 'cherry', korWord: '체리' },
-  { engWord: 'orange', korWord: '오렌지' },
-  { engWord: 'grape', korWord: '포도' },
+const mockWords: Word[] = [
+  {
+    id: 'apple',
+    textEn: 'apple',
+    meanings: [
+      {
+        partOfSpeech: 'n',
+        textKo: '사과',
+      },
+    ],
+  },
+  {
+    id: 'banana',
+    textEn: 'banana',
+    meanings: [
+      {
+        partOfSpeech: 'n',
+        textKo: '바나나',
+      },
+    ],
+  },
+  {
+    id: 'cherry',
+    textEn: 'cherry',
+    meanings: [
+      {
+        partOfSpeech: 'n',
+        textKo: '체리',
+      },
+    ],
+  },
+  {
+    id: 'orange',
+    textEn: 'orange',
+    meanings: [
+      {
+        partOfSpeech: 'n',
+        textKo: '오렌지',
+      },
+    ],
+  },
+  {
+    id: 'grape',
+    textEn: 'grape',
+    meanings: [
+      {
+        partOfSpeech: 'n',
+        textKo: '포도',
+      },
+    ],
+  },
 ];
 
 export const Default: Story = {
