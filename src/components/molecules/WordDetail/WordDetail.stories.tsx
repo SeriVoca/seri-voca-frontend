@@ -12,14 +12,30 @@ type Story = StoryObj<typeof WordDetail>;
 
 export const Default: Story = {
   args: {
-    engWord: 'apple',
-    korWord: '사과',
+    word: {
+      id: '1',
+      textEn: 'apple',
+      meanings: [
+        {
+          partOfSpeech: 'n',
+          textKo: '사과',
+        },
+      ],
+    },
   },
 };
 
 export const LongText: Story = {
   args: {
-    engWord: 'internationalization',
-    korWord: '국제화',
+    word: {
+      id: '2',
+      textEn: 'internationalization',
+      meanings: [
+        {
+          partOfSpeech: 'n',
+          textKo: '국제화',
+        },
+      ],
+    },
   },
 };
