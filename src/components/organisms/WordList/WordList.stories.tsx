@@ -18,7 +18,7 @@ const mockWords: Word[] = [
     textEn: 'apple',
     meanings: [
       {
-        partOfSpeech: 'noun',
+        partOfSpeech: 'n',
         textKo: '사과',
       },
     ],
@@ -28,7 +28,7 @@ const mockWords: Word[] = [
     textEn: 'banana',
     meanings: [
       {
-        partOfSpeech: 'noun',
+        partOfSpeech: 'n',
         textKo: '바나나',
       },
     ],
@@ -38,7 +38,7 @@ const mockWords: Word[] = [
     textEn: 'cherry',
     meanings: [
       {
-        partOfSpeech: 'noun',
+        partOfSpeech: 'n',
         textKo: '체리',
       },
     ],
@@ -48,7 +48,7 @@ const mockWords: Word[] = [
     textEn: 'orange',
     meanings: [
       {
-        partOfSpeech: 'noun',
+        partOfSpeech: 'n',
         textKo: '오렌지',
       },
     ],
@@ -58,7 +58,7 @@ const mockWords: Word[] = [
     textEn: 'grape',
     meanings: [
       {
-        partOfSpeech: 'noun',
+        partOfSpeech: 'n',
         textKo: '포도',
       },
     ],
