@@ -8,7 +8,7 @@ import { getWordList } from '../../api/word';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
-  const [words, setWords] = useState<Word[]>([]);
+  const [words, setWords] = useState<Word[] | null>(null);
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
   const handleNavigate = () => {
@@ -21,7 +21,7 @@ export const WordbookDetailPage = () => {
 
     const fetchWords = async () => {
       try {
-        const data = await getWordList(wordbookId!);
+        const data = await getWordList(wordbookId);
         setWords(data);
       } catch (_) {
         // TODO: 에러 발생 시 UI/UX 기획 필요
