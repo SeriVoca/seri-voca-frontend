@@ -38,7 +38,7 @@ const WordbooksPage = () => {
     case 'loading':
       return <div>Loading...</div>;
     case 'error':
-      return <div>Error occurred while fetching words.</div>;
+      return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
   return (
