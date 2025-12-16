@@ -5,10 +5,11 @@ import { ROUTES } from '../../router/path';
 import { useEffect, useState } from 'react';
 import type { Word } from '../../domain/word';
 import { getWordList } from '../../api/word';
+import type { AsyncState } from '../../shared/types/asyncState';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
-  const [words, setWords] = useState<Word[] | null>(null);
+  const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
   const handleNavigate = () => {
@@ -21,18 +22,27 @@ export const WordbookDetailPage = () => {
 
     const fetchWords = async () => {
       try {
+        setWords({ status: 'loading' });
         const data = await getWordList(wordbookId);
-        setWords(data);
+        setWords({ status: 'success', data });
       } catch (_) {
         // TODO: 에러 발생 시 UI/UX 기획 필요
-        alert('단어 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+        setWords({ status: 'error' });
+        alert('단어 목록을 불러오는 중에 오류가 발생했습니다.');
       }
     };
     fetchWords();
   }, [wordbookId]);
 
-  // TODO: 로딩 처리
-  if (!words) return null;
+  // data status가 success가 아닐 때의 처리
+  // TODO: 로딩, 에러 UI/UX 기획 필요
+  switch (words.status) {
+    case 'idle':
+    case 'loading':
+      return <div>Loading...</div>;
+    case 'error':
+      return <div>Error occurred while fetching words.</div>;
+  }
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -43,7 +53,7 @@ export const WordbookDetailPage = () => {
         onLCTAClick={handleNavigate}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} />
+        <WordList words={words.data} />
       </div>
     </div>
   );
