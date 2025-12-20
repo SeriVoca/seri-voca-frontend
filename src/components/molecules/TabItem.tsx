@@ -1,6 +1,7 @@
 type Props = {
   label: string;
   active: boolean;
+  disabled?: boolean;
   onClick: () => void;
 };
 

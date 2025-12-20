@@ -4,26 +4,28 @@
 
 import TabItem from '../molecules/TabItem';
 
-type Tab = {
+export type Tab = {
   id: number;
   label: string;
+  disabled?: boolean;
 };
 
 type Props = {
   tabs: Tab[];
   activeTab: number;
-  onChange: (tabId: number) => void;
+  onChange: (tab: Tab) => void;
 };
 
 const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
   return (
-    <div className="flex h-[2.5rem] w-full items-center justify-center gap-[0.75rem] rounded-full bg-white px-[0.75rem] py-[o.375rem]">
+    <div className="flex h-[2.5rem] w-full items-center justify-center gap-[0.75rem] rounded-full bg-white px-[0.75rem] py-[0.375rem]">
       {tabs.map((tab, index) => (
         <TabItem
           key={index}
           label={tab.label}
           active={tab.id === activeTab}
-          onClick={() => onChange(tab.id)}
+          disabled={tab.disabled}
+          onClick={() => onChange(tab)}
         />
       ))}
     </div>

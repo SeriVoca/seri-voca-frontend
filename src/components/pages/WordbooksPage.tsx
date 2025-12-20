@@ -1,5 +1,5 @@
 import Header from '../organisms/Header/Header';
-import TabSwitcher from '../organisms/TabSwitcher';
+import TabSwitcher, { type Tab } from '../organisms/TabSwitcher';
 import { useEffect, useState } from 'react';
 import { WordbookList } from '../organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +33,14 @@ const WordbooksPage = () => {
     fetchWordbookList();
   }, []);
 
+  const handleTabClick = (tab: Tab) => {
+    if (tab.disabled) {
+      alert('서비스 준비중입니다.');
+    } else if (tab.disabled == false) {
+      setActiveTab(tab.id);
+    }
+  };
+
   switch (wordbooks.status) {
     case 'idle':
     case 'loading':
@@ -45,7 +53,7 @@ const WordbooksPage = () => {
     <div className="flex h-full w-full flex-col items-center bg-gray-100">
       <Header title="Wordbooks Page" variant="basic" />
       <main className="mt-[2.25rem] flex min-h-0 w-full flex-1 flex-col items-center px-[1.25rem]">
-        <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+        <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={handleTabClick} />
         <div className="mt-[1.25rem] mb-[2.25rem] w-full flex-1 overflow-y-auto">
           <WordbookList wordbooks={wordbooks.data} handleNavigate={handleNavigate} />
         </div>
@@ -57,7 +65,7 @@ const WordbooksPage = () => {
 export default WordbooksPage;
 
 // 정적 데이터
-const tabs = [
+const tabs: Tab[] = [
   { id: 1, label: '커리큘럼' },
-  { id: 2, label: '내 단어장' },
+  { id: 2, label: '내 단어장', disabled: true },
 ];
