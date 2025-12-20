@@ -14,7 +14,7 @@ const LoginPage = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: BASE_URL + ROUTES.WORDBOOKS,
+        redirectTo: BASE_URL + ROUTES.HOME,
       },
     });
     if (error) {

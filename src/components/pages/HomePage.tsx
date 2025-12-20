@@ -1,14 +1,10 @@
-import Header from '../organisms/Header/Header';
+import { Navigate } from 'react-router-dom';
+import { ROUTES } from '../../router/path';
 
 const HomePage = () => {
-  return (
-    <div className="flex w-full flex-1 flex-col">
-      <header>
-        <Header title="Seri Voca" variant="basic" />
-      </header>
-      <h1>Home Page</h1>
-    </div>
-  );
+  // home page 미구현
+  // 구현 전까지는 wordbooks page 로 redirect
+  return <Navigate to={ROUTES.WORDBOOKS} replace />;
 };
 
 export default HomePage;

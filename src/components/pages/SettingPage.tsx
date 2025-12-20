@@ -55,7 +55,8 @@ const SettingPage = () => {
       <SettingList
         items={[
           { label: '로그아웃', handleNavigate: handleLogout },
-          { label: '회원탈퇴', handleNavigate: handleAccountDeletion },
+          // TODO : 회원 탈퇴 API 개발 시 복구
+          // { label: '회원탈퇴', handleNavigate: handleAccountDeletion },
         ]}
       />
     </div>
