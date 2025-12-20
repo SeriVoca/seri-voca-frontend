@@ -24,7 +24,6 @@ const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
           key={index}
           label={tab.label}
           active={tab.id === activeTab}
-          disabled={tab.disabled}
           onClick={() => onChange(tab)}
         />
       ))}

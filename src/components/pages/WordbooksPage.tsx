@@ -36,7 +36,7 @@ const WordbooksPage = () => {
   const handleTabClick = (tab: Tab) => {
     if (tab.disabled) {
       alert('서비스 준비중입니다.');
-    } else if (tab.disabled == false) {
+    } else if (tab.disabled === false) {
       setActiveTab(tab.id);
     }
   };
