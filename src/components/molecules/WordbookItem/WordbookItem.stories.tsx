@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { WordbookItem } from './WordbookItem';
+import { WordbookItem } from '@/components/molecules/WordbookItem/WordbookItem';
 
 const meta: Meta<typeof WordbookItem> = {
   title: 'Components/WordbookItem',

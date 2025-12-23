@@ -1,6 +1,6 @@
-import { BottomNavItem } from '../../atoms/BottomNav/BottomNavItem';
+import { BottomNavItem } from '@/components/atoms/BottomNav/BottomNavItem';
 import { useLocation } from 'react-router-dom';
-import { ROUTES } from '../../../router/path';
+import { ROUTES } from '@/router/path';
 
 const BottomNavbar = () => {
   const location = useLocation();

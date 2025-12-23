@@ -1,6 +1,6 @@
-import type { Profile } from '../../domain/user';
-import { mapUserProfileResponseToDomain } from '../../mapper/user';
-import { api } from '../axiosInstance';
+import type { Profile } from '@/domain/user';
+import { mapUserProfileResponseToDomain } from '@/mapper/user';
+import { api } from '@/apis/axiosInstance';
 
 export const getUserProfileData = async (): Promise<Profile> => {
   try {

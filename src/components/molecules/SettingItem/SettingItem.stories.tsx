@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SettingItem } from './SettingItem';
+import { SettingItem } from '@/components/molecules/SettingItem/SettingItem';
 
 const meta: Meta<typeof SettingItem> = {
   title: 'Molecules/SettingItem',

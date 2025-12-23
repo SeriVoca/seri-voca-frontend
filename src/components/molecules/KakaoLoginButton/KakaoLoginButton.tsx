@@ -1,4 +1,4 @@
-import chatBubble from '../../../assets/chat-bubble.svg';
+import chatBubble from '@/assets/chat-bubble.svg';
 
 type Props = {
   handleClick: () => void;

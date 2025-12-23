@@ -1,7 +1,7 @@
-import { api } from '../axiosInstance';
-import type { Word } from '../../domain/word';
-import type { WordResponse } from './types';
-import { mapWordListResponseToDomain } from '../../mapper/word';
+import { api } from '@/apis/axiosInstance';
+import type { Word } from '@/domain/word';
+import type { WordResponse } from '@/api/word/types';
+import { mapWordListResponseToDomain } from '@/mapper/word';
 
 export const getWordList = async (wordbookId: string): Promise<Word[]> => {
   try {

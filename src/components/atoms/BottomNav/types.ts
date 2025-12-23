@@ -1,5 +1,5 @@
 import * as Icons from '@mynaui/icons-react';
-import { ROUTES } from '../../../router/path';
+import { ROUTES } from '@/router/path';
 
 export type BOTTOM_NAV_KEY = 'home' | 'word-book' | 'setting';
 

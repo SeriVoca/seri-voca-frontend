@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import supabase from './apis/supabase'; // 경로 확인
-import { useAuthStore } from './store/useAuthStore';
-import router from './router';
-import { authTokenStore } from './store/authTokenStore';
+import supabase from '@/apis/supabase';
+import { useAuthStore } from '@/store/useAuthStore';
+import router from '@/router';
+import { authTokenStore } from '@/store/authTokenStore';
 
 function App() {
   const { setLogin, setLogout } = useAuthStore();

@@ -1,5 +1,5 @@
-import { SettingItem } from '../../molecules/SettingItem/SettingItem';
-import { type SettingItemProps } from '../../molecules/SettingItem/SettingItem';
+import { SettingItem } from '@/components/molecules/SettingItem/SettingItem';
+import { type SettingItemProps } from '@/components/molecules/SettingItem/SettingItem';
 
 type Props = {
   items: SettingItemProps[];

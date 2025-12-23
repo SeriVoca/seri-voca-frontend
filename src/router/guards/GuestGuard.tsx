@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthStore } from '../../store/useAuthStore';
-import { ROUTES } from '../path';
+import { useAuthStore } from '@/store/useAuthStore';
+import { ROUTES } from '@/router/path';
 
 const GuestGuard = () => {
   const { isAuthenticated } = useAuthStore();

@@ -1,6 +1,6 @@
-import supabase from '../../apis/supabase';
-import { ROUTES } from '../../router/path';
-import KakaoLoginButton from '../molecules/KakaoLoginButton/KakaoLoginButton';
+import supabase from '@/apis/supabase';
+import { ROUTES } from '@/router/path';
+import KakaoLoginButton from '@/components/molecules/KakaoLoginButton/KakaoLoginButton';
 
 const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL;
 

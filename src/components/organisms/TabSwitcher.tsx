@@ -2,7 +2,7 @@
     # 단어장 페이지
 */
 
-import TabItem from '../molecules/TabItem';
+import TabItem from '@/components/molecules/TabItem';
 
 export type Tab = {
   id: number;

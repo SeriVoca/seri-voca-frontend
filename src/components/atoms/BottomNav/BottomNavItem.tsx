@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { BOTTOM_NAV_MAPPER as Mapper, type BOTTOM_NAV_KEY as Key } from './types';
+import {
+  BOTTOM_NAV_MAPPER as Mapper,
+  type BOTTOM_NAV_KEY as Key,
+} from '@/components/atoms/BottomNav/types';
 import * as Icons from '@mynaui/icons-react';
-import { Icon } from '../Icon/Icon';
-import type { BOTTOM_NAV_STATUS } from './constants';
+import { Icon } from '@/components/atoms/Icon/Icon';
+import type { BOTTOM_NAV_STATUS } from '@/components/atoms/BottomNav/constants';
 
 type BottomNavItemProps = {
   navKey: Key;

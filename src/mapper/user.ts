@@ -1,5 +1,5 @@
-import type { GetUserProfileDataResponse } from '../apis/user/types';
-import type { Profile } from '../domain/user';
+import type { GetUserProfileDataResponse } from '@/apis/user/types';
+import type { Profile } from '@/domain/user';
 
 export const mapUserProfileResponseToDomain = (response: GetUserProfileDataResponse): Profile => {
   return {

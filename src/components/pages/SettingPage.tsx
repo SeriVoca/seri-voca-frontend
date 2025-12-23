@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import supabase from '../../apis/supabase';
-import Header from '../organisms/Header/Header';
-import { SettingList } from '../organisms/SettingList/SettingList';
-import { UserProfileCard } from '../organisms/UserProfileCard/UserProfileCard';
-import { getUserProfileData } from '../../apis/user';
-import type { Profile } from '../../domain/user';
-import type { AsyncState } from '../../shared/types/asyncState';
+import supabase from '@/apis/supabase';
+import Header from '@/components/organisms/Header/Header';
+import { SettingList } from '@/components/organisms/SettingList/SettingList';
+import { UserProfileCard } from '@/components/organisms/UserProfileCard/UserProfileCard';
+import { getUserProfileData } from '@/apis/user';
+import type { Profile } from '@/domain/user';
+import type { AsyncState } from '@/shared/types/asyncState';
 
 const SettingPage = () => {
   const [profile, setProfile] = useState<AsyncState<Profile>>({ status: 'idle' });

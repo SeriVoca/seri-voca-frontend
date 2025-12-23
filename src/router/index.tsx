@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import AuthGuard from './guards/AuthGuard'; // 경로에 맞게 수정
-import GuestGuard from './guards/GuestGuard'; // 경로에 맞게 수정
-import { publicRoutes } from './PublicRoutes';
-import { protectedRoutes } from './ProtectedRoutes';
-import { ROUTES } from './path';
+import AuthGuard from '@/router/guards/AuthGuard';
+import GuestGuard from '@/router/guards/GuestGuard';
+import { publicRoutes } from '@/router/PublicRoutes';
+import { protectedRoutes } from '@/router/ProtectedRoutes';
+import { ROUTES } from '@/router/path';
 
 const router = createBrowserRouter([
   // 1. 로그인한 유저는 접근 못하는 페이지 (로그인 페이지 등)

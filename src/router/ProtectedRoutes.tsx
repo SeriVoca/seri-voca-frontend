@@ -1,13 +1,13 @@
-import { ROUTES } from './path';
+import { ROUTES } from '@/router/path';
 import { type RouteObject } from 'react-router-dom';
 
-import BasicLayout from '../layouts/BasicLayout';
-import BottomNavLayout from '../layouts/BottomNavLayout';
+import BasicLayout from '@/layouts/BasicLayout';
+import BottomNavLayout from '@/layouts/BottomNavLayout';
 
-import HomePage from '../components/pages/HomePage';
-import WordbooksPage from '../components/pages/WordbooksPage';
-import SettingPage from '../components/pages/SettingPage';
-import { WordbookDetailPage } from '../components/pages/WordbookDetailPage';
+import HomePage from '@/components/pages/HomePage';
+import WordbooksPage from '@/components/pages/WordbooksPage';
+import SettingPage from '@/components/pages/SettingPage';
+import { WordbookDetailPage } from '@/components/pages/WordbookDetailPage';
 
 export const protectedRoutes: RouteObject[] = [
   {
