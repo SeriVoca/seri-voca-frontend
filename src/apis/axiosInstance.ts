@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { authTokenStore } from '../store/authTokenStore';
+import { authTokenStore } from '@/store/authTokenStore';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 

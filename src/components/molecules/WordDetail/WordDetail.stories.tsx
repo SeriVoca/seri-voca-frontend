@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { WordDetail } from './WordDetail';
+import { WordDetail } from '@/components/molecules/WordDetail/WordDetail';
+
 const meta: Meta<typeof WordDetail> = {
   title: 'Molecules/WordDetail',
   component: WordDetail,

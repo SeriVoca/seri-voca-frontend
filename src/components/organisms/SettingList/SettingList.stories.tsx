@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SettingList } from './SettingList';
+import { SettingList } from '@/components/organisms/SettingList/SettingList';
 
 const meta: Meta<typeof SettingList> = {
   title: 'Organisms/SettingList',

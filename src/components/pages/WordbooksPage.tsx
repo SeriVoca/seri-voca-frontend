@@ -1,12 +1,12 @@
-import Header from '../organisms/Header/Header';
-import TabSwitcher, { type Tab } from '../organisms/TabSwitcher';
+import Header from '@/components/organisms/Header/Header';
+import TabSwitcher, { type Tab } from '@/components/organisms/TabSwitcher';
 import { useEffect, useState } from 'react';
-import { WordbookList } from '../organisms/WordbookList/WordbookList';
+import { WordbookList } from '@/components/organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../router/path';
-import { getWordbookList } from '../../apis/wordbook';
-import type { Wordbook } from '../../domain/wordbook';
-import type { AsyncState } from '../../shared/types/asyncState';
+import { ROUTES } from '@/router/path';
+import { getWordbookList } from '@/apis/wordbook';
+import type { Wordbook } from '@/domain/wordbook';
+import type { AsyncState } from '@/shared/types/asyncState';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();

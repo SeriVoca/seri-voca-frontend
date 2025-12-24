@@ -1,4 +1,4 @@
-import { Icon } from '../../atoms/Icon/Icon';
+import { Icon } from '@/components/atoms/Icon/Icon';
 
 export type SettingItemProps = {
   label: string;

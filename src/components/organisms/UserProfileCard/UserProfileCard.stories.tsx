@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { UserProfileCard } from './UserProfileCard';
+import { UserProfileCard } from '@/components/organisms/UserProfileCard/UserProfileCard';
 
 const meta: Meta<typeof UserProfileCard> = {
   title: 'Organisms/UserProfileCard',

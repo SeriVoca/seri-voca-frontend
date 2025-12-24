@@ -1,5 +1,5 @@
 import axios from 'axios';
-import supabase from './supabaseInstance';
+import supabase from '@/api/supabaseInstance';
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_SUPABASE_URL + '/functions/v1/api',

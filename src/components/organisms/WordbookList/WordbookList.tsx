@@ -1,5 +1,5 @@
-import type { Wordbook } from '../../../domain/wordbook';
-import { WordbookItem } from '../../molecules/WordbookItem/WordbookItem';
+import type { Wordbook } from '@/domain/wordbook';
+import { WordbookItem } from '@/components/molecules/WordbookItem/WordbookItem';
 
 type Props = {
   wordbooks: Wordbook[];

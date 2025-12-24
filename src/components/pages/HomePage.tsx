@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { ROUTES } from '../../router/path';
+import { ROUTES } from '@/router/path';
 
 const HomePage = () => {
   // home page 미구현

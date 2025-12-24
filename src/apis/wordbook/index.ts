@@ -1,6 +1,6 @@
-import type { Wordbook } from '../../domain/wordbook';
-import { mapWordbookList } from '../../mapper/wordbook';
-import { api } from '../axiosInstance';
+import type { Wordbook } from '@/domain/wordbook';
+import { mapWordbookList } from '@/mapper/wordbook';
+import { api } from '@/apis/axiosInstance';
 
 export const getWordbookList = async (): Promise<Wordbook[]> => {
   try {

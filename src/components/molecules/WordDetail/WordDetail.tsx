@@ -1,4 +1,4 @@
-import type { Word } from '../../../domain/word';
+import type { Word } from '@/domain/word';
 
 export type WordDetailProps = {
   word: Word;

@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../../store/useAuthStore'; // store import
+import { useAuthStore } from '@/store/useAuthStore';
 
 const AuthGuard = () => {
   const { isAuthenticated } = useAuthStore();

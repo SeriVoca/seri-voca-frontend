@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '../organisms/Header/Header';
-import { WordList } from '../organisms/WordList/WordList';
-import { ROUTES } from '../../router/path';
+import Header from '@/components/organisms/Header/Header';
+import { WordList } from '@/components/organisms/WordList/WordList';
+import { ROUTES } from '@/router/path';
 import { useEffect, useState } from 'react';
-import type { Word } from '../../domain/word';
-import { getWordList } from '../../api/word';
-import type { AsyncState } from '../../shared/types/asyncState';
+import type { Word } from '@/domain/word';
+import { getWordList } from '@/api/word';
+import type { AsyncState } from '@/shared/types/asyncState';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();

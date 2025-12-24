@@ -1,5 +1,5 @@
-import type { GetWordbookListResponse } from '../apis/wordbook/types';
-import type { Wordbook } from '../domain/wordbook';
+import type { GetWordbookListResponse } from '@/apis/wordbook/types';
+import type { Wordbook } from '@/domain/wordbook';
 
 type WordbookResponseItem = GetWordbookListResponse[number];
 

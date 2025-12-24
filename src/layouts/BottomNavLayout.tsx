@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import BottomNavbar from '../components/organisms/BottomNavBar/BottomNavbar';
+import BottomNavbar from '@/components/organisms/BottomNavBar/BottomNavbar';
 
 const BottomNavLayout = () => {
   return (
