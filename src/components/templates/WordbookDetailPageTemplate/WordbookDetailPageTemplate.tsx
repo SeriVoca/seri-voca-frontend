@@ -4,7 +4,7 @@ import type { Word } from '@/domain/word';
 
 type Props = {
   words: Word[];
-  handleNavigate: () => void;
+  handleNavigate: () => Promise<void> | void;
 };
 
 export const WordbookDetailPageTemplate = ({ words, handleNavigate }: Props) => {

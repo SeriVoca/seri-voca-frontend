@@ -6,9 +6,9 @@ import type { Wordbook } from '@/domain/wordbook';
 type Props = {
   tabs: Tab[];
   activeTab: number;
-  handleTabClick: (tab: Tab) => void;
+  handleTabClick: (tab: Tab) => Promise<void> | void;
   wordbooks: Wordbook[];
-  handleNavigate: (id: string) => void;
+  handleNavigate: (id: string) => Promise<void> | void;
 };
 
 export const WordbooksPageTemplate = ({

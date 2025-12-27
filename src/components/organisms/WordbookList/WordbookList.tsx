@@ -3,7 +3,7 @@ import { WordbookItem } from '@/components/molecules/WordbookItem/WordbookItem';
 
 type Props = {
   wordbooks: Wordbook[];
-  handleNavigate: (id: string) => void;
+  handleNavigate: (id: string) => Promise<void> | void;
 };
 
 export const WordbookList = ({ wordbooks, handleNavigate }: Props) => {

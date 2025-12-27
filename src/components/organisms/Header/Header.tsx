@@ -5,7 +5,7 @@ export type HeaderProps = {
   title: string;
   variant?: 'basic' | 'LCTA';
   LCTAIcon?: string;
-  onLCTAClick?: () => void;
+  onLCTAClick?: () => Promise<void> | void;
 };
 
 const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps) => {

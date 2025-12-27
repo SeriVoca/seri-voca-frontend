@@ -1,7 +1,7 @@
 import chatBubble from '@/assets/chat-bubble.svg';
 
 type Props = {
-  handleClick: () => void;
+  handleClick: () => Promise<void> | void;
 };
 
 const KakaoLoginButton = ({ handleClick }: Props) => {

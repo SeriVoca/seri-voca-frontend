@@ -13,7 +13,7 @@ export type Tab = {
 type Props = {
   tabs: Tab[];
   activeTab: number;
-  onChange: (tab: Tab) => void;
+  onChange: (tab: Tab) => Promise<void> | void;
 };
 
 const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
