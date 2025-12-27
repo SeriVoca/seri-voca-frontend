@@ -3,7 +3,7 @@ import { Icon } from '@/components/atoms/Icon/Icon';
 type Props = {
   title: string;
   caption: string;
-  handleNavigate: () => void;
+  handleNavigate: () => Promise<void> | void;
 };
 
 export const WordbookItem = ({ title: name, caption, handleNavigate }: Props) => {

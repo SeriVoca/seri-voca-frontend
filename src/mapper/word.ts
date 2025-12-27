@@ -1,4 +1,4 @@
-import type { WordResponse } from '@/api/word/types';
+import type { WordResponse } from '@/apis/word/types';
 import type { Word, Meaning } from '@/domain/word';
 
 export const mapWordResponseToDomain = (data: WordResponse): Word => {

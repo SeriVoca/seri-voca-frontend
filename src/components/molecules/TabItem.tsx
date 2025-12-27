@@ -1,7 +1,7 @@
 type Props = {
   label: string;
   active: boolean;
-  onClick: () => void;
+  onClick: () => Promise<void> | void;
 };
 
 const TabItem = ({ label, active, onClick }: Props) => {

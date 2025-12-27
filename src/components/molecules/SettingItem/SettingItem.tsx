@@ -2,7 +2,7 @@ import { Icon } from '@/components/atoms/Icon/Icon';
 
 export type SettingItemProps = {
   label: string;
-  handleNavigate: () => void;
+  handleNavigate: () => Promise<void> | void;
 };
 
 export const SettingItem = ({ label, handleNavigate }: SettingItemProps) => {
