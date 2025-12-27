@@ -1,4 +1,4 @@
-import { BottomNavItem } from '@/components/atoms/BottomNav/BottomNavItem';
+import { BottomNavItem } from '@/components/molecules/BottomNavItem/BottomNavItem';
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
 
