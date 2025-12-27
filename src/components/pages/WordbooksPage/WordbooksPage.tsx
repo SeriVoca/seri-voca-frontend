@@ -5,7 +5,7 @@ import { ROUTES } from '@/router/path';
 import { getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
 import type { AsyncState } from '@/shared/types/asyncState';
-import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate.tsx/WordbooksPageTemplate';
+import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();

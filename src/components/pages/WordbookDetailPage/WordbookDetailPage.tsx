@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Header from '@/components/organisms/Header/Header';
-import { WordList } from '@/components/organisms/WordList/WordList';
-import { ROUTES } from '@/router/path';
 import { useEffect, useState } from 'react';
 import type { Word } from '@/domain/word';
 import { getWordList } from '@/api/word';
 import type { AsyncState } from '@/shared/types/asyncState';
+import WordbookDetailPageTemplate from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
+import { ROUTES } from '@/router/path';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -44,17 +43,5 @@ export const WordbookDetailPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
-  return (
-    <div className="flex h-full w-full flex-col">
-      <Header
-        title="단어장 상세 페이지"
-        variant="LCTA"
-        LCTAIcon="ChevronLeft"
-        onLCTAClick={handleNavigate}
-      />
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words.data} />
-      </div>
-    </div>
-  );
+  return <WordbookDetailPageTemplate words={words.data} handleNavigate={handleNavigate} />;
 };

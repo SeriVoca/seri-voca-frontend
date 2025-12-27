@@ -4,10 +4,10 @@ import { type RouteObject } from 'react-router-dom';
 import BasicLayout from '@/layouts/BasicLayout';
 import BottomNavLayout from '@/layouts/BottomNavLayout';
 
-import HomePage from '@/components/pages/HomePage';
+import HomePage from '@/components/pages/HomePage/HomePage';
 import WordbooksPage from '@/components/pages/WordbooksPage/WordbooksPage';
-import SettingPage from '@/components/pages/SettingPage';
-import { WordbookDetailPage } from '@/components/pages/WordbookDetailPage';
+import SettingPage from '@/components/pages/SettingPage/SettingPage';
+import { WordbookDetailPage } from '@/components/pages/WordbookDetailPage/WordbookDetailPage';
 
 export const protectedRoutes: RouteObject[] = [
   {

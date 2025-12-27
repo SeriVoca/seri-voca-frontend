@@ -1,6 +1,6 @@
 import supabase from '@/apis/supabase';
 import { ROUTES } from '@/router/path';
-import KakaoLoginButton from '@/components/molecules/KakaoLoginButton/KakaoLoginButton';
+import LoginPageTemplate from '@/components/templates/LoginPageTemplate/LoginPageTemplate';
 
 const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL;
 
@@ -24,14 +24,7 @@ const LoginPage = () => {
     }
   };
 
-  return (
-    <div className="flex h-full w-full flex-col items-center bg-white">
-      <div className="mt-[12.5rem] text-[3rem]">Serivoca</div>
-      <div className="mt-auto w-full p-5">
-        <KakaoLoginButton handleClick={signInWithKakao} />
-      </div>
-    </div>
-  );
+  return <LoginPageTemplate handleSignIn={signInWithKakao} />;
 };
 
 export default LoginPage;
