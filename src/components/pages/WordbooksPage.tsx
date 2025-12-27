@@ -1,12 +1,11 @@
-import Header from '@/components/organisms/Header/Header';
-import TabSwitcher, { type Tab } from '@/components/organisms/TabSwitcher';
+import { type Tab } from '@/components/organisms/TabSwitcher';
 import { useEffect, useState } from 'react';
-import { WordbookList } from '@/components/organisms/WordbookList/WordbookList';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
 import { getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
 import type { AsyncState } from '@/shared/types/asyncState';
+import { WordbooksPageTemplate } from '../templates/WordbooksPageTemplate.tsx/WordbooksPageTemplate';
 
 const WordbooksPage = () => {
   const navigate = useNavigate();
@@ -50,15 +49,13 @@ const WordbooksPage = () => {
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center bg-gray-100">
-      <Header title="Wordbooks Page" variant="basic" />
-      <main className="mt-[2.25rem] flex min-h-0 w-full flex-1 flex-col items-center px-[1.25rem]">
-        <TabSwitcher tabs={tabs} activeTab={activeTab} onChange={handleTabClick} />
-        <div className="mt-[1.25rem] mb-[2.25rem] w-full flex-1 overflow-y-auto">
-          <WordbookList wordbooks={wordbooks.data} handleNavigate={handleNavigate} />
-        </div>
-      </main>
-    </div>
+    <WordbooksPageTemplate
+      tabs={tabs}
+      activeTab={activeTab}
+      handleTabClick={handleTabClick}
+      wordbooks={wordbooks.data}
+      handleNavigate={handleNavigate}
+    />
   );
 };
 
