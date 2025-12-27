@@ -5,7 +5,7 @@ import type { Profile } from '@/domain/user';
 
 type Props = {
   profile: Profile;
-  handleLogout: () => Promise<void> | (() => void);
+  handleLogout: () => void;
   handleAccountDeletion: () => void;
 };
 

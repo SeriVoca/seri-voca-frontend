@@ -1,7 +1,7 @@
 import KakaoLoginButton from '@/components/molecules/KakaoLoginButton/KakaoLoginButton';
 
 type Props = {
-  handleSignIn: () => Promise<void> | (() => void);
+  handleSignIn: () => void;
 };
 
 export const LoginPageTemplate = ({ handleSignIn }: Props) => {
