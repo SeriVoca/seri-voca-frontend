@@ -5,7 +5,7 @@ import BasicLayout from '@/layouts/BasicLayout';
 import BottomNavLayout from '@/layouts/BottomNavLayout';
 
 import HomePage from '@/components/pages/HomePage';
-import WordbooksPage from '@/components/pages/WordbooksPage';
+import WordbooksPage from '@/components/pages/WordbooksPage/WordbooksPage';
 import SettingPage from '@/components/pages/SettingPage';
 import { WordbookDetailPage } from '@/components/pages/WordbookDetailPage';
 
