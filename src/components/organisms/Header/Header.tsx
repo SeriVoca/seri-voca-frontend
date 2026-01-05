@@ -28,7 +28,7 @@ export const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: Head
   if (variant === 'LCTA') {
     return (
       <Wrapper>
-        <button className="flex cursor-pointer items-center" onClick={onLCTAClick}>
+        <button type="button" className="flex cursor-pointer items-center" onClick={onLCTAClick}>
           {LCTAIcon && <Icon name={LCTAIcon} />}
         </button>
 

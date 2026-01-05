@@ -7,6 +7,7 @@ type Props = {
 export const KakaoLoginButton = ({ handleClick }: Props) => {
   return (
     <button
+      type="button"
       onClick={handleClick}
       className="flex h-[3rem] w-full cursor-pointer items-center rounded-[0.75rem] bg-[#FEE500] px-[1.5rem]"
     >

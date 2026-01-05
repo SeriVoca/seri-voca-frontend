@@ -30,7 +30,12 @@ export const Button = ({ content, variant, onClick, className }: ButtonProps) =>
   const mergedStyle = twMerge(baseStyle, variantStyle, classNameStyle);
 
   return (
-    <button className={mergedStyle} onClick={onClick} disabled={variant === 'disabled'}>
+    <button
+      type="button"
+      className={mergedStyle}
+      onClick={onClick}
+      disabled={variant === 'disabled'}
+    >
       {content}
     </button>
   );

@@ -32,6 +32,7 @@ export const BottomNavItem = ({ navKey, status, selected }: BottomNavItemProps) 
 
   return (
     <button
+      type="button"
       className={`${selected ? BgByStatus[status] : ''} flex h-[3rem] w-[4.5rem] items-center justify-center rounded-[2rem]`}
       onClick={handleClick}
       disabled={status === 'disabled'}
