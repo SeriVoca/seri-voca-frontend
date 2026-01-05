@@ -7,6 +7,4 @@ if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
   throw new Error('Supabase 환경 변수가 설정되지 않았습니다.');
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-
-export default supabase;
+export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);

@@ -4,7 +4,7 @@ type Props = {
   handleClick: () => Promise<void> | void;
 };
 
-const KakaoLoginButton = ({ handleClick }: Props) => {
+export const KakaoLoginButton = ({ handleClick }: Props) => {
   return (
     <button
       onClick={handleClick}
@@ -15,5 +15,3 @@ const KakaoLoginButton = ({ handleClick }: Props) => {
     </button>
   );
 };
-
-export default KakaoLoginButton;

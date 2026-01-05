@@ -1,7 +1,7 @@
 import { type RouteObject } from 'react-router-dom';
-import LoginPage from '@/components/pages/LoginPage/LoginPage';
+import { LoginPage } from '@/components/pages/LoginPage/LoginPage';
 import { ROUTES } from '@/router/path';
-import BasicLayout from '@/layouts/BasicLayout';
+import { BasicLayout } from '@/layouts/BasicLayout';
 
 export const publicRoutes: RouteObject[] = [
   {

@@ -1,4 +1,4 @@
-import Header from '@/components/organisms/Header/Header';
+import { Header } from '@/components/organisms/Header/Header';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 
@@ -22,5 +22,3 @@ export const WordbookDetailPageTemplate = ({ words, handleNavigate }: Props) => 
     </div>
   );
 };
-
-export default WordbookDetailPageTemplate;

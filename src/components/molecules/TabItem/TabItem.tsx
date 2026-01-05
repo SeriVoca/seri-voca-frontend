@@ -4,7 +4,7 @@ type Props = {
   onClick: () => Promise<void> | void;
 };
 
-const TabItem = ({ label, active, onClick }: Props) => {
+export const TabItem = ({ label, active, onClick }: Props) => {
   return (
     <button
       className={`flex h-7 w-full items-center justify-center rounded-full px-2 py-1 ${
@@ -16,5 +16,3 @@ const TabItem = ({ label, active, onClick }: Props) => {
     </button>
   );
 };
-
-export default TabItem;

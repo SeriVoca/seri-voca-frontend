@@ -8,7 +8,7 @@ export type HeaderProps = {
   onLCTAClick?: () => Promise<void> | void;
 };
 
-const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps) => {
+export const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps) => {
   const Wrapper = ({ children }: { children: ReactNode }) => (
     <header className="flex h-[56px] w-full items-center bg-white px-4 shadow-sm">
       {children}
@@ -41,5 +41,3 @@ const Header = ({ title, variant = 'basic', LCTAIcon, onLCTAClick }: HeaderProps
 
   return null;
 };
-
-export default Header;

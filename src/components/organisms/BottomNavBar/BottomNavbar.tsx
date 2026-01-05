@@ -2,7 +2,7 @@ import { BottomNavItem } from '@/components/molecules/BottomNavItem/BottomNavIte
 import { useLocation } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
 
-const BottomNavbar = () => {
+export const BottomNavbar = () => {
   const location = useLocation();
   const path = location.pathname;
 
@@ -14,4 +14,3 @@ const BottomNavbar = () => {
     </div>
   );
 };
-export default BottomNavbar;

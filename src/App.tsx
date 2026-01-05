@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import supabase from '@/apis/supabase';
+import { supabase } from '@/apis/supabase';
 import { useAuthStore } from '@/store/useAuthStore';
-import router from '@/router';
+import { router } from '@/router';
 import { authTokenStore } from '@/store/authTokenStore';
 
-function App() {
+export const App = () => {
   const { setLogin, setLogout } = useAuthStore();
   const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
@@ -46,6 +46,4 @@ function App() {
   }
 
   return <RouterProvider router={router} />;
-}
-
-export default App;
+};

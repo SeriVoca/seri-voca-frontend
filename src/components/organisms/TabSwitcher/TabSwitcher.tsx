@@ -2,7 +2,7 @@
     # 단어장 페이지
 */
 
-import TabItem from '@/components/molecules/TabItem';
+import { TabItem } from '@/components/molecules/TabItem/TabItem';
 
 export type Tab = {
   id: number;
@@ -16,7 +16,7 @@ type Props = {
   onChange: (tab: Tab) => Promise<void> | void;
 };
 
-const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
+export const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
   return (
     <div className="flex h-[2.5rem] w-full items-center justify-center gap-[0.75rem] rounded-full bg-white px-[0.75rem] py-[0.375rem]">
       {tabs.map((tab, index) => (
@@ -30,7 +30,5 @@ const TabSwitcher = ({ tabs, activeTab, onChange }: Props) => {
     </div>
   );
 };
-
-export default TabSwitcher;
 
 // # 클릭 이벤트에 대해 필요한 정보를 조립하는 가장 상위 컴포넌트에서 연결시켜서 하위 컴포넌트에서는 신경 쓸 필요가 없음

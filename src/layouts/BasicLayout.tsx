@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-const BasicLayout = () => {
+export const BasicLayout = () => {
   return (
     <div className="flex justify-center bg-gray-100">
       <div className="flex h-dvh w-dvw flex-col bg-white sm:w-[360px]">
@@ -11,5 +11,3 @@ const BasicLayout = () => {
     </div>
   );
 };
-
-export default BasicLayout;
