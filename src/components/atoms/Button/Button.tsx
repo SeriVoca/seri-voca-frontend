@@ -17,10 +17,11 @@ type ButtonProps = {
   content: string;
   variant?: 'primary' | 'secondary' | 'disabled';
   onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
   className?: string;
 };
 
-export const Button = ({ content, variant, onClick, className }: ButtonProps) => {
+export const Button = ({ content, variant, onClick, type = 'button', className }: ButtonProps) => {
   // 스타일 정의
   const baseStyle = 'px-8 py-2 rounded-xl text-sm font-semibold bg-[#f2f4f0]'; // 기본 스타일
   const variantStyle = variant ? ButtonStyle[variant] : ''; // variant 스타일
@@ -30,12 +31,7 @@ export const Button = ({ content, variant, onClick, className }: ButtonProps) =>
   const mergedStyle = twMerge(baseStyle, variantStyle, classNameStyle);
 
   return (
-    <button
-      type="button"
-      className={mergedStyle}
-      onClick={onClick}
-      disabled={variant === 'disabled'}
-    >
+    <button type={type} className={mergedStyle} onClick={onClick} disabled={variant === 'disabled'}>
       {content}
     </button>
   );
