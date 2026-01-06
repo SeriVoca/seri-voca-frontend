@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/apis/supabase';
 import { getUserProfileData } from '@/apis/user';
 import type { Profile } from '@/domain/user';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { SettingPageTemplate } from '@/components/templates/SettingPageTemplate/SettingPageTemplate';
+import { logout } from '@/apis/auth';
 
 export const SettingPage = () => {
   const [profile, setProfile] = useState<AsyncState<Profile>>({ status: 'idle' });
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    console.log(error);
+    try {
+      await logout();
+    } catch (_error) {
+      // TODO: 로그아웃 실패 UI 필요
+      alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   const handleAccountDeletion = () => {
