@@ -1,6 +1,6 @@
-import supabase from '@/apis/supabase';
+import { supabase } from '@/apis/supabase';
 import { ROUTES } from '@/router/path';
-import LoginPageTemplate from '@/components/templates/LoginPageTemplate/LoginPageTemplate';
+import { LoginPageTemplate } from '@/components/templates/LoginPageTemplate/LoginPageTemplate';
 
 const BASE_URL = import.meta.env.VITE_CLIENT_BASE_URL;
 
@@ -8,7 +8,7 @@ if (!BASE_URL) {
   throw new Error('VITE_CLIENT_BASE_URL 환경 변수가 설정되지 않았습니다.');
 }
 
-const LoginPage = () => {
+export const LoginPage = () => {
   // TODO : api 컨벤션 논의
   const signInWithKakao = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
@@ -26,5 +26,3 @@ const LoginPage = () => {
 
   return <LoginPageTemplate handleSignIn={signInWithKakao} />;
 };
-
-export default LoginPage;

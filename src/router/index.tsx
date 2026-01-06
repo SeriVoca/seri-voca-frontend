@@ -1,11 +1,11 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import AuthGuard from '@/router/guards/AuthGuard';
-import GuestGuard from '@/router/guards/GuestGuard';
+import { AuthGuard } from '@/router/guards/AuthGuard';
+import { GuestGuard } from '@/router/guards/GuestGuard';
 import { publicRoutes } from '@/router/PublicRoutes';
 import { protectedRoutes } from '@/router/ProtectedRoutes';
 import { ROUTES } from '@/router/path';
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   // 1. 로그인한 유저는 접근 못하는 페이지 (로그인 페이지 등)
   {
     element: <GuestGuard />,
@@ -24,5 +24,3 @@ const router = createBrowserRouter([
     element: <Navigate to={ROUTES.WORDBOOKS} replace />, // TODO: <NotFoundPage /> 로 바꾸기
   },
 ]);
-
-export default router;

@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/store/useAuthStore';
 
-const AuthGuard = () => {
+export const AuthGuard = () => {
   const { isAuthenticated } = useAuthStore();
   const location = useLocation();
 
@@ -12,5 +12,3 @@ const AuthGuard = () => {
 
   return <Outlet />;
 };
-
-export default AuthGuard;

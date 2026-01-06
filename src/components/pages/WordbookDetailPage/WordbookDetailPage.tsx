@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type { Word } from '@/domain/word';
 import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
-import WordbookDetailPageTemplate from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
+import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
 
 export const WordbookDetailPage = () => {

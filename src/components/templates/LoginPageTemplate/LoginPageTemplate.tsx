@@ -1,4 +1,4 @@
-import KakaoLoginButton from '@/components/molecules/KakaoLoginButton/KakaoLoginButton';
+import { KakaoLoginButton } from '@/components/molecules/KakaoLoginButton/KakaoLoginButton';
 
 type Props = {
   handleSignIn: () => Promise<void> | void;
@@ -14,5 +14,3 @@ export const LoginPageTemplate = ({ handleSignIn }: Props) => {
     </div>
   );
 };
-
-export default LoginPageTemplate;

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import supabase from '@/apis/supabase';
+import { supabase } from '@/apis/supabase';
 import { getUserProfileData } from '@/apis/user';
 import type { Profile } from '@/domain/user';
 import type { AsyncState } from '@/shared/types/asyncState';
-import SettingPageTemplate from '@/components/templates/SettingPageTemplate/SettingPageTemplate';
+import { SettingPageTemplate } from '@/components/templates/SettingPageTemplate/SettingPageTemplate';
 
-const SettingPage = () => {
+export const SettingPage = () => {
   const [profile, setProfile] = useState<AsyncState<Profile>>({ status: 'idle' });
 
   const handleLogout = async () => {
@@ -48,5 +48,3 @@ const SettingPage = () => {
     />
   );
 };
-
-export default SettingPage;

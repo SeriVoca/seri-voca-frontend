@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ROUTES } from '@/router/path';
 
-const GuestGuard = () => {
+export const GuestGuard = () => {
   const { isAuthenticated } = useAuthStore();
 
   if (isAuthenticated) {
@@ -13,5 +13,3 @@ const GuestGuard = () => {
 
   return <Outlet />;
 };
-
-export default GuestGuard;

@@ -1,4 +1,4 @@
-import { type Tab } from '@/components/organisms/TabSwitcher';
+import { type Tab } from '@/components/organisms/TabSwitcher/TabSwitcher';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
@@ -7,7 +7,7 @@ import type { Wordbook } from '@/domain/wordbook';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
 
-const WordbooksPage = () => {
+export const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
   const [wordbooks, setWordbooks] = useState<AsyncState<Wordbook[]>>({ status: 'idle' });
@@ -58,8 +58,6 @@ const WordbooksPage = () => {
     />
   );
 };
-
-export default WordbooksPage;
 
 // 정적 데이터
 const tabs: Tab[] = [

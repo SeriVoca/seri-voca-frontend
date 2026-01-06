@@ -1,4 +1,4 @@
-import Header from '@/components/organisms/Header/Header';
+import { Header } from '@/components/organisms/Header/Header';
 import { SettingList } from '@/components/organisms/SettingList/SettingList';
 import { UserProfileCard } from '@/components/organisms/UserProfileCard/UserProfileCard';
 import type { Profile } from '@/domain/user';
@@ -30,5 +30,3 @@ export const SettingPageTemplate = ({ profile, handleLogout }: Props) => {
     </div>
   );
 };
-
-export default SettingPageTemplate;

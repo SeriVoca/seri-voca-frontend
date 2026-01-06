@@ -1,5 +1,5 @@
-import Header from '@/components/organisms/Header/Header';
-import TabSwitcher, { type Tab } from '@/components/organisms/TabSwitcher';
+import { Header } from '@/components/organisms/Header/Header';
+import { TabSwitcher, type Tab } from '@/components/organisms/TabSwitcher/TabSwitcher';
 import { WordbookList } from '@/components/organisms/WordbookList/WordbookList';
 import type { Wordbook } from '@/domain/wordbook';
 
