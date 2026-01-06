@@ -1,5 +1,3 @@
-// TODO : 파일 위치 조정
-
 let accessToken: string | null = null;
 
 export const authTokenStore = {
