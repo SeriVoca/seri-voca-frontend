@@ -20,3 +20,12 @@ export const signInWithKakao = async () => {
     throw error;
   }
 };
+
+export const logout = async () => {
+  try {
+    await supabase.auth.signOut();
+  } catch (error) {
+    console.log('[ERROR] 로그아웃 실패: ', error);
+    throw error;
+  }
+};
