@@ -5,7 +5,7 @@ import { mapWordListResponseToDomain } from '@/mapper/word';
 
 export const getWordList = async (wordbookId: string): Promise<Word[]> => {
   try {
-    const res = await api.get<WordResponse[]>(`/wordbook/${wordbookId}`);
+    const res = await api.get<WordResponse[]>(`/wordbooks/${wordbookId}`);
     return mapWordListResponseToDomain(res.data);
   } catch (error) {
     console.error('[ERROR] 단어 목록 조회 실패', error);
