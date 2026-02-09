@@ -12,9 +12,11 @@ export const WordbookDetailPageTemplate = ({ words, handleNavigate }: Props) => 
     <div className="flex h-full w-full flex-col">
       <Header
         title="단어장 상세 페이지"
-        variant="LCTA"
+        variant="LRCTA"
         LCTAIcon="ChevronLeft"
         onLCTAClick={handleNavigate}
+        RCTAIcon="DotsVertical"
+        onRCTAClick={() => {}}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
