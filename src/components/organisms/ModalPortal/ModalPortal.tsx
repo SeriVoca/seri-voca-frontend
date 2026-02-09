@@ -17,9 +17,6 @@ export type ModalPortalProps = {
 
   /** 닫힐 때 호출(선택) */
   onClose?: () => void;
-
-  /** portal root id (기본값: modal-root) */
-  rootId?: string;
 };
 
 /**
