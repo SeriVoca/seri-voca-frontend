@@ -43,5 +43,5 @@ export const POS_DOMAIN_LABEL_MAP: Record<PartOfSpeech, PartOfSpeechLabel> = {
 };
 
 export const mapPosToLabel = (pos: PartOfSpeech): PartOfSpeechLabel => {
-  return POS_DOMAIN_LABEL_MAP[pos];
+  return POS_DOMAIN_LABEL_MAP[pos] ?? pos;
 };
