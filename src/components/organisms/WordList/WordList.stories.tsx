@@ -12,58 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof WordList>;
 
-const mockWords: Word[] = [
-  {
-    id: 'apple',
-    textEn: 'apple',
-    meanings: [
-      {
-        partOfSpeech: 'n',
-        textKo: '사과',
-      },
-    ],
-  },
-  {
-    id: 'banana',
-    textEn: 'banana',
-    meanings: [
-      {
-        partOfSpeech: 'n',
-        textKo: '바나나',
-      },
-    ],
-  },
-  {
-    id: 'cherry',
-    textEn: 'cherry',
-    meanings: [
-      {
-        partOfSpeech: 'n',
-        textKo: '체리',
-      },
-    ],
-  },
-  {
-    id: 'orange',
-    textEn: 'orange',
-    meanings: [
-      {
-        partOfSpeech: 'n',
-        textKo: '오렌지',
-      },
-    ],
-  },
-  {
-    id: 'grape',
-    textEn: 'grape',
-    meanings: [
-      {
-        partOfSpeech: 'n',
-        textKo: '포도',
-      },
-    ],
-  },
-];
+const mockWords: Word[] = [];
 
 export const Default: Story = {
   args: {
