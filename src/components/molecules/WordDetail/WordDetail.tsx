@@ -1,5 +1,5 @@
 import type { Word } from '@/domain/word';
-import { mapPosToLabel, type PartOfSpeech } from '@/mapper/word';
+import { mapPosToLabel } from '@/mapper/word';
 
 export type WordDetailProps = {
   word: Word;
@@ -11,10 +11,7 @@ export const WordDetail = ({ word }: WordDetailProps) => {
       <div className="flex-[2]">{word.textEn}</div>
       <div className="flex flex-[3]">
         {word.meanings
-          .map(
-            (meaning) =>
-              `${mapPosToLabel(meaning.partOfSpeech as PartOfSpeech)}. ${meaning.textKo}`,
-          )
+          .map((meaning) => `${mapPosToLabel(meaning.partOfSpeech)}. ${meaning.textKo}`)
           .join(', ')}
       </div>
     </div>

@@ -1,5 +1,15 @@
+export type PartOfSpeech =
+  | 'noun'
+  | 'pronoun'
+  | 'verb'
+  | 'adjective'
+  | 'adverb'
+  | 'preposition'
+  | 'conjunction'
+  | 'interjection';
+
 export interface Meaning {
-  partOfSpeech: string;
+  partOfSpeech: PartOfSpeech;
   textKo: string;
 }
 

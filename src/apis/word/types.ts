@@ -3,13 +3,13 @@ export interface WordResponse {
   en_text: string;
   order_index: number;
   meanings: {
-    part_of_speech: PartOfSpeech;
+    part_of_speech: PartOfSpeechResponse;
     meaning: string;
     order_index: number;
   }[];
 }
 
-export type PartOfSpeech =
+export type PartOfSpeechResponse =
   | 'noun'
   | 'pronoun'
   | 'verb'

@@ -16,12 +16,7 @@ export const Default: Story = {
     word: {
       id: '1',
       textEn: 'apple',
-      meanings: [
-        {
-          partOfSpeech: 'n',
-          textKo: '사과',
-        },
-      ],
+      meanings: [],
     },
   },
 };
@@ -31,12 +26,7 @@ export const LongText: Story = {
     word: {
       id: '2',
       textEn: 'internationalization',
-      meanings: [
-        {
-          partOfSpeech: 'n',
-          textKo: '국제화',
-        },
-      ],
+      meanings: [],
     },
   },
 };
