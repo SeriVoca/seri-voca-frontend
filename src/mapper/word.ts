@@ -1,4 +1,4 @@
-import type { WordResponse } from '@/apis/word/types';
+import type { PartOfSpeech, WordResponse } from '@/apis/word/types';
 import type { Word, Meaning } from '@/domain/word';
 
 export const mapWordResponseToDomain = (data: WordResponse): Word => {
@@ -17,16 +17,6 @@ export const mapWordResponseToDomain = (data: WordResponse): Word => {
 export const mapWordListResponseToDomain = (data: WordResponse[]): Word[] => {
   return data.map(mapWordResponseToDomain);
 };
-
-export type PartOfSpeech =
-  | 'noun'
-  | 'pronoun'
-  | 'verb'
-  | 'adjective'
-  | 'adverb'
-  | 'preposition'
-  | 'conjunction'
-  | 'interjection';
 
 export type PartOfSpeechLabel = 'n' | 'pron' | 'v' | 'adj' | 'adv' | 'prep' | 'conj' | 'interj';
 

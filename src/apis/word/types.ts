@@ -1,5 +1,3 @@
-import type { PartOfSpeech } from '@/mapper/word';
-
 export interface WordResponse {
   id: string;
   en_text: string;
@@ -10,3 +8,13 @@ export interface WordResponse {
     order_index: number;
   }[];
 }
+
+export type PartOfSpeech =
+  | 'noun'
+  | 'pronoun'
+  | 'verb'
+  | 'adjective'
+  | 'adverb'
+  | 'preposition'
+  | 'conjunction'
+  | 'interjection';
