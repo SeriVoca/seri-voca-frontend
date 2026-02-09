@@ -40,7 +40,7 @@ export function KebabMenu({ open, anchorRef, onClose }: Props) {
   if (!open || !pos || !rootEl) return null;
 
   return createPortal(
-    <div className="pointer-events-auto flex h-full items-center justify-center sm:w-[360px]">
+    <div className="pointer-events-auto flex h-full w-full items-center justify-center sm:w-[360px]">
       {/* ✅ 바깥 클릭 닫기용 backdrop */}
       <button
         type="button"
@@ -51,7 +51,7 @@ export function KebabMenu({ open, anchorRef, onClose }: Props) {
       {/* ✅ 실제 메뉴 */}
       <div className="relative h-full w-full">
         <div
-          className={`top pointer-events-auto absolute right-3 rounded-xl bg-white shadow-lg`}
+          className={`pointer-events-auto absolute right-3 rounded-xl bg-white shadow-lg`}
           style={{ top: pos.top }}
           onMouseDown={(e) => e.stopPropagation()} // 메뉴 클릭은 닫히지 않게
           role="menu"
