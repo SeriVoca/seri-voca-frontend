@@ -39,7 +39,7 @@ export const Button = ({ content, variant, onClick, type = 'button', className }
 
 // variant
 const ButtonStyle = {
-  primary: 'bg-[#a4ec13] text-gray-700 cursor-pointer',
-  secondary: 'bg-[#f2f4f0] text-gray-700 cursor-pointer',
+  primary: 'bg-[#b4e35a] text-[#f5f5f5] cursor-pointer',
+  secondary: 'bg-[#f5f5f5] text-[#9d9d9d] cursor-pointer',
   disabled: 'bg-gray-200 text-gray-400 cursor-not-allowed',
 };
