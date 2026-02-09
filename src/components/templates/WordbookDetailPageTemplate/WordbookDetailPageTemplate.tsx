@@ -1,4 +1,5 @@
 import { Header } from '@/components/organisms/Header/Header';
+import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { RefObject } from 'react';
@@ -26,8 +27,13 @@ export const WordbookDetailPageTemplate = ({
         LCTAIcon="ChevronLeft"
         onLCTAClick={handleNavigate}
         RCTAIcon="DotsVertical"
-        onRCTAClick={() => {}}
+        onRCTAClick={() => handleKebabMenuOpen(true)}
         RCTARef={kebabAnchorRef}
+      />
+      <KebabMenu
+        open={isKebabMenuOpen}
+        anchorRef={kebabAnchorRef}
+        onClose={() => handleKebabMenuOpen(false)}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
