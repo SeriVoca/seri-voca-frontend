@@ -17,3 +17,30 @@ export const mapWordResponseToDomain = (data: WordResponse): Word => {
 export const mapWordListResponseToDomain = (data: WordResponse[]): Word[] => {
   return data.map(mapWordResponseToDomain);
 };
+
+export type PartOfSpeech =
+  | 'noun'
+  | 'pronoun'
+  | 'verb'
+  | 'adjective'
+  | 'adverb'
+  | 'preposition'
+  | 'conjunction'
+  | 'interjection';
+
+export type PartOfSpeechLabel = 'n' | 'pron' | 'v' | 'adj' | 'adv' | 'prep' | 'conj' | 'interj';
+
+export const POS_LABEL_MAP: Record<PartOfSpeech, PartOfSpeechLabel> = {
+  noun: 'n',
+  pronoun: 'pron',
+  verb: 'v',
+  adjective: 'adj',
+  adverb: 'adv',
+  preposition: 'prep',
+  conjunction: 'conj',
+  interjection: 'interj',
+};
+
+export const mapPosToLabel = (pos: PartOfSpeech): PartOfSpeechLabel => {
+  return POS_LABEL_MAP[pos];
+};
