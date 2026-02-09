@@ -3,7 +3,7 @@ import { ModalPortal } from './ModalPortal';
 import { useModalStore } from '@/store/useModalStore';
 
 const meta: Meta<typeof ModalPortal> = {
-  title: 'Overlay/ModalPortal',
+  title: 'Organisms/ModalPortal',
   component: ModalPortal,
 };
 
