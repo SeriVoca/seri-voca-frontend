@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, type RefObject } from 'react';
 import { Icon } from '@/components/atoms/Icon/Icon';
 
 export type HeaderProps = {
@@ -8,6 +8,7 @@ export type HeaderProps = {
   onLCTAClick?: () => Promise<void> | void;
   RCTAIcon?: string;
   onRCTAClick?: () => Promise<void> | void;
+  RCTARef?: RefObject<HTMLButtonElement | null>;
 };
 
 export const Header = ({
@@ -17,6 +18,7 @@ export const Header = ({
   onLCTAClick,
   RCTAIcon,
   onRCTAClick,
+  RCTARef,
 }: HeaderProps) => {
   const Wrapper = ({ children }: { children: ReactNode }) => (
     <header className="flex h-[56px] w-full items-center bg-white px-4 shadow-sm">
@@ -57,7 +59,12 @@ export const Header = ({
 
         <h1 className="flex-1 text-center text-lg font-semibold">{title}</h1>
 
-        <button type="button" className="flex cursor-pointer items-center" onClick={onRCTAClick}>
+        <button
+          ref={RCTARef}
+          type="button"
+          className="flex cursor-pointer items-center"
+          onClick={onRCTAClick}
+        >
           {RCTAIcon && <Icon name={RCTAIcon} />}
         </button>
       </Wrapper>
