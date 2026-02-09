@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+type UIProp = {
+  label: string;
+  handleCLick: () => Promise<void> | void;
+};
+
 type Props = {
   open: boolean;
   anchorRef: React.RefObject<HTMLElement | null>;
   onClose: () => Promise<void> | void;
+  UIProps: UIProp[];
 };
 
-export function KebabMenu({ open, anchorRef, onClose }: Props) {
+export function KebabMenu({ open, anchorRef, onClose, UIProps }: Props) {
   const [pos, setPos] = useState<{ top: number } | null>(null);
 
   const rootEl = typeof document !== 'undefined' ? document.getElementById('dropdown-root') : null;
@@ -57,9 +63,18 @@ export function KebabMenu({ open, anchorRef, onClose }: Props) {
           role="menu"
           tabIndex={-1}
         >
-          <button className="w-full px-4 py-3 text-left hover:bg-gray-50" role="menuitem">
-            나의 단어장에 단어 추가하기
-          </button>
+          {UIProps.map((prop) => {
+            return (
+              <button
+                key={null}
+                className="w-full px-4 py-3 text-left hover:bg-gray-50"
+                role="menuitem"
+                onClick={prop.handleCLick}
+              >
+                {prop.label}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>,

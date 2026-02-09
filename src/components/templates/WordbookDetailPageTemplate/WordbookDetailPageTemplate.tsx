@@ -34,6 +34,14 @@ export const WordbookDetailPageTemplate = ({
         open={isKebabMenuOpen}
         anchorRef={kebabAnchorRef}
         onClose={() => handleKebabMenuOpen(false)}
+        UIProps={[
+          {
+            label: '나의 단어장에 단어 추가하기',
+            handleCLick: () => {
+              // 바텀 시트 여는 함수
+            },
+          },
+        ]}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
