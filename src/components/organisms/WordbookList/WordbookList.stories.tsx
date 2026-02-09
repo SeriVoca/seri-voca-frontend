@@ -19,11 +19,7 @@ type Story = StoryObj<typeof WordbookList>;
 
 export const Default: Story = {
   args: {
-    wordbooks: [
-      { id: 'a', title: 'Day 1 - Basics', description: '기초 단어 20개' },
-      { id: 'b', title: 'Day 2 - Verbs', description: '동사 중심 구성' },
-      { id: 'c', title: 'Day 3 - Travel', description: '여행 단어 모음' },
-    ],
+    wordbooks: [],
     handleNavigate: (id: string) => {
       console.log(`Navigate wordbook: ${id}`);
     },
@@ -45,6 +41,7 @@ export const ManyItems: Story = {
       id: String(i + 1),
       title: `Wordbook #${i + 1}`,
       description: `캡션 테스트 ${i + 1}`,
+      type: 'SYSTEM',
     })),
     handleNavigate: (id: string) => {
       console.log(`Navigate: ${id}`);

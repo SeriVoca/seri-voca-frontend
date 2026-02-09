@@ -4,7 +4,7 @@ import type { Profile } from '@/domain/user';
 export const mapUserProfileResponseToDomain = (response: GetUserProfileDataResponse): Profile => {
   return {
     email: response.email,
-    name: response.name,
-    profile_image_url: response.profile_image_url,
+    name: response.nickname,
+    profile_image_url: response.avatar_url,
   };
 };

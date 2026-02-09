@@ -1,6 +1,9 @@
 export type GetWordbookListResponse = {
   order_index: number;
-  id: string;
-  title: string;
-  description: string;
+  wordbook: {
+    id: string;
+    title: string;
+    description: string;
+    type: 'SYSTEM' | 'USER';
+  };
 }[];
