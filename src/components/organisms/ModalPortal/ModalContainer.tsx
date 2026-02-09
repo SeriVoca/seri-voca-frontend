@@ -3,5 +3,5 @@ export type ModalContainerProps = {
 };
 
 export const ModalContainer = ({ children }: ModalContainerProps) => {
-  return <div className="rounded-md bg-white px-[1.5rem] py-[1.25rem]">{children}</div>;
+  return <div className="w-[320px] rounded-md bg-white px-[1.5rem] py-[1.25rem]">{children}</div>;
 };
