@@ -6,11 +6,18 @@ import { getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
+import { useModalStore } from '@/store/useModalStore';
+import { CreateWordbookModal } from '@/components/organisms/CreateWordbookModal/CreateWordbookModal';
 
 export const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
   const [wordbooks, setWordbooks] = useState<AsyncState<Wordbook[]>>({ status: 'idle' });
+
+  // 단어장 생성 플로우 - 단어장 이름 상태 및 모달 open/close 핸들러
+  const [wordbookName, setWordbookName] = useState<string>('');
+  const open = useModalStore((s) => s.open);
+  const close = useModalStore((s) => s.close);
 
   const handleNavigate = (id: string) => {
     const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));
@@ -40,6 +47,23 @@ export const WordbooksPage = () => {
     }
   };
 
+  const createWordbookModalContent = () => {
+    return (
+      <CreateWordbookModal
+        value={wordbookName}
+        onChange={setWordbookName}
+        onSubmit={() => {
+          // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
+          alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
+          close('wordbook-create-modal');
+        }}
+        onCancel={() => {
+          close('wordbook-create-modal');
+        }}
+      />
+    );
+  };
+
   switch (wordbooks.status) {
     case 'idle':
     case 'loading':
@@ -55,6 +79,8 @@ export const WordbooksPage = () => {
       handleTabClick={handleTabClick}
       wordbooks={wordbooks.data}
       handleNavigate={handleNavigate}
+      openWordbookCreateModal={open}
+      createWordbookModalContent={createWordbookModalContent()}
     />
   );
 };
