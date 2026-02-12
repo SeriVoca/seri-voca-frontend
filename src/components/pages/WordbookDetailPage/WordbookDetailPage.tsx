@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
 import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
@@ -11,9 +11,18 @@ export const WordbookDetailPage = () => {
   const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
+  // interactive ui state
+  const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
+  const kebabButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
     navigate(path);
+  };
+
+  const handleKebabMenuOpen = (flag: boolean) => {
+    if (flag) setIsKebabMenuOpen(true);
+    else setIsKebabMenuOpen(false);
   };
 
   useEffect(() => {
@@ -43,5 +52,13 @@ export const WordbookDetailPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
-  return <WordbookDetailPageTemplate words={words.data} handleNavigate={handleNavigate} />;
+  return (
+    <WordbookDetailPageTemplate
+      words={words.data}
+      handleNavigate={handleNavigate}
+      isKebabMenuOpen={isKebabMenuOpen}
+      handleKebabMenuOpen={handleKebabMenuOpen}
+      kebabAnchorRef={kebabButtonRef}
+    />
+  );
 };
