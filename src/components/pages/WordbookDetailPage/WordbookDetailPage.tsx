@@ -5,6 +5,7 @@ import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
+import { useModalStore } from '@/store/useModalStore';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -12,8 +13,15 @@ export const WordbookDetailPage = () => {
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
   // interactive ui state
+
+  // Header kebab menu
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
   const kebabButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // Wordbook select modal
+  const open = useModalStore((s) => s.open);
+  const close = useModalStore((s) => s.close);
+  const wordbookSelectModalId = 'wordbook-select-modal';
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -59,6 +67,9 @@ export const WordbookDetailPage = () => {
       isKebabMenuOpen={isKebabMenuOpen}
       handleKebabMenuOpen={handleKebabMenuOpen}
       kebabAnchorRef={kebabButtonRef}
+      openWordbookSelectModal={() => open(wordbookSelectModalId)}
+      closeWordbookSelectModal={() => close(wordbookSelectModalId)}
+      wordbookSelectModalId={wordbookSelectModalId}
     />
   );
 };

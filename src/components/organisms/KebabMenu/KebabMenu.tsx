@@ -69,7 +69,10 @@ export function KebabMenu({ open, anchorRef, onClose, UIProps }: Props) {
                 key={index}
                 className="w-full px-4 py-3 text-left hover:bg-gray-50"
                 role="menuitem"
-                onClick={prop.handleClick}
+                onClick={() => {
+                  prop.handleClick();
+                  onClose();
+                }}
               >
                 {prop.label}
               </button>

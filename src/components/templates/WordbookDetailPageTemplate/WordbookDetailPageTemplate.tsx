@@ -1,5 +1,7 @@
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
+import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
+import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSeldectModalContent';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { RefObject } from 'react';
@@ -10,6 +12,9 @@ type Props = {
   isKebabMenuOpen: boolean;
   handleKebabMenuOpen: (flag: boolean) => Promise<void> | void;
   kebabAnchorRef: RefObject<HTMLButtonElement | null>;
+  openWordbookSelectModal: (id: string) => void;
+  closeWordbookSelectModal: (id: string) => void;
+  wordbookSelectModalId: string;
 };
 
 export const WordbookDetailPageTemplate = ({
@@ -18,6 +23,9 @@ export const WordbookDetailPageTemplate = ({
   isKebabMenuOpen,
   handleKebabMenuOpen,
   kebabAnchorRef,
+  openWordbookSelectModal,
+  closeWordbookSelectModal,
+  wordbookSelectModalId,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col">
@@ -37,15 +45,18 @@ export const WordbookDetailPageTemplate = ({
         UIProps={[
           {
             label: '나의 단어장에 단어 추가하기',
-            handleClick: () => {
-              // 바텀 시트 여는 함수
-            },
+            handleClick: () => openWordbookSelectModal(wordbookSelectModalId),
           },
         ]}
       />
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
       </div>
+
+      {/* 단어장 선택 모달 */}
+      <ModalPortal id={wordbookSelectModalId}>
+        <WordbookSelectModalContent />
+      </ModalPortal>
     </div>
   );
 };
