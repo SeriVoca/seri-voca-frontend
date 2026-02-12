@@ -6,6 +6,10 @@ import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
+import {
+  MOCK_WORDBOOKS,
+  MOCK_WORDBOOKS_10,
+} from '@/components/templates/WordbookDetailPageTemplate/mock';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -70,6 +74,7 @@ export const WordbookDetailPage = () => {
       openWordbookSelectModal={() => open(wordbookSelectModalId)}
       closeWordbookSelectModal={() => close(wordbookSelectModalId)}
       wordbookSelectModalId={wordbookSelectModalId}
+      myWordbooks={MOCK_WORDBOOKS_10}
     />
   );
 };

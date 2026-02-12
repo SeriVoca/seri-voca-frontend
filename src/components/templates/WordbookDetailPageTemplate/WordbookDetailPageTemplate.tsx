@@ -4,6 +4,7 @@ import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSeldectModalContent';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
+import type { Wordbook } from '@/domain/wordbook';
 import type { RefObject } from 'react';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
   openWordbookSelectModal: (id: string) => void;
   closeWordbookSelectModal: (id: string) => void;
   wordbookSelectModalId: string;
+  myWordbooks: Wordbook[];
 };
 
 export const WordbookDetailPageTemplate = ({
@@ -26,6 +28,7 @@ export const WordbookDetailPageTemplate = ({
   openWordbookSelectModal,
   closeWordbookSelectModal,
   wordbookSelectModalId,
+  myWordbooks,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col">
@@ -55,7 +58,7 @@ export const WordbookDetailPageTemplate = ({
 
       {/* 단어장 선택 모달 */}
       <ModalPortal id={wordbookSelectModalId}>
-        <WordbookSelectModalContent />
+        <WordbookSelectModalContent wordbooks={myWordbooks} />
       </ModalPortal>
     </div>
   );
