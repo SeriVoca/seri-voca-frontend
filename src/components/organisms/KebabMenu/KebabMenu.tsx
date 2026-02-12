@@ -63,10 +63,10 @@ export function KebabMenu({ open, anchorRef, onClose, UIProps }: Props) {
           role="menu"
           tabIndex={-1}
         >
-          {UIProps.map((prop) => {
+          {UIProps.map((prop, index) => {
             return (
               <button
-                key={null}
+                key={index}
                 className="w-full px-4 py-3 text-left hover:bg-gray-50"
                 role="menuitem"
                 onClick={prop.handleClick}
