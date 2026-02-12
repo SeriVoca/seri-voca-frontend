@@ -66,8 +66,6 @@ export const WordbookDetailPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
-  console.log('[WordbookDetailPage] ', selectedWordbook);
-
   return (
     <WordbookDetailPageTemplate
       words={words.data}

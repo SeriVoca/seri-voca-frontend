@@ -1,7 +1,7 @@
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
-import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSeldectModalContent';
+import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSelectModalContent';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { Wordbook } from '@/domain/wordbook';
