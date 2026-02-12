@@ -53,11 +53,17 @@ export const WordbooksPage = () => {
         value={wordbookName}
         onChange={setWordbookName}
         onSubmit={() => {
+          if (wordbookName.trim() === '') {
+            alert('단어장 이름을 입력해주세요.');
+            return;
+          }
           // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
           alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
+          setWordbookName('');
           close('wordbook-create-modal');
         }}
         onCancel={() => {
+          setWordbookName('');
           close('wordbook-create-modal');
         }}
       />
