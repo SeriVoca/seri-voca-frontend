@@ -5,6 +5,9 @@ import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
+import { useModalStore } from '@/store/useModalStore';
+import { MOCK_WORDBOOKS_10 } from '@/components/pages/WordbookDetailPage/mock';
+import type { Wordbook } from '@/domain/wordbook';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -12,8 +15,19 @@ export const WordbookDetailPage = () => {
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
   // interactive ui state
+
+  // Header kebab menu
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
   const kebabButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // Wordbook select modal
+  const open = useModalStore((s) => s.open);
+  const close = useModalStore((s) => s.close);
+  const wordbookSelectModalId = 'wordbook-select-modal';
+
+  // Select mode
+  const [selectMode, setSelectMode] = useState<boolean>(false);
+  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook>();
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -59,6 +73,13 @@ export const WordbookDetailPage = () => {
       isKebabMenuOpen={isKebabMenuOpen}
       handleKebabMenuOpen={handleKebabMenuOpen}
       kebabAnchorRef={kebabButtonRef}
+      openWordbookSelectModal={() => open(wordbookSelectModalId)}
+      closeWordbookSelectModal={() => close(wordbookSelectModalId)}
+      wordbookSelectModalId={wordbookSelectModalId}
+      myWordbooks={MOCK_WORDBOOKS_10}
+      selectMode={selectMode}
+      selectedWordbook={selectedWordbook}
+      setSelectedWordbook={setSelectedWordbook}
     />
   );
 };
