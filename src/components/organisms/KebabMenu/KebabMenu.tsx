@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 type UIProp = {
   label: string;
-  handleCLick: () => Promise<void> | void;
+  handleClick: () => Promise<void> | void;
 };
 
 type Props = {
@@ -69,7 +69,7 @@ export function KebabMenu({ open, anchorRef, onClose, UIProps }: Props) {
                 key={null}
                 className="w-full px-4 py-3 text-left hover:bg-gray-50"
                 role="menuitem"
-                onClick={prop.handleCLick}
+                onClick={prop.handleClick}
               >
                 {prop.label}
               </button>

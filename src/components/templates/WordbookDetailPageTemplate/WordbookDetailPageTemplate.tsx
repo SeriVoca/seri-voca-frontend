@@ -37,7 +37,7 @@ export const WordbookDetailPageTemplate = ({
         UIProps={[
           {
             label: '나의 단어장에 단어 추가하기',
-            handleCLick: () => {
+            handleClick: () => {
               // 바텀 시트 여는 함수
             },
           },
