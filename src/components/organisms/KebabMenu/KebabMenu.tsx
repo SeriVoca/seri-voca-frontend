@@ -55,7 +55,7 @@ export function KebabMenu({ open, anchorRef, onClose, UIProps }: Props) {
         onMouseDown={onClose}
       />
       {/* ✅ 실제 메뉴 */}
-      <div className="relative h-full w-full">
+      <div className="pointer-events-none relative h-full w-full">
         <div
           className={`pointer-events-auto absolute right-3 rounded-xl bg-white shadow-lg`}
           style={{ top: pos.top }}
