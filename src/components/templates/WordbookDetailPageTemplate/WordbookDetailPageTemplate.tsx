@@ -17,6 +17,9 @@ type Props = {
   closeWordbookSelectModal: (id: string) => void;
   wordbookSelectModalId: string;
   myWordbooks: Wordbook[];
+  selectMode: boolean;
+  selectedWordbook?: Wordbook;
+  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
 };
 
 export const WordbookDetailPageTemplate = ({
@@ -29,6 +32,9 @@ export const WordbookDetailPageTemplate = ({
   closeWordbookSelectModal,
   wordbookSelectModalId,
   myWordbooks,
+  selectMode,
+  selectedWordbook,
+  setSelectedWordbook,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col">
@@ -58,7 +64,11 @@ export const WordbookDetailPageTemplate = ({
 
       {/* 단어장 선택 모달 */}
       <ModalPortal id={wordbookSelectModalId}>
-        <WordbookSelectModalContent wordbooks={myWordbooks} />
+        <WordbookSelectModalContent
+          wordbooks={myWordbooks}
+          setSelectedWordbook={setSelectedWordbook}
+          closeModal={() => closeWordbookSelectModal(wordbookSelectModalId)}
+        />
       </ModalPortal>
     </div>
   );

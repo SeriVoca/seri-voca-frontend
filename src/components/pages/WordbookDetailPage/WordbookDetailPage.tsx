@@ -6,10 +6,8 @@ import type { AsyncState } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
-import {
-  MOCK_WORDBOOKS,
-  MOCK_WORDBOOKS_10,
-} from '@/components/templates/WordbookDetailPageTemplate/mock';
+import { MOCK_WORDBOOKS_10 } from '@/components/pages/WordbookDetailPage/mock';
+import type { Wordbook } from '@/domain/wordbook';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -26,6 +24,10 @@ export const WordbookDetailPage = () => {
   const open = useModalStore((s) => s.open);
   const close = useModalStore((s) => s.close);
   const wordbookSelectModalId = 'wordbook-select-modal';
+
+  // Select mode
+  const [selectMode, setSelectMode] = useState<boolean>(false);
+  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook>();
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -64,6 +66,8 @@ export const WordbookDetailPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
+  console.log('[WordbookDetailPage] ', selectedWordbook);
+
   return (
     <WordbookDetailPageTemplate
       words={words.data}
@@ -75,6 +79,9 @@ export const WordbookDetailPage = () => {
       closeWordbookSelectModal={() => close(wordbookSelectModalId)}
       wordbookSelectModalId={wordbookSelectModalId}
       myWordbooks={MOCK_WORDBOOKS_10}
+      selectMode={selectMode}
+      selectedWordbook={selectedWordbook}
+      setSelectedWordbook={setSelectedWordbook}
     />
   );
 };

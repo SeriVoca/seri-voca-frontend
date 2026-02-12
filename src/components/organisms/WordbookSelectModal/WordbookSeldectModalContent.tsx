@@ -6,9 +6,15 @@ import type { Wordbook } from '@/domain/wordbook';
 
 type Props = {
   wordbooks: Wordbook[];
+  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
+  closeModal: () => Promise<void> | void;
 };
 
-export const WordbookSelectModalContent = ({ wordbooks }: Props) => {
+export const WordbookSelectModalContent = ({
+  wordbooks,
+  setSelectedWordbook,
+  closeModal,
+}: Props) => {
   return (
     <div className="flex max-h-[400px] flex-col">
       <div className="mb-5 text-2xl font-semibold">추가할 단어장</div>
@@ -21,7 +27,10 @@ export const WordbookSelectModalContent = ({ wordbooks }: Props) => {
               key={wordbook.id}
               title={wordbook.title}
               caption={wordbook.description}
-              handleNavigate={() => {}}
+              handleNavigate={() => {
+                setSelectedWordbook(wordbook);
+                closeModal();
+              }}
             />
           );
         })}
