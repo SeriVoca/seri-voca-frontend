@@ -13,8 +13,8 @@ type Props = {
   isKebabMenuOpen: boolean;
   handleKebabMenuOpen: (flag: boolean) => Promise<void> | void;
   kebabAnchorRef: RefObject<HTMLButtonElement | null>;
-  openWordbookSelectModal: (id: string) => void;
-  closeWordbookSelectModal: (id: string) => void;
+  openWordbookSelectModal: () => void;
+  closeWordbookSelectModal: () => void;
   wordbookSelectModalId: string;
   myWordbooks: Wordbook[];
   selectMode: boolean;
@@ -22,52 +22,44 @@ type Props = {
   setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
 };
 
-export const WordbookDetailPageTemplate = ({
-  words,
-  handleNavigate,
-  isKebabMenuOpen,
-  handleKebabMenuOpen,
-  kebabAnchorRef,
-  openWordbookSelectModal,
-  closeWordbookSelectModal,
-  wordbookSelectModalId,
-  myWordbooks,
-  selectMode,
-  selectedWordbook,
-  setSelectedWordbook,
-}: Props) => {
+export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
   return (
     <div className="flex h-full w-full flex-col">
+      {/* 메인 헤더 */}
       <Header
         title="단어장 상세 페이지"
         variant="LRCTA"
         LCTAIcon="ChevronLeft"
-        onLCTAClick={handleNavigate}
+        onLCTAClick={props.handleNavigate}
         RCTAIcon="DotsVertical"
-        onRCTAClick={() => handleKebabMenuOpen(true)}
-        RCTARef={kebabAnchorRef}
+        onRCTAClick={() => props.handleKebabMenuOpen(true)}
+        RCTARef={props.kebabAnchorRef}
       />
+
+      {/* 선택 제출 모드 */}
+
+      {/* 메인 스크롤 영역 */}
+      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
+        <WordList words={props.words} />
+      </div>
+
       <KebabMenu
-        open={isKebabMenuOpen}
-        anchorRef={kebabAnchorRef}
-        onClose={() => handleKebabMenuOpen(false)}
+        open={props.isKebabMenuOpen}
+        anchorRef={props.kebabAnchorRef}
+        onClose={() => props.handleKebabMenuOpen(false)}
         UIProps={[
           {
             label: '나의 단어장에 단어 추가하기',
-            handleClick: () => openWordbookSelectModal(wordbookSelectModalId),
+            handleClick: props.openWordbookSelectModal,
           },
         ]}
       />
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} />
-      </div>
-
       {/* 단어장 선택 모달 */}
-      <ModalPortal id={wordbookSelectModalId}>
+      <ModalPortal id={props.wordbookSelectModalId}>
         <WordbookSelectModalContent
-          wordbooks={myWordbooks}
-          setSelectedWordbook={setSelectedWordbook}
-          closeModal={() => closeWordbookSelectModal(wordbookSelectModalId)}
+          wordbooks={props.myWordbooks}
+          setSelectedWordbook={props.setSelectedWordbook}
+          closeModal={props.closeWordbookSelectModal}
         />
       </ModalPortal>
     </div>
