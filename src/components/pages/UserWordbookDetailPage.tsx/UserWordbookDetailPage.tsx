@@ -1,15 +1,12 @@
-import { Button } from '@/components/atoms/Button/Button';
-import { Input } from '@/components/atoms/Input/Input';
-import { PartOfSpeechDropdown } from '@/components/organisms/PartOfSpeechDropdown/PartOfSpeechDropdown';
-import { Header } from '@/components/organisms/Header/Header';
-import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
-import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import { useModalStore } from '@/store/useModalStore';
 import React, { useState } from 'react';
-import { Icon } from '@/components/atoms/Icon/Icon';
+import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordbookDetailPageTemplate/UserWordbookDetailPageTemplate';
+import { ROUTES } from '@/router/path';
+import { useNavigate } from 'react-router-dom';
 
 export const UserWordbookDetailPage = () => {
+  const navigate = useNavigate();
   const createEmptyWord = (): Word => ({
     id: crypto.randomUUID(),
     textEn: '',
@@ -97,19 +94,23 @@ export const UserWordbookDetailPage = () => {
     openCreateWordModal(CREATE_WORD_MODAL);
   };
 
+  const handleNavigate = () => {
+    const path = ROUTES.WORDBOOKS; // TODO: '나의 단어장' 탭이 보여야 하는지 확인 필요
+    navigate(path);
+  };
   return (
-    <div className="flex h-full w-full flex-col">
-      <Header
-        title="단어장 상세 페이지"
-        variant="LRCTA"
-        LCTAIcon="ChevronLeft"
-        onLCTAClick={() => {}}
-        RCTAIcon="Plus"
-        onRCTAClick={handleOpenCreateWordModal}
-      />
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} />
-      </div>
-    </div>
+    <UserWordbookDetailPageTemplate
+      words={words}
+      createWordModalId={CREATE_WORD_MODAL}
+      newWord={newWord}
+      onEngChange={handleEngChange}
+      onMeaningChange={handleMeaningChange}
+      onAddMeaning={handleAddMeaning}
+      onDeleteMeaning={handleDeleteMeaning}
+      onSubmit={handleCreateWordSubmit}
+      onCancel={handleCreateWordCancel}
+      onNavigate={handleNavigate}
+      onOpenCreateWordModal={handleOpenCreateWordModal}
+    />
   );
 };
