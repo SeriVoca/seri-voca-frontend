@@ -8,6 +8,7 @@ import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
 import { MOCK_WORDBOOKS_10 } from '@/components/pages/WordbookDetailPage/mock';
 import type { Wordbook } from '@/domain/wordbook';
+import { useWordSelection } from '@/hooks/useWordSelection';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,9 @@ export const WordbookDetailPage = () => {
 
   // Select mode
   const [selectMode, setSelectMode] = useState<boolean>(false);
-  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook>();
+  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
+  const allIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
+  const { selectedIds, selectAll } = useWordSelection(allIds);
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -37,6 +40,11 @@ export const WordbookDetailPage = () => {
   const handleKebabMenuOpen = (flag: boolean) => {
     if (flag) setIsKebabMenuOpen(true);
     else setIsKebabMenuOpen(false);
+  };
+
+  const handleWordsAdditionConfirm = () => {
+    if (!selectedWordbook) alert('단어장을 선택해주세요.');
+    if (!selectedIds) alert('선택된 단어가 없습니다.');
   };
 
   useEffect(() => {
@@ -80,6 +88,13 @@ export const WordbookDetailPage = () => {
       selectMode={selectMode}
       selectedWordbook={selectedWordbook}
       setSelectedWordbook={setSelectedWordbook}
+      // select mode dashboard
+      onAllSelect={selectAll}
+      onConfirm={handleWordsAdditionConfirm}
+      onCancel={() => {
+        setSelectMode(false);
+        setSelectedWordbook(null);
+      }}
     />
   );
 };

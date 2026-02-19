@@ -11,16 +11,27 @@ import type { RefObject } from 'react';
 type Props = {
   words: Word[];
   handleNavigate: () => Promise<void> | void;
+
+  // kebab menu props
   isKebabMenuOpen: boolean;
   handleKebabMenuOpen: (flag: boolean) => Promise<void> | void;
   kebabAnchorRef: RefObject<HTMLButtonElement | null>;
   openWordbookSelectModal: () => void;
+
+  // wordbook select modal props
   closeWordbookSelectModal: () => void;
+  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
   wordbookSelectModalId: string;
   myWordbooks: Wordbook[];
+
+  // select mode props
   selectMode: boolean;
-  selectedWordbook?: Wordbook;
-  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
+  selectedWordbook?: Wordbook | null;
+
+  // select mode - dashboard props
+  onAllSelect: () => Promise<void> | void;
+  onConfirm: () => Promise<void> | void;
+  onCancel: () => Promise<void> | void;
 };
 
 export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
@@ -38,7 +49,12 @@ export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
       />
 
       {/* 선택 제출 모드 전용 대시보드 */}
-      <SelectModeDashboard />
+      <SelectModeDashboard
+        selectMode={props.selectMode}
+        onAllSelect={props.onAllSelect}
+        onConfirm={props.onConfirm}
+        onCancel={props.onCancel}
+      />
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">

@@ -4,7 +4,15 @@ const mock = {
   totalNum: 30,
 };
 
-export const SelectModeDashboard = () => {
+type Props = {
+  selectMode: boolean;
+  onAllSelect: () => Promise<void> | void;
+  onConfirm: () => Promise<void> | void;
+  onCancel: () => Promise<void> | void;
+};
+
+export const SelectModeDashboard = ({ selectMode, onAllSelect, onConfirm, onCancel }: Props) => {
+  if (!selectMode) return;
   return (
     <div className="fixed bottom-0 left-1/2 z-10 w-full -translate-x-1/2 shadow-[0_-8px_30px_rgb(0,0,0,0.2)] sm:max-w-[360px]">
       <div className="flex w-full flex-col items-center justify-between gap-4 px-5 py-4">
@@ -16,7 +24,7 @@ export const SelectModeDashboard = () => {
         />
 
         {/* 액션 버튼 섹션 */}
-        <ActionSection />
+        <ActionSection onAllSelect={onAllSelect} onConfirm={onConfirm} onCancel={onCancel} />
       </div>
     </div>
   );
@@ -39,12 +47,18 @@ const ProgressSection = ({ title, selectedNum, totalNum }: ProgressSectionProps)
   );
 };
 
-const ActionSection = () => {
+type ActionSectionProps = {
+  onAllSelect: () => Promise<void> | void;
+  onConfirm: () => Promise<void> | void;
+  onCancel: () => Promise<void> | void;
+};
+
+const ActionSection = ({ onAllSelect, onConfirm, onCancel }: ActionSectionProps) => {
   return (
     <div className="flex w-full items-center justify-between">
-      <button>전체 선택</button>
-      <button>확인</button>
-      <button>취소</button>
+      <button onClick={onAllSelect}>전체 선택</button>
+      <button onClick={onConfirm}>확인</button>
+      <button onClick={onCancel}>취소</button>
     </div>
   );
 };
