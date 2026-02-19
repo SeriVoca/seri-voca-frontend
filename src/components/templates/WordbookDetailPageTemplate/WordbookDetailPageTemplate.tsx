@@ -1,6 +1,7 @@
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
+import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
 import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSelectModalContent';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
@@ -36,13 +37,15 @@ export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
         RCTARef={props.kebabAnchorRef}
       />
 
-      {/* 선택 제출 모드 */}
+      {/* 선택 제출 모드 전용 대시보드 */}
+      <SelectModeDashboard />
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={props.words} />
       </div>
 
+      {/* 휘발성 오버레이 */}
       <KebabMenu
         open={props.isKebabMenuOpen}
         anchorRef={props.kebabAnchorRef}
@@ -54,7 +57,7 @@ export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
           },
         ]}
       />
-      {/* 단어장 선택 모달 */}
+
       <ModalPortal id={props.wordbookSelectModalId}>
         <WordbookSelectModalContent
           wordbooks={props.myWordbooks}
