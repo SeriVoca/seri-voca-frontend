@@ -110,38 +110,6 @@ export const UserWordbookDetailPage = () => {
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
       </div>
-
-      {/* 단어장 선택 모달 */}
-      <ModalPortal id={CREATE_WORD_MODAL}>
-        <div className="flex flex-col gap-[1rem]">
-          <h2 className="text-lg font-semibold">단어를 생성해주세요.</h2>
-          <div className="flex flex-col gap-[0.5rem]">
-            <h3 className="font-semibold">영어</h3>
-            <Input value={newWord.textEn} onChange={handleEngChange} />
-            <h3 className="font-semibold">뜻</h3>
-            {newWord.meanings.map((meaning, idx) => (
-              <div key={idx} className="flex gap-2">
-                <PartOfSpeechDropdown selected={meaning.partOfSpeech} />
-                <Input value={meaning.textKo} onChange={(e) => handleMeaningChange(idx, e)} />
-                <button onClick={() => handleDeleteMeaning(idx)} className="flex items-center">
-                  <Icon name="Trash" color="#FF8C8C" />
-                </button>
-              </div>
-            ))}
-          </div>
-          <button
-            type="button"
-            className="text-left text-sm text-[#9d9d9d]"
-            onClick={handleAddMeaning}
-          >
-            뜻 추가하기
-          </button>
-          <div className="flex justify-center gap-[0.5rem]">
-            <Button content="생성" variant="primary" onClick={handleCreateWordSubmit} />
-            <Button content="취소" variant="secondary" onClick={handleCreateWordCancel} />
-          </div>
-        </div>
-      </ModalPortal>
     </div>
   );
 };
