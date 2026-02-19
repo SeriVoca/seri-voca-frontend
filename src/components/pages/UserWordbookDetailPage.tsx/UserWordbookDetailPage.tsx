@@ -23,6 +23,10 @@ export const UserWordbookDetailPage = () => {
   const openCreateWordModal = useModalStore((s) => s.open);
   const closeCreateWordModal = useModalStore((s) => s.close);
 
+  const isCreateWordValid =
+    newWord.textEn.trim() !== '' &&
+    newWord.meanings.every((meaning) => meaning.textKo.trim() !== '');
+
   const handleEngChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setNewWord((prev) => ({ ...prev, textEn: value }));
@@ -103,6 +107,7 @@ export const UserWordbookDetailPage = () => {
       words={words}
       createWordModalId={CREATE_WORD_MODAL}
       newWord={newWord}
+      isCreateWordValid={isCreateWordValid}
       onEngChange={handleEngChange}
       onMeaningChange={handleMeaningChange}
       onAddMeaning={handleAddMeaning}

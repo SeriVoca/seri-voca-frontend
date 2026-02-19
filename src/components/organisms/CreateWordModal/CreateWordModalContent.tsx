@@ -6,6 +6,7 @@ import type { Word } from '@/domain/word';
 
 export interface Props {
   newWord: Word;
+  isCreateWordValid: boolean;
   onAddMeaning: () => void;
   onDeleteMeaning: (idxToDelete: number) => void;
   onEngChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,6 +17,7 @@ export interface Props {
 
 export const CreateWordModalContent = ({
   newWord,
+  isCreateWordValid,
   onAddMeaning,
   onDeleteMeaning,
   onEngChange,
@@ -44,7 +46,11 @@ export const CreateWordModalContent = ({
         뜻 추가하기
       </button>
       <div className="flex justify-center gap-[0.5rem]">
-        <Button content="생성" variant="primary" onClick={onSubmit} />
+        <Button
+          content="생성"
+          variant={isCreateWordValid ? 'primary' : 'disabled'}
+          onClick={onSubmit}
+        />
         <Button content="취소" variant="secondary" onClick={onCancel} />
       </div>
     </div>

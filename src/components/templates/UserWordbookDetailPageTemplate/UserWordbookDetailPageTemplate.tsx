@@ -12,6 +12,7 @@ interface Props {
   createWordModalId: string;
   /** CreateWordModalContent props */
   newWord: Word;
+  isCreateWordValid: boolean;
   onEngChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onMeaningChange: (idx: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddMeaning: () => void;
@@ -28,6 +29,7 @@ export const UserWordbookDetailPageTemplate = ({
   words,
   createWordModalId,
   newWord,
+  isCreateWordValid,
   onEngChange,
   onMeaningChange,
   onAddMeaning,
@@ -55,6 +57,7 @@ export const UserWordbookDetailPageTemplate = ({
       <ModalPortal id={createWordModalId}>
         <CreateWordModalContent
           newWord={newWord}
+          isCreateWordValid={isCreateWordValid}
           onAddMeaning={onAddMeaning}
           onDeleteMeaning={onDeleteMeaning}
           onEngChange={onEngChange}
