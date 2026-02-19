@@ -30,7 +30,7 @@ export const WordbookDetailPage = () => {
   const [selectMode, setSelectMode] = useState<boolean>(false);
   const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
   const allIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
-  const { selectedIds, selectAll } = useWordSelection(allIds);
+  const { selectedIds, selectAll, clear } = useWordSelection(allIds);
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -49,8 +49,23 @@ export const WordbookDetailPage = () => {
   };
 
   const handleWordsAdditionConfirm = () => {
-    if (!selectedWordbook) alert('단어장을 선택해주세요.');
-    if (!selectedIds) alert('선택된 단어가 없습니다.');
+    if (!selectedWordbook) {
+      alert('단어장을 선택해주세요.');
+      return;
+    }
+    if (selectedIds.size === 0) {
+      alert('선택된 단어가 없습니다.');
+      return;
+    }
+
+    // POST /wordbooks/:wordbookId/words/system api 요청
+    alert('POST /wordbooks/:wordbookId/words/system api 요청');
+  };
+
+  const handleWordsAdditionCancel = () => {
+    setSelectMode(false);
+    setSelectedWordbook(null);
+    clear();
   };
 
   useEffect(() => {
@@ -97,12 +112,10 @@ export const WordbookDetailPage = () => {
       selectMode={selectMode}
       selectedWordbook={selectedWordbook}
       // select mode dashboard props
+      selectedIds={selectedIds}
       onAllSelect={selectAll}
       onConfirm={handleWordsAdditionConfirm}
-      onCancel={() => {
-        setSelectMode(false);
-        setSelectedWordbook(null);
-      }}
+      onCancel={handleWordsAdditionCancel}
     />
   );
 };

@@ -1,26 +1,31 @@
-const mock = {
-  title: '테스트 단어장',
-  selectedNum: 1,
-  totalNum: 30,
-};
+import type { Word } from '@/domain/word';
+import type { Wordbook } from '@/domain/wordbook';
 
 type Props = {
-  selectMode: boolean;
+  words: Word[];
+  selectedWordbook: Wordbook;
+  selectedIds: Set<string>;
   onAllSelect: () => Promise<void> | void;
   onConfirm: () => Promise<void> | void;
   onCancel: () => Promise<void> | void;
 };
 
-export const SelectModeDashboard = ({ selectMode, onAllSelect, onConfirm, onCancel }: Props) => {
-  if (!selectMode) return;
+export const SelectModeDashboard = ({
+  words,
+  selectedWordbook,
+  selectedIds,
+  onAllSelect,
+  onConfirm,
+  onCancel,
+}: Props) => {
   return (
     <div className="fixed bottom-0 left-1/2 z-10 w-full -translate-x-1/2 shadow-[0_-8px_30px_rgb(0,0,0,0.2)] sm:max-w-[360px]">
       <div className="flex w-full flex-col items-center justify-between gap-4 px-5 py-4">
         {/* 진행 상황 섹션 */}
         <ProgressSection
-          title={mock.title}
-          selectedNum={mock.selectedNum}
-          totalNum={mock.totalNum}
+          title={selectedWordbook.title}
+          selectedNum={selectedIds.size}
+          totalNum={words.length}
         />
 
         {/* 액션 버튼 섹션 */}
