@@ -42,6 +42,12 @@ export const WordbookDetailPage = () => {
     else setIsKebabMenuOpen(false);
   };
 
+  const handleSelectTargetWordbook = (wordbook: Wordbook) => {
+    setSelectedWordbook(wordbook);
+    setSelectMode(true);
+    close(wordbookSelectModalId);
+  };
+
   const handleWordsAdditionConfirm = () => {
     if (!selectedWordbook) alert('단어장을 선택해주세요.');
     if (!selectedIds) alert('선택된 단어가 없습니다.');
@@ -78,17 +84,19 @@ export const WordbookDetailPage = () => {
     <WordbookDetailPageTemplate
       words={words.data}
       handleNavigate={handleNavigate}
+      // kebab menu props
       isKebabMenuOpen={isKebabMenuOpen}
       handleKebabMenuOpen={handleKebabMenuOpen}
       kebabAnchorRef={kebabButtonRef}
       openWordbookSelectModal={() => open(wordbookSelectModalId)}
-      closeWordbookSelectModal={() => close(wordbookSelectModalId)}
+      // wordbook select modal props
+      handleSelectTargetWordbook={handleSelectTargetWordbook}
       wordbookSelectModalId={wordbookSelectModalId}
       myWordbooks={MOCK_WORDBOOKS_10}
+      // select mode props
       selectMode={selectMode}
       selectedWordbook={selectedWordbook}
-      setSelectedWordbook={setSelectedWordbook}
-      // select mode dashboard
+      // select mode dashboard props
       onAllSelect={selectAll}
       onConfirm={handleWordsAdditionConfirm}
       onCancel={() => {

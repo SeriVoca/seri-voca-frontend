@@ -19,10 +19,9 @@ type Props = {
   openWordbookSelectModal: () => void;
 
   // wordbook select modal props
-  closeWordbookSelectModal: () => void;
-  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
   wordbookSelectModalId: string;
   myWordbooks: Wordbook[];
+  handleSelectTargetWordbook: (wordbook: Wordbook) => Promise<void> | void;
 
   // select mode props
   selectMode: boolean;
@@ -34,7 +33,22 @@ type Props = {
   onCancel: () => Promise<void> | void;
 };
 
-export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
+export const WordbookDetailPageTemplate = ({
+  words,
+  handleNavigate,
+  isKebabMenuOpen,
+  handleKebabMenuOpen,
+  kebabAnchorRef,
+  openWordbookSelectModal,
+  wordbookSelectModalId,
+  myWordbooks,
+  handleSelectTargetWordbook,
+  selectMode,
+  selectedWordbook,
+  onAllSelect,
+  onConfirm,
+  onCancel,
+}: Props) => {
   return (
     <div className="flex h-full w-full flex-col">
       {/* 메인 헤더 */}
@@ -42,43 +56,42 @@ export const WordbookDetailPageTemplate = ({ ...props }: Props) => {
         title="단어장 상세 페이지"
         variant="LRCTA"
         LCTAIcon="ChevronLeft"
-        onLCTAClick={props.handleNavigate}
+        onLCTAClick={handleNavigate}
         RCTAIcon="DotsVertical"
-        onRCTAClick={() => props.handleKebabMenuOpen(true)}
-        RCTARef={props.kebabAnchorRef}
+        onRCTAClick={() => handleKebabMenuOpen(true)}
+        RCTARef={kebabAnchorRef}
       />
 
       {/* 선택 제출 모드 전용 대시보드 */}
       <SelectModeDashboard
-        selectMode={props.selectMode}
-        onAllSelect={props.onAllSelect}
-        onConfirm={props.onConfirm}
-        onCancel={props.onCancel}
+        selectMode={selectMode}
+        onAllSelect={onAllSelect}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
       />
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={props.words} />
+        <WordList words={words} />
       </div>
 
       {/* 휘발성 오버레이 */}
       <KebabMenu
-        open={props.isKebabMenuOpen}
-        anchorRef={props.kebabAnchorRef}
-        onClose={() => props.handleKebabMenuOpen(false)}
+        open={isKebabMenuOpen}
+        anchorRef={kebabAnchorRef}
+        onClose={() => handleKebabMenuOpen(false)}
         UIProps={[
           {
             label: '나의 단어장에 단어 추가하기',
-            handleClick: props.openWordbookSelectModal,
+            handleClick: openWordbookSelectModal,
           },
         ]}
       />
 
-      <ModalPortal id={props.wordbookSelectModalId}>
+      <ModalPortal id={wordbookSelectModalId}>
         <WordbookSelectModalContent
-          wordbooks={props.myWordbooks}
-          setSelectedWordbook={props.setSelectedWordbook}
-          closeModal={props.closeWordbookSelectModal}
+          wordbooks={myWordbooks}
+          handleSelectTargetWordbook={handleSelectTargetWordbook}
         />
       </ModalPortal>
     </div>
