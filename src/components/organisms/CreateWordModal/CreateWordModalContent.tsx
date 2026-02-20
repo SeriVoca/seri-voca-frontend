@@ -35,13 +35,17 @@ export const CreateWordModalContent = ({
         <Input value={newWord.textEn} onChange={onEngChange} />
         <h3 className="font-semibold">뜻</h3>
         {newWord.meanings.map((meaning, idx) => (
-          <div key={idx} className="flex gap-2">
+          <div key={crypto.randomUUID()} className="flex gap-2">
             <PartOfSpeechDropdown
               selected={meaning.partOfSpeech}
               onChange={(next) => onPartOfSpeechChange(idx, next)}
             />
             <Input value={meaning.textKo} onChange={(e) => onMeaningChange(idx, e)} />
-            <button onClick={() => onDeleteMeaning(idx)} className="flex items-center">
+            <button
+              type="button"
+              onClick={() => onDeleteMeaning(idx)}
+              className="flex items-center"
+            >
               <Icon name="Trash" color="#FF8C8C" />
             </button>
           </div>
