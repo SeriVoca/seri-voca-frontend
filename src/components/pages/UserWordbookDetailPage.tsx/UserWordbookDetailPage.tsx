@@ -1,4 +1,4 @@
-import type { Word } from '@/domain/word';
+import type { PartOfSpeech, Word } from '@/domain/word';
 import { useModalStore } from '@/store/useModalStore';
 import React, { useState } from 'react';
 import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordbookDetailPageTemplate/UserWordbookDetailPageTemplate';
@@ -30,6 +30,16 @@ export const UserWordbookDetailPage = () => {
   const handleEngChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setNewWord((prev) => ({ ...prev, textEn: value }));
+  };
+  const handlePartOfSpeechChange = (idx: number, nextPartOfSpeech: PartOfSpeech) => {
+    setNewWord((prev) => {
+      const updated = [...prev.meanings];
+      updated[idx] = {
+        ...updated[idx],
+        partOfSpeech: nextPartOfSpeech,
+      };
+      return { ...prev, meanings: updated };
+    });
   };
   const handleMeaningChange = (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -109,6 +119,7 @@ export const UserWordbookDetailPage = () => {
       newWord={newWord}
       isCreateWordValid={isCreateWordValid}
       onEngChange={handleEngChange}
+      onPartOfSpeechChange={handlePartOfSpeechChange}
       onMeaningChange={handleMeaningChange}
       onAddMeaning={handleAddMeaning}
       onDeleteMeaning={handleDeleteMeaning}

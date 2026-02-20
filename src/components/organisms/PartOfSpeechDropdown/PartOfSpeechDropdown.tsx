@@ -5,22 +5,20 @@ import { type PartOfSpeech, PARTS_OF_SPEECH } from '@/domain/word';
 
 interface PartOfSpeechDropdownProps {
   selected: PartOfSpeech;
+  onChange: (next: PartOfSpeech) => void;
 }
 
-export const PartOfSpeechDropdown = ({
-  selected: defaultPartOfSpeech,
-}: PartOfSpeechDropdownProps) => {
+export const PartOfSpeechDropdown = ({ selected, onChange }: PartOfSpeechDropdownProps) => {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState<PartOfSpeech>(defaultPartOfSpeech);
   const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   const UIProps = useMemo(
     () =>
       PARTS_OF_SPEECH.map((pos) => ({
         label: pos,
-        handleClick: () => setSelected(pos),
+        handleClick: () => onChange(pos),
       })),
-    [],
+    [onChange],
   );
 
   return (

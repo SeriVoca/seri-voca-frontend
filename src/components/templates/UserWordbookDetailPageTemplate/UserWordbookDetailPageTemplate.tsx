@@ -3,7 +3,7 @@ import { Header } from '@/components/organisms/Header/Header';
 import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import { CreateWordModalContent } from '@/components/organisms/CreateWordModal/CreateWordModalContent';
-import type { Word } from '@/domain/word';
+import type { PartOfSpeech, Word } from '@/domain/word';
 
 interface Props {
   title?: string;
@@ -14,6 +14,7 @@ interface Props {
   newWord: Word;
   isCreateWordValid: boolean;
   onEngChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPartOfSpeechChange: (idx: number, next: PartOfSpeech) => void;
   onMeaningChange: (idx: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   onAddMeaning: () => void;
   onDeleteMeaning: (idxToDelete: number) => void;
@@ -31,6 +32,7 @@ export const UserWordbookDetailPageTemplate = ({
   newWord,
   isCreateWordValid,
   onEngChange,
+  onPartOfSpeechChange,
   onMeaningChange,
   onAddMeaning,
   onDeleteMeaning,
@@ -61,6 +63,7 @@ export const UserWordbookDetailPageTemplate = ({
           onAddMeaning={onAddMeaning}
           onDeleteMeaning={onDeleteMeaning}
           onEngChange={onEngChange}
+          onPartOfSpeechChange={onPartOfSpeechChange}
           onMeaningChange={onMeaningChange}
           onSubmit={onSubmit}
           onCancel={onCancel}

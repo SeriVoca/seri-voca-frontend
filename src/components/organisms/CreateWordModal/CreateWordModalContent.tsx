@@ -2,7 +2,7 @@ import { Button } from '@/components/atoms/Button/Button';
 import { Icon } from '@/components/atoms/Icon/Icon';
 import { Input } from '@/components/atoms/Input/Input';
 import { PartOfSpeechDropdown } from '@/components/organisms/PartOfSpeechDropdown/PartOfSpeechDropdown';
-import type { Word } from '@/domain/word';
+import type { PartOfSpeech, Word } from '@/domain/word';
 
 export interface Props {
   newWord: Word;
@@ -10,6 +10,7 @@ export interface Props {
   onAddMeaning: () => void;
   onDeleteMeaning: (idxToDelete: number) => void;
   onEngChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPartOfSpeechChange: (idx: number, next: PartOfSpeech) => void;
   onMeaningChange: (idx: number, e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
   onCancel: () => void;
@@ -21,6 +22,7 @@ export const CreateWordModalContent = ({
   onAddMeaning,
   onDeleteMeaning,
   onEngChange,
+  onPartOfSpeechChange,
   onMeaningChange,
   onSubmit,
   onCancel,
@@ -34,7 +36,10 @@ export const CreateWordModalContent = ({
         <h3 className="font-semibold">뜻</h3>
         {newWord.meanings.map((meaning, idx) => (
           <div key={idx} className="flex gap-2">
-            <PartOfSpeechDropdown selected={meaning.partOfSpeech} />
+            <PartOfSpeechDropdown
+              selected={meaning.partOfSpeech}
+              onChange={(next) => onPartOfSpeechChange(idx, next)}
+            />
             <Input value={meaning.textKo} onChange={(e) => onMeaningChange(idx, e)} />
             <button onClick={() => onDeleteMeaning(idx)} className="flex items-center">
               <Icon name="Trash" color="#FF8C8C" />
