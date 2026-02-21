@@ -31,6 +31,11 @@ export const WordbookDetailPage = () => {
   const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
   const allIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
   const { selectedIds, selectAll, clear } = useWordSelection(allIds);
+  const selectModeClear = () => {
+    setSelectMode(false);
+    setSelectedWordbook(null);
+    clear();
+  };
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -60,12 +65,12 @@ export const WordbookDetailPage = () => {
 
     // POST /wordbooks/:wordbookId/words/system api 요청
     alert('POST /wordbooks/:wordbookId/words/system api 요청');
+
+    selectModeClear();
   };
 
   const handleWordsAdditionCancel = () => {
-    setSelectMode(false);
-    setSelectedWordbook(null);
-    clear();
+    selectModeClear();
   };
 
   useEffect(() => {
