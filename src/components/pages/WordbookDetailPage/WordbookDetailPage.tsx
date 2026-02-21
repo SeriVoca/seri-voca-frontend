@@ -105,9 +105,11 @@ export const WordbookDetailPage = () => {
       kebabAnchorRef={kebabButtonRef}
       openWordbookSelectModal={() => open(wordbookSelectModalId)}
       // wordbook select modal props
-      handleSelectTargetWordbook={handleSelectTargetWordbook}
-      wordbookSelectModalId={wordbookSelectModalId}
-      myWordbooks={MOCK_WORDBOOKS_10}
+      wordbookSelectModal={{
+        id: wordbookSelectModalId,
+        wordbooks: MOCK_WORDBOOKS_10,
+        handleSelectTargetWordbook,
+      }}
       // select mode props
       selectMode={selectMode}
       selectedWordbook={selectedWordbook}
