@@ -6,9 +6,10 @@ type Props = {
   words: Word[];
   mode?: 'view' | 'select';
   selectedIds: Set<string>;
+  toggleWordSelection: (id: string) => Promise<void> | void;
 };
 
-export const WordList = ({ words, mode = 'view', selectedIds }: Props) => {
+export const WordList = ({ words, mode = 'view', selectedIds, toggleWordSelection }: Props) => {
   return (
     <div className="flex w-full flex-col gap-[0.25rem] bg-gray-100">
       {words.map((word) =>
@@ -17,7 +18,7 @@ export const WordList = ({ words, mode = 'view', selectedIds }: Props) => {
             key={word.id}
             word={word}
             selected={selectedIds.has(word.id)}
-            onToggle={() => {}}
+            onToggle={() => toggleWordSelection(word.id)}
           />
         ) : (
           <WordItem key={word.id} word={word} />

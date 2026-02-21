@@ -30,7 +30,7 @@ export const WordbookDetailPage = () => {
   const [selectMode, setSelectMode] = useState<boolean>(false);
   const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
   const allIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
-  const { selectedIds, selectAll, clear } = useWordSelection(allIds);
+  const { selectedIds, selectAll, toggle, clear } = useWordSelection(allIds);
   const selectModeClear = () => {
     setSelectMode(false);
     setSelectedWordbook(null);
@@ -120,6 +120,7 @@ export const WordbookDetailPage = () => {
       selectedWordbook={selectedWordbook}
       // select mode dashboard props
       selectedIds={selectedIds}
+      toggleWordSelection={toggle}
       onAllSelect={selectAll}
       onConfirm={handleWordsAdditionConfirm}
       onCancel={handleWordsAdditionCancel}

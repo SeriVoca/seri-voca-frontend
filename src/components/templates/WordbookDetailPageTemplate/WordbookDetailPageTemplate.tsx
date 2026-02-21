@@ -28,6 +28,7 @@ type Props = {
   // select mode props
   selectMode: boolean;
   selectedWordbook: Wordbook | null;
+  toggleWordSelection: (id: string) => Promise<void> | void;
 
   // select mode - dashboard props
   selectedIds: Set<string>;
@@ -46,6 +47,7 @@ export const WordbookDetailPageTemplate = ({
   wordbookSelectModal,
   selectMode,
   selectedWordbook,
+  toggleWordSelection,
   selectedIds,
   onAllSelect,
   onConfirm,
@@ -78,7 +80,12 @@ export const WordbookDetailPageTemplate = ({
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} mode={selectMode ? 'select' : 'view'} selectedIds={selectedIds} />
+        <WordList
+          words={words}
+          mode={selectMode ? 'select' : 'view'}
+          selectedIds={selectedIds}
+          toggleWordSelection={toggleWordSelection}
+        />
       </div>
 
       {/* 휘발성 오버레이 */}
