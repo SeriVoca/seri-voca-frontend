@@ -4,10 +4,6 @@ import { useState, useCallback, useEffect } from 'react';
 export const useWordSelection = (allIds: string[]) => {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    console.log('selectedIds:', selectedIds);
-  }, [selectedIds]);
-
   const toggle = useCallback((id: string) => {
     setSelectedIds((prev) => {
       const next = new Set(prev);

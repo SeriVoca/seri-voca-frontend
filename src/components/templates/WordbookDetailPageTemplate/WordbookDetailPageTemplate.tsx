@@ -1,12 +1,10 @@
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
-import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
 import {
   WordbookSelectModal,
   type WordbookSelectModalProps,
 } from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
-import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSelectModalContent';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { Wordbook } from '@/domain/wordbook';
@@ -80,12 +78,16 @@ export const WordbookDetailPageTemplate = ({
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList
-          words={words}
-          mode={selectMode ? 'select' : 'view'}
-          selectedIds={selectedIds}
-          toggleWordSelection={toggleWordSelection}
-        />
+        {selectMode ? (
+          <WordList
+            words={words}
+            mode="select"
+            selectedIds={selectedIds}
+            toggleWordSelection={toggleWordSelection}
+          />
+        ) : (
+          <WordList words={words} mode="view" />
+        )}
       </div>
 
       {/* 휘발성 오버레이 */}
