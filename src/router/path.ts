@@ -7,5 +7,6 @@ export const ROUTES = {
   LOGIN: '/login',
   WORDBOOKS: '/wordbooks',
   WORDBOOK_DETAIL: '/wordbook/:wordbookId/wordbook-detail',
+  USER_WORDBOOK_DETAIL: '/user/wordbook/:wordbookId/wordbook-detail',
   SETTING: '/setting',
 };
