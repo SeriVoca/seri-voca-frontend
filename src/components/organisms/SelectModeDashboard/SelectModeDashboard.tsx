@@ -43,8 +43,10 @@ type ProgressSectionProps = {
 
 const ProgressSection = ({ title, selectedNum, totalNum }: ProgressSectionProps) => {
   return (
-    <div className="flex w-full items-center justify-between">
-      <div>{title}</div>
+    <div className="flex w-full items-center justify-between text-gray-700">
+      <div className="font-bold">
+        {title} <span className="text-sm font-normal">에 추가 중</span>
+      </div>
       <div>
         {selectedNum}/{totalNum}
       </div>
@@ -60,10 +62,14 @@ type ActionSectionProps = {
 
 const ActionSection = ({ onAllSelect, onConfirm, onCancel }: ActionSectionProps) => {
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex w-full items-center justify-between font-medium text-gray-700">
       <button onClick={onAllSelect}>전체 선택</button>
-      <button onClick={onConfirm}>확인</button>
-      <button onClick={onCancel}>취소</button>
+      <div className="flex gap-[1rem]">
+        <button onClick={onConfirm}>확인</button>
+        <button onClick={onCancel} className="text-red-500">
+          취소
+        </button>
+      </div>
     </div>
   );
 };
