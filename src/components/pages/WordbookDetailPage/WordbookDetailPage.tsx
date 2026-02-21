@@ -48,6 +48,7 @@ export const WordbookDetailPage = () => {
   };
 
   const handleSelectTargetWordbook = (wordbook: Wordbook) => {
+    selectModeClear(); // 선택 제출 모드와 관련된 상태를 전부 초기화
     setSelectedWordbook(wordbook);
     setSelectMode(true);
     close(wordbookSelectModalId);

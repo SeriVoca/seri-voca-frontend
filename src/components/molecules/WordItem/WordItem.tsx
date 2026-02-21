@@ -1,11 +1,11 @@
 import type { Word } from '@/domain/word';
 import { mapPosToLabel } from '@/mapper/word';
 
-export type WordDetailProps = {
+export type WordItemProps = {
   word: Word;
 };
 
-export const WordItem = ({ word }: WordDetailProps) => {
+export const WordItem = ({ word }: WordItemProps) => {
   return (
     <div className="flex w-full bg-white px-[0.75rem] py-[1.25rem]">
       <div className="flex-[2]">{word.textEn}</div>

@@ -19,7 +19,7 @@ export const SelectModeDashboard = ({
   onCancel,
 }: Props) => {
   return (
-    <div className="fixed bottom-0 left-1/2 z-10 w-full -translate-x-1/2 shadow-[0_-8px_30px_rgb(0,0,0,0.2)] sm:max-w-[360px]">
+    <div className="fixed bottom-0 left-1/2 z-10 w-full -translate-x-1/2 bg-white shadow-[0_-8px_30px_rgb(0,0,0,0.2)] sm:max-w-[360px]">
       <div className="flex w-full flex-col items-center justify-between gap-4 px-5 py-4">
         {/* 진행 상황 섹션 */}
         <ProgressSection

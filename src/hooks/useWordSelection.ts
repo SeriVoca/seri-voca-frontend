@@ -26,6 +26,6 @@ export const useWordSelection = (allIds: string[]) => {
     toggle,
     selectAll,
     clear,
-    isAllSelected: selectedIds.size === allIds.length,
+    isAllSelected: allIds.length > 0 && selectedIds.size === allIds.length,
   };
 };

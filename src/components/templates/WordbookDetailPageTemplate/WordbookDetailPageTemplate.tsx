@@ -77,7 +77,9 @@ export const WordbookDetailPageTemplate = ({
       )}
 
       {/* 메인 스크롤 영역 */}
-      <div className="mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
+      <div
+        className={`mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto ${selectMode ? 'pb-[6rem]' : ''}`}
+      >
         {selectMode ? (
           <WordList
             words={words}

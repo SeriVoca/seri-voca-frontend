@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { WordItem } from '@/components/molecules/WordItem/WordItem';
 
 const meta: Meta<typeof WordItem> = {
-  title: 'Molecules/WordDetail',
+  title: 'Molecules/WordItem',
   component: WordItem,
   tags: ['autodocs'],
 };
