@@ -52,7 +52,7 @@ export const WordbookDetailPageTemplate = ({
   onCancel,
 }: Props) => {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col bg-gray-100">
       {/* 메인 헤더 */}
       <Header
         title="단어장 상세 페이지"
@@ -77,7 +77,7 @@ export const WordbookDetailPageTemplate = ({
       )}
 
       {/* 메인 스크롤 영역 */}
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
+      <div className="mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         {selectMode ? (
           <WordList
             words={words}
