@@ -78,7 +78,7 @@ export const WordbookDetailPageTemplate = ({
 
       {/* 메인 스크롤 영역 */}
       <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} mode={selectMode ? 'select' : 'view'} />
+        <WordList words={words} mode={selectMode ? 'select' : 'view'} selectedIds={selectedIds} />
       </div>
 
       {/* 휘발성 오버레이 */}
