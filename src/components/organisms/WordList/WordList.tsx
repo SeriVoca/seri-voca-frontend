@@ -1,5 +1,5 @@
 import type { Word } from '../../../domain/word';
-import { WordItem } from '../../molecules/WordDetail/WordDetail';
+import { WordItem } from '../../molecules/WordItem/WordItem';
 
 type Props = {
   words: Word[];
