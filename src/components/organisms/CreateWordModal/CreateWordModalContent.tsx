@@ -35,7 +35,7 @@ export const CreateWordModalContent = ({
         <Input value={newWord.textEn} onChange={onEngChange} />
         <h3 className="font-semibold">뜻</h3>
         {newWord.meanings.map((meaning, idx) => (
-          <div key={crypto.randomUUID()} className="flex gap-2">
+          <div key={idx} className="flex gap-2">
             <PartOfSpeechDropdown
               selected={meaning.partOfSpeech}
               onChange={(next) => onPartOfSpeechChange(idx, next)}
