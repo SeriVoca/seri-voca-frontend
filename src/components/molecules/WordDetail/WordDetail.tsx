@@ -5,7 +5,7 @@ export type WordDetailProps = {
   word: Word;
 };
 
-export const WordDetail = ({ word }: WordDetailProps) => {
+export const WordItem = ({ word }: WordDetailProps) => {
   return (
     <div className="flex w-full bg-white px-[0.75rem] py-[1.25rem]">
       <div className="flex-[2]">{word.textEn}</div>

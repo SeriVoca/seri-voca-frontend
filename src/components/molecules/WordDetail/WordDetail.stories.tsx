@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { WordDetail } from '@/components/molecules/WordDetail/WordDetail';
+import { WordItem } from '@/components/molecules/WordDetail/WordDetail';
 
-const meta: Meta<typeof WordDetail> = {
+const meta: Meta<typeof WordItem> = {
   title: 'Molecules/WordDetail',
-  component: WordDetail,
+  component: WordItem,
   tags: ['autodocs'],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof WordDetail>;
+type Story = StoryObj<typeof WordItem>;
 
 export const Default: Story = {
   args: {
