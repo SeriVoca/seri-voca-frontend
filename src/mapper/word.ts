@@ -8,7 +8,7 @@ export const mapWordResponseToDomain = (data: WordResponse): Word => {
     meanings: data.meanings
       .sort((a, b) => a.order_index - b.order_index)
       .map<Meaning>((m) => ({
-        partOfSpeech: m.part_of_speech,
+        partOfSpeech: POS_RESPONSE_DOMAIN_MAP[m.part_of_speech],
         textKo: m.meaning,
       })),
   };
@@ -21,14 +21,14 @@ export const mapWordListResponseToDomain = (data: WordResponse[]): Word[] => {
 export type PartOfSpeechLabel = 'n' | 'pron' | 'v' | 'adj' | 'adv' | 'prep' | 'conj' | 'interj';
 
 export const POS_RESPONSE_DOMAIN_MAP: Record<PartOfSpeechResponse, PartOfSpeech> = {
-  noun: 'noun',
-  pronoun: 'pronoun',
-  verb: 'verb',
-  adjective: 'adjective',
-  adverb: 'adverb',
-  preposition: 'preposition',
-  conjunction: 'conjunction',
-  interjection: 'interjection',
+  NOUN: 'noun',
+  PRONOUN: 'pronoun',
+  VERB: 'verb',
+  ADJECTIVE: 'adjective',
+  ADVERB: 'adverb',
+  PREPOSITION: 'preposition',
+  CONJUNCTION: 'conjunction',
+  INTERJECTION: 'interjection',
 };
 
 export const POS_DOMAIN_LABEL_MAP: Record<PartOfSpeech, PartOfSpeechLabel> = {

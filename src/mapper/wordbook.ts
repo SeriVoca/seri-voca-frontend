@@ -7,7 +7,7 @@ export const mapWordbook = (item: WordbookResponseItem): Wordbook => {
   return {
     id: item.wordbook.id,
     title: item.wordbook.title,
-    description: item.wordbook.description,
+    description: item.wordbook.description ?? '',
     type: item.wordbook.type,
   };
 };
