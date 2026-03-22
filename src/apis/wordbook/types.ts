@@ -3,7 +3,7 @@ export type GetWordbookListResponse = {
   wordbook: {
     id: string;
     title: string;
-    description: string;
+    description: string | null;
     type: 'SYSTEM' | 'USER';
   };
 }[];

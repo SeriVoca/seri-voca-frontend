@@ -10,11 +10,11 @@ export interface WordResponse {
 }
 
 export type PartOfSpeechResponse =
-  | 'noun'
-  | 'pronoun'
-  | 'verb'
-  | 'adjective'
-  | 'adverb'
-  | 'preposition'
-  | 'conjunction'
-  | 'interjection';
+  | 'NOUN'
+  | 'PRONOUN'
+  | 'VERB'
+  | 'ADJECTIVE'
+  | 'ADVERB'
+  | 'PREPOSITION'
+  | 'CONJUNCTION'
+  | 'INTERJECTION';
