@@ -42,7 +42,7 @@ export const UserWordbookDetailPageTemplate = ({
   onOpenCreateWordModal,
 }: Props) => {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col bg-gray-100">
       <Header
         title={title}
         variant="LRCTA"
@@ -52,7 +52,7 @@ export const UserWordbookDetailPageTemplate = ({
         onRCTAClick={onOpenCreateWordModal}
       />
 
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
+      <div className="mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
       </div>
 
