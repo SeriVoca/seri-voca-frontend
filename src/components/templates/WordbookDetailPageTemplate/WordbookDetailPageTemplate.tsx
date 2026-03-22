@@ -1,7 +1,10 @@
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
-import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
-import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSelectModalContent';
+import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
+import {
+  WordbookSelectModal,
+  type WordbookSelectModalProps,
+} from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { Wordbook } from '@/domain/wordbook';
@@ -10,16 +13,26 @@ import type { RefObject } from 'react';
 type Props = {
   words: Word[];
   handleNavigate: () => Promise<void> | void;
+
+  // kebab menu props
   isKebabMenuOpen: boolean;
   handleKebabMenuOpen: (flag: boolean) => Promise<void> | void;
   kebabAnchorRef: RefObject<HTMLButtonElement | null>;
-  openWordbookSelectModal: (id: string) => void;
-  closeWordbookSelectModal: (id: string) => void;
-  wordbookSelectModalId: string;
-  myWordbooks: Wordbook[];
+  openWordbookSelectModal: () => void;
+
+  // wordbook select modal props
+  wordbookSelectModal: WordbookSelectModalProps;
+
+  // select mode props
   selectMode: boolean;
-  selectedWordbook?: Wordbook;
-  setSelectedWordbook: (wordbook: Wordbook) => Promise<void> | void;
+  selectedWordbook: Wordbook | null;
+  toggleWordSelection: (id: string) => Promise<void> | void;
+
+  // select mode - dashboard props
+  selectedIds: Set<string>;
+  onAllSelect: () => Promise<void> | void;
+  onConfirm: () => Promise<void> | void;
+  onCancel: () => Promise<void> | void;
 };
 
 export const WordbookDetailPageTemplate = ({
@@ -29,15 +42,18 @@ export const WordbookDetailPageTemplate = ({
   handleKebabMenuOpen,
   kebabAnchorRef,
   openWordbookSelectModal,
-  closeWordbookSelectModal,
-  wordbookSelectModalId,
-  myWordbooks,
+  wordbookSelectModal,
   selectMode,
   selectedWordbook,
-  setSelectedWordbook,
+  toggleWordSelection,
+  selectedIds,
+  onAllSelect,
+  onConfirm,
+  onCancel,
 }: Props) => {
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col bg-gray-100">
+      {/* 메인 헤더 */}
       <Header
         title="단어장 상세 페이지"
         variant="LRCTA"
@@ -47,6 +63,36 @@ export const WordbookDetailPageTemplate = ({
         onRCTAClick={() => handleKebabMenuOpen(true)}
         RCTARef={kebabAnchorRef}
       />
+
+      {/* 선택 제출 모드 전용 대시보드 */}
+      {selectMode && selectedWordbook && (
+        <SelectModeDashboard
+          words={words}
+          selectedWordbook={selectedWordbook}
+          selectedIds={selectedIds}
+          onAllSelect={onAllSelect}
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+        />
+      )}
+
+      {/* 메인 스크롤 영역 */}
+      <div
+        className={`mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto ${selectMode ? 'pb-[6rem]' : ''}`}
+      >
+        {selectMode ? (
+          <WordList
+            words={words}
+            mode="select"
+            selectedIds={selectedIds}
+            toggleWordSelection={toggleWordSelection}
+          />
+        ) : (
+          <WordList words={words} mode="view" />
+        )}
+      </div>
+
+      {/* 휘발성 오버레이 */}
       <KebabMenu
         open={isKebabMenuOpen}
         anchorRef={kebabAnchorRef}
@@ -54,22 +100,12 @@ export const WordbookDetailPageTemplate = ({
         UIProps={[
           {
             label: '나의 단어장에 단어 추가하기',
-            handleClick: () => openWordbookSelectModal(wordbookSelectModalId),
+            handleClick: openWordbookSelectModal,
           },
         ]}
       />
-      <div className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} />
-      </div>
 
-      {/* 단어장 선택 모달 */}
-      <ModalPortal id={wordbookSelectModalId}>
-        <WordbookSelectModalContent
-          wordbooks={myWordbooks}
-          setSelectedWordbook={setSelectedWordbook}
-          closeModal={() => closeWordbookSelectModal(wordbookSelectModalId)}
-        />
-      </ModalPortal>
+      <WordbookSelectModal {...wordbookSelectModal} />
     </div>
   );
 };

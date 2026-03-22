@@ -8,6 +8,7 @@ import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
 import { MOCK_WORDBOOKS_10 } from '@/components/pages/WordbookDetailPage/mock';
 import type { Wordbook } from '@/domain/wordbook';
+import { useWordSelection } from '@/hooks/useWordSelection';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,14 @@ export const WordbookDetailPage = () => {
 
   // Select mode
   const [selectMode, setSelectMode] = useState<boolean>(false);
-  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook>();
+  const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
+  const allIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
+  const { selectedIds, selectAll, toggle, clear } = useWordSelection(allIds);
+  const selectModeClear = () => {
+    setSelectMode(false);
+    setSelectedWordbook(null);
+    clear();
+  };
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -37,6 +45,33 @@ export const WordbookDetailPage = () => {
   const handleKebabMenuOpen = (flag: boolean) => {
     if (flag) setIsKebabMenuOpen(true);
     else setIsKebabMenuOpen(false);
+  };
+
+  const handleSelectTargetWordbook = (wordbook: Wordbook) => {
+    selectModeClear(); // 선택 제출 모드와 관련된 상태를 전부 초기화
+    setSelectedWordbook(wordbook);
+    setSelectMode(true);
+    close(wordbookSelectModalId);
+  };
+
+  const handleWordsAdditionConfirm = () => {
+    if (!selectedWordbook) {
+      alert('단어장을 선택해주세요.');
+      return;
+    }
+    if (selectedIds.size === 0) {
+      alert('선택된 단어가 없습니다.');
+      return;
+    }
+
+    // POST /wordbooks/:wordbookId/words/system api 요청
+    alert('POST /wordbooks/:wordbookId/words/system api 요청');
+
+    selectModeClear();
+  };
+
+  const handleWordsAdditionCancel = () => {
+    selectModeClear();
   };
 
   useEffect(() => {
@@ -70,16 +105,26 @@ export const WordbookDetailPage = () => {
     <WordbookDetailPageTemplate
       words={words.data}
       handleNavigate={handleNavigate}
+      // kebab menu props
       isKebabMenuOpen={isKebabMenuOpen}
       handleKebabMenuOpen={handleKebabMenuOpen}
       kebabAnchorRef={kebabButtonRef}
       openWordbookSelectModal={() => open(wordbookSelectModalId)}
-      closeWordbookSelectModal={() => close(wordbookSelectModalId)}
-      wordbookSelectModalId={wordbookSelectModalId}
-      myWordbooks={MOCK_WORDBOOKS_10}
+      // wordbook select modal props
+      wordbookSelectModal={{
+        id: wordbookSelectModalId,
+        wordbooks: MOCK_WORDBOOKS_10,
+        handleSelectTargetWordbook,
+      }}
+      // select mode props
       selectMode={selectMode}
       selectedWordbook={selectedWordbook}
-      setSelectedWordbook={setSelectedWordbook}
+      // select mode dashboard props
+      selectedIds={selectedIds}
+      toggleWordSelection={toggle}
+      onAllSelect={selectAll}
+      onConfirm={handleWordsAdditionConfirm}
+      onCancel={handleWordsAdditionCancel}
     />
   );
 };
