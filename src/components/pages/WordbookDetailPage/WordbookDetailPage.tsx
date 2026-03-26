@@ -26,6 +26,10 @@ export const WordbookDetailPage = () => {
   const close = useModalStore((s) => s.close);
   const wordbookSelectModalId = 'wordbook-select-modal';
 
+  // Wordbook create modal
+  const wordbookCreateModalId = 'wordbook-create-modal';
+  const [wordbookName, setWordbookName] = useState<string>('');
+
   // Select mode
   const [selectMode, setSelectMode] = useState<boolean>(false);
   const [selectedWordbook, setSelectedWordbook] = useState<Wordbook | null>(null);
@@ -74,6 +78,23 @@ export const WordbookDetailPage = () => {
     selectModeClear();
   };
 
+  const handleWordbookCreateModalSubmit = () => {
+    if (wordbookName.trim() === '') {
+      alert('단어장 이름을 입력해주세요.');
+      return;
+    }
+    // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
+    alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
+    setWordbookName('');
+    close(wordbookCreateModalId);
+  };
+
+  const handleWordbookCreateModalCancel = () => {
+    setWordbookName('');
+    close(wordbookCreateModalId);
+  };
+
+  // fetch data
   useEffect(() => {
     if (!wordbookId) return;
 
@@ -112,9 +133,16 @@ export const WordbookDetailPage = () => {
       openWordbookSelectModal={() => open(wordbookSelectModalId)}
       // wordbook select modal props
       wordbookSelectModal={{
-        id: wordbookSelectModalId,
-        wordbooks: MOCK_WORDBOOKS_10,
-        handleSelectTargetWordbook,
+        id: wordbookSelectModalId, // modal id
+        wordbooks: MOCK_WORDBOOKS_10, // fetch data
+        handleSelectTargetWordbook, // action
+      }}
+      // wordbook create modal props
+      wordbookCreateModal={{
+        value: wordbookName,
+        onChange: setWordbookName,
+        onSubmit: handleWordbookCreateModalSubmit,
+        onCancel: handleWordbookCreateModalCancel,
       }}
       // select mode props
       selectMode={selectMode}

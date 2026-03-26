@@ -1,3 +1,7 @@
+import {
+  CreateWordbookModal,
+  type CreateWordbookModalProps,
+} from '@/components/organisms/CreateWordbookModal/CreateWordbookModal';
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
@@ -23,6 +27,9 @@ type Props = {
   // wordbook select modal props
   wordbookSelectModal: WordbookSelectModalProps;
 
+  // wordbook create modal props
+  wordbookCreateModal: CreateWordbookModalProps;
+
   // select mode props
   selectMode: boolean;
   selectedWordbook: Wordbook | null;
@@ -43,6 +50,7 @@ export const WordbookDetailPageTemplate = ({
   kebabAnchorRef,
   openWordbookSelectModal,
   wordbookSelectModal,
+  wordbookCreateModal,
   selectMode,
   selectedWordbook,
   toggleWordSelection,
@@ -106,6 +114,7 @@ export const WordbookDetailPageTemplate = ({
       />
 
       <WordbookSelectModal {...wordbookSelectModal} />
+      <CreateWordbookModal {...wordbookCreateModal} />
     </div>
   );
 };
