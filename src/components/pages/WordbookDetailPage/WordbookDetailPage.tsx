@@ -137,6 +137,7 @@ export const WordbookDetailPage = () => {
         id: wordbookSelectModalId, // modal id
         wordbooks: MOCK_WORDBOOKS_10, // fetch data
         handleSelectTargetWordbook, // action
+        handleWordbookCreateModalOpen: () => open(wordbookCreateModalId), // action
       }}
       // wordbook create modal props
       wordbookCreateModal={{

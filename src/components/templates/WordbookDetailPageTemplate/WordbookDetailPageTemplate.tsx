@@ -7,7 +7,7 @@ import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
 import { type WordbookSelectModalProps } from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
-import { WordbookSelectModalContent } from '@/components/organisms/WordbookSelectModal/WordbookSelectModalContent';
+import { WordbookSelectModal } from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { Wordbook } from '@/domain/wordbook';
@@ -24,7 +24,7 @@ type Props = {
   openWordbookSelectModal: () => void;
 
   // wordbook select modal props
-  wordbookSelectModal: WordbookSelectModalProps;
+  wordbookSelectModal: WordbookSelectModalProps & { id: string };
 
   // wordbook create modal props
   wordbookCreateModal: CreateWordbookModalProps & { isOpen: boolean };
@@ -114,9 +114,10 @@ export const WordbookDetailPageTemplate = ({
 
       <ModalPortal id={wordbookSelectModal.id}>
         {!wordbookCreateModal.isOpen ? (
-          <WordbookSelectModalContent
+          <WordbookSelectModal
             wordbooks={wordbookSelectModal.wordbooks}
             handleSelectTargetWordbook={wordbookSelectModal.handleSelectTargetWordbook}
+            handleWordbookCreateModalOpen={wordbookSelectModal.handleWordbookCreateModalOpen}
           />
         ) : (
           <CreateWordbookModal {...wordbookCreateModal} />
