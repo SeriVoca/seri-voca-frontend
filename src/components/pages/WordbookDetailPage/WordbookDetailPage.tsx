@@ -28,6 +28,7 @@ export const WordbookDetailPage = () => {
 
   // Wordbook create modal
   const wordbookCreateModalId = 'wordbook-create-modal';
+  const isWordbookCreateModalOpen = useModalStore((s) => s.isOpen(wordbookCreateModalId));
   const [wordbookName, setWordbookName] = useState<string>('');
 
   // Select mode
@@ -139,6 +140,7 @@ export const WordbookDetailPage = () => {
       }}
       // wordbook create modal props
       wordbookCreateModal={{
+        isOpen: isWordbookCreateModalOpen,
         value: wordbookName,
         onChange: setWordbookName,
         onSubmit: handleWordbookCreateModalSubmit,
