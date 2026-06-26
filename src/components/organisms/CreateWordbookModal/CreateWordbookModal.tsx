@@ -1,14 +1,19 @@
 import { Button } from '@/components/atoms/Button/Button';
 import { Input } from '@/components/atoms/Input/Input';
 
-export interface Props {
+export interface CreateWordbookModalProps {
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
   onCancel: () => void;
 }
 
-export const CreateWordbookModal = ({ value, onChange, onSubmit, onCancel }: Props) => {
+export const CreateWordbookModal = ({
+  value,
+  onChange,
+  onSubmit,
+  onCancel,
+}: CreateWordbookModalProps) => {
   return (
     <div className="flex flex-col gap-[0.5rem]">
       <h2 className="text-lg">단어장 이름을 정해주세요</h2>

@@ -1,10 +1,13 @@
+import {
+  CreateWordbookModal,
+  type CreateWordbookModalProps,
+} from '@/components/organisms/CreateWordbookModal/CreateWordbookModal';
 import { Header } from '@/components/organisms/Header/Header';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
+import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
-import {
-  WordbookSelectModal,
-  type WordbookSelectModalProps,
-} from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
+import { type WordbookSelectModalProps } from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
+import { WordbookSelectModal } from '@/components/organisms/WordbookSelectModal/WordbookSelectModal';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import type { Word } from '@/domain/word';
 import type { Wordbook } from '@/domain/wordbook';
@@ -21,7 +24,10 @@ type Props = {
   openWordbookSelectModal: () => void;
 
   // wordbook select modal props
-  wordbookSelectModal: WordbookSelectModalProps;
+  wordbookSelectModal: WordbookSelectModalProps & { id: string };
+
+  // wordbook create modal props
+  wordbookCreateModal: CreateWordbookModalProps & { isOpen: boolean };
 
   // select mode props
   selectMode: boolean;
@@ -43,6 +49,7 @@ export const WordbookDetailPageTemplate = ({
   kebabAnchorRef,
   openWordbookSelectModal,
   wordbookSelectModal,
+  wordbookCreateModal,
   selectMode,
   selectedWordbook,
   toggleWordSelection,
@@ -105,7 +112,17 @@ export const WordbookDetailPageTemplate = ({
         ]}
       />
 
-      <WordbookSelectModal {...wordbookSelectModal} />
+      <ModalPortal id={wordbookSelectModal.id}>
+        {!wordbookCreateModal.isOpen ? (
+          <WordbookSelectModal
+            wordbooks={wordbookSelectModal.wordbooks}
+            handleSelectTargetWordbook={wordbookSelectModal.handleSelectTargetWordbook}
+            handleWordbookCreateModalOpen={wordbookSelectModal.handleWordbookCreateModalOpen}
+          />
+        ) : (
+          <CreateWordbookModal {...wordbookCreateModal} />
+        )}
+      </ModalPortal>
     </div>
   );
 };
