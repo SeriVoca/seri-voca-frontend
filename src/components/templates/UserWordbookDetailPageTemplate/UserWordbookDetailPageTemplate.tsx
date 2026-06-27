@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { type RefObject } from 'react';
 import { Header } from '@/components/organisms/Header/Header';
 import { ModalPortal } from '@/components/organisms/ModalPortal/ModalPortal';
 import { WordList } from '@/components/organisms/WordList/WordList';
 import { CreateWordModalContent } from '@/components/organisms/CreateWordModal/CreateWordModalContent';
 import type { PartOfSpeech, Word } from '@/domain/word';
+import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
 
 interface Props {
   title?: string;
   words: Word[];
+
+  /** kebab menu props */
+  isKebabMenuOpen: boolean;
+  handleKebabMenuOpen: (flag: boolean) => Promise<void> | void;
+  kebabAnchorRef: RefObject<HTMLButtonElement | null>;
+
   /** ModalPortal id */
   createWordModalId: string;
+
   /** CreateWordModalContent props */
   newWord: Word;
   isCreateWordValid: boolean;
@@ -20,6 +28,7 @@ interface Props {
   onDeleteMeaning: (idxToDelete: number) => void;
   onSubmit: () => void;
   onCancel: () => void;
+
   /** Header actions */
   onNavigate: () => void;
   onOpenCreateWordModal: () => void;
@@ -28,6 +37,9 @@ interface Props {
 export const UserWordbookDetailPageTemplate = ({
   title = '단어장 상세 페이지',
   words,
+  isKebabMenuOpen,
+  handleKebabMenuOpen,
+  kebabAnchorRef,
   createWordModalId,
   newWord,
   isCreateWordValid,
@@ -48,13 +60,35 @@ export const UserWordbookDetailPageTemplate = ({
         variant="LRCTA"
         LCTAIcon="ChevronLeft"
         onLCTAClick={onNavigate}
-        RCTAIcon="Plus"
-        onRCTAClick={onOpenCreateWordModal}
+        RCTAIcon="DotsVertical"
+        onRCTAClick={() => handleKebabMenuOpen(true)}
+        RCTARef={kebabAnchorRef}
       />
 
       <div className="mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
         <WordList words={words} />
       </div>
+
+      {/* 휘발성 오버레이 */}
+      <KebabMenu
+        open={isKebabMenuOpen}
+        anchorRef={kebabAnchorRef}
+        onClose={() => handleKebabMenuOpen(false)}
+        UIProps={[
+          {
+            label: '단어 생성하기',
+            handleClick: onOpenCreateWordModal,
+          },
+          {
+            label: '단어 삭제하기',
+            handleClick: () => alert('준비 중입니다.'),
+          },
+          {
+            label: '단어장 삭제하기',
+            handleClick: () => alert('준비 중입니다.'),
+          },
+        ]}
+      />
 
       <ModalPortal id={createWordModalId}>
         <CreateWordModalContent
