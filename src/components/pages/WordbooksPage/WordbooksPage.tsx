@@ -42,7 +42,7 @@ export const WordbooksPage = () => {
   const handleTabClick = (tab: Tab) => {
     if (tab.disabled) {
       alert('서비스 준비중입니다.');
-    } else if (tab.disabled === false) {
+    } else {
       setActiveTab(tab.id);
     }
   };
@@ -83,7 +83,9 @@ export const WordbooksPage = () => {
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={wordbooks.data}
+      wordbooks={
+        tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼' ? wordbooks.data : [] // TODO: 내 단어장 목록 API 연동 필요
+      }
       handleNavigate={handleNavigate}
       openWordbookCreateModal={open}
       createWordbookModalContent={createWordbookModalContent()}
@@ -94,5 +96,5 @@ export const WordbooksPage = () => {
 // 정적 데이터
 const tabs: Tab[] = [
   { id: 1, label: '커리큘럼' },
-  { id: 2, label: '내 단어장', disabled: true },
+  { id: 2, label: '내 단어장' },
 ];
