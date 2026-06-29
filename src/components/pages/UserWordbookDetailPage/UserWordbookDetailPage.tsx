@@ -98,7 +98,7 @@ export const UserWordbookDetailPage = () => {
     });
   };
 
-  const CREATE_WORD_MODAL = 'create-word-modal';
+  const CREATE_WORD_MODAL_ID = 'create-word-modal';
 
   const resetCreateWordForm = () => {
     setNewWord(createEmptyWord());
@@ -108,17 +108,17 @@ export const UserWordbookDetailPage = () => {
     setWords((prev) => [...prev, newWord]);
 
     resetCreateWordForm();
-    closeCreateWordModal(CREATE_WORD_MODAL);
+    closeCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleCreateWordCancel = () => {
     resetCreateWordForm();
-    closeCreateWordModal(CREATE_WORD_MODAL);
+    closeCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleOpenCreateWordModal = () => {
     resetCreateWordForm();
-    openCreateWordModal(CREATE_WORD_MODAL);
+    openCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleNavigate = () => {
@@ -133,7 +133,7 @@ export const UserWordbookDetailPage = () => {
       handleKebabMenuOpen={handleKebabMenuOpen}
       kebabAnchorRef={kebabButtonRef}
       // create word modal props
-      createWordModalId={CREATE_WORD_MODAL}
+      createWordModalId={CREATE_WORD_MODAL_ID}
       newWord={newWord}
       isCreateWordValid={isCreateWordValid}
       onEngChange={handleEngChange}
