@@ -28,6 +28,7 @@ interface Props {
   onDeleteMeaning: (idxToDelete: number) => void;
   onSubmit: () => void;
   onCancel: () => void;
+  onClose: () => void;
 
   /** Header actions */
   onNavigate: () => void;
@@ -50,6 +51,7 @@ export const UserWordbookDetailPageTemplate = ({
   onDeleteMeaning,
   onSubmit,
   onCancel,
+  onClose,
   onNavigate,
   onOpenCreateWordModal,
 }: Props) => {
@@ -90,7 +92,7 @@ export const UserWordbookDetailPageTemplate = ({
         ]}
       />
 
-      <ModalPortal id={createWordModalId}>
+      <ModalPortal id={createWordModalId} onClose={onClose}>
         <CreateWordModalContent
           newWord={newWord}
           isCreateWordValid={isCreateWordValid}

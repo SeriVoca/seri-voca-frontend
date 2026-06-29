@@ -100,20 +100,24 @@ export const UserWordbookDetailPage = () => {
 
   const CREATE_WORD_MODAL = 'create-word-modal';
 
+  const resetCreateWordForm = () => {
+    setNewWord(createEmptyWord());
+  };
+
   const handleCreateWordSubmit = () => {
     setWords((prev) => [...prev, newWord]);
 
-    setNewWord(createEmptyWord()); // 입력 폼 초기화
+    resetCreateWordForm();
     closeCreateWordModal(CREATE_WORD_MODAL);
   };
 
   const handleCreateWordCancel = () => {
-    setNewWord(createEmptyWord());
+    resetCreateWordForm();
     closeCreateWordModal(CREATE_WORD_MODAL);
   };
 
   const handleOpenCreateWordModal = () => {
-    setNewWord(createEmptyWord());
+    resetCreateWordForm();
     openCreateWordModal(CREATE_WORD_MODAL);
   };
 
@@ -139,6 +143,7 @@ export const UserWordbookDetailPage = () => {
       onDeleteMeaning={handleDeleteMeaning}
       onSubmit={handleCreateWordSubmit}
       onCancel={handleCreateWordCancel}
+      onClose={resetCreateWordForm}
       onNavigate={handleNavigate}
       onOpenCreateWordModal={handleOpenCreateWordModal}
     />
