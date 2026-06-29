@@ -83,9 +83,11 @@ export const WordbooksPage = () => {
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={
-        tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼' ? wordbooks.data : [] // TODO: 내 단어장 목록 API 연동 필요
-      }
+      wordbooks={wordbooks.data.filter((wordbook) =>
+        tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼'
+          ? wordbook.type === 'SYSTEM'
+          : wordbook.type === 'USER',
+      )}
       handleNavigate={handleNavigate}
       openWordbookCreateModal={open}
       createWordbookModalContent={createWordbookModalContent()}
