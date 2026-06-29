@@ -47,6 +47,17 @@ export const WordbooksPage = () => {
     }
   };
 
+  const CREATE_WORDBOOK_MODAL_ID = 'create-wordbook-modal';
+
+  const resetCreateWordbookForm = () => {
+    setWordbookName('');
+  };
+
+  const handleCreateWordbookCancel = () => {
+    resetCreateWordbookForm();
+    close(CREATE_WORDBOOK_MODAL_ID);
+  };
+
   const createWordbookModalContent = () => {
     return (
       <CreateWordbookModal
@@ -59,13 +70,10 @@ export const WordbooksPage = () => {
           }
           // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
           alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
-          setWordbookName('');
-          close('wordbook-create-modal');
+          resetCreateWordbookForm();
+          close(CREATE_WORDBOOK_MODAL_ID);
         }}
-        onCancel={() => {
-          setWordbookName('');
-          close('wordbook-create-modal');
-        }}
+        onCancel={handleCreateWordbookCancel}
       />
     );
   };
@@ -89,7 +97,9 @@ export const WordbooksPage = () => {
           : wordbook.type === 'USER',
       )}
       handleNavigate={handleNavigate}
-      openWordbookCreateModal={open}
+      createWordbookModalId={CREATE_WORDBOOK_MODAL_ID}
+      onOpenWordbookCreateModal={() => open(CREATE_WORDBOOK_MODAL_ID)}
+      onClose={resetCreateWordbookForm}
       createWordbookModalContent={createWordbookModalContent()}
     />
   );

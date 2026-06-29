@@ -10,7 +10,9 @@ type Props = {
   handleTabClick: (tab: Tab) => Promise<void> | void;
   wordbooks: Wordbook[];
   handleNavigate: (id: string) => Promise<void> | void;
-  openWordbookCreateModal: (modalId: string) => void;
+  createWordbookModalId: string;
+  onOpenWordbookCreateModal: () => void;
+  onClose: () => void;
   createWordbookModalContent: React.ReactNode;
 };
 
@@ -20,7 +22,9 @@ export const WordbooksPageTemplate = ({
   handleTabClick,
   wordbooks,
   handleNavigate,
-  openWordbookCreateModal,
+  createWordbookModalId,
+  onOpenWordbookCreateModal,
+  onClose,
   createWordbookModalContent,
 }: Props) => {
   return (
@@ -32,7 +36,7 @@ export const WordbooksPageTemplate = ({
           {tabs.find((tab) => tab.id === activeTab)?.label === '내 단어장' && (
             <button
               className="flex h-[36px] items-center justify-center rounded-full bg-[#e9e9e9] py-[8px] text-lg text-[#9d9d9d]"
-              onClick={() => openWordbookCreateModal('wordbook-create-modal')}
+              onClick={onOpenWordbookCreateModal}
             >
               <div className="flex items-center justify-center leading-none">+</div>
             </button>
@@ -40,7 +44,9 @@ export const WordbooksPageTemplate = ({
           <WordbookList wordbooks={wordbooks} handleNavigate={handleNavigate} />
         </div>
       </main>
-      <ModalPortal id="wordbook-create-modal">{createWordbookModalContent}</ModalPortal>
+      <ModalPortal id={createWordbookModalId} onClose={onClose}>
+        {createWordbookModalContent}
+      </ModalPortal>
     </div>
   );
 };
