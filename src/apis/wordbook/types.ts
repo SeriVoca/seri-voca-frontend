@@ -7,3 +7,10 @@ export type GetWordbookListResponse = {
     type: 'SYSTEM' | 'USER';
   };
 }[];
+
+export type GetWordbookResponse = {
+  id: string;
+  title: string;
+  description: string | null;
+  type: 'SYSTEM' | 'USER';
+};

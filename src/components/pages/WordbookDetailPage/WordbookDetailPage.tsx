@@ -3,19 +3,18 @@ import { useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
 import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
+import { combineAsyncStates } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
-import { MOCK_WORDBOOKS_10 } from '@/components/pages/WordbookDetailPage/mock';
 import type { Wordbook } from '@/domain/wordbook';
 import { useWordSelection } from '@/hooks/useWordSelection';
+import { getUserWordbookList } from '@/apis/wordbook';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
   const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const { wordbookId } = useParams<{ wordbookId: string }>();
-
-  // interactive ui state
 
   // Header kebab menu
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
@@ -25,6 +24,7 @@ export const WordbookDetailPage = () => {
   const open = useModalStore((s) => s.open);
   const close = useModalStore((s) => s.close);
   const wordbookSelectModalId = 'wordbook-select-modal';
+  const [userWordbooks, setUserWordbooks] = useState<AsyncState<Wordbook[]>>({ status: 'idle' });
 
   // Wordbook create modal
   const wordbookCreateModalId = 'wordbook-create-modal';
@@ -113,9 +113,23 @@ export const WordbookDetailPage = () => {
     fetchWords();
   }, [wordbookId]);
 
-  // data status가 success가 아닐 때의 처리
+  useEffect(() => {
+    const fetchUserWordbooks = async () => {
+      try {
+        const data = await getUserWordbookList();
+        setUserWordbooks({ status: 'success', data });
+      } catch (_) {
+        setUserWordbooks({ status: 'error' });
+      }
+    };
+    fetchUserWordbooks();
+  }, []);
+
+  // page에서 모든 fetch data의 예외처리를 끝내고, template 이하는 완결된 데이터를 가정한다.
   // TODO: 로딩, 에러 UI/UX 기획 필요
-  switch (words.status) {
+  const pageData = combineAsyncStates(words, userWordbooks);
+
+  switch (pageData.status) {
     case 'idle':
     case 'loading':
       return <div>Loading...</div>;
@@ -123,9 +137,11 @@ export const WordbookDetailPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
+  const [wordsData, userWordbooksData] = pageData.data;
+
   return (
     <WordbookDetailPageTemplate
-      words={words.data}
+      words={wordsData}
       handleNavigate={handleNavigate}
       // kebab menu props
       isKebabMenuOpen={isKebabMenuOpen}
@@ -135,7 +151,7 @@ export const WordbookDetailPage = () => {
       // wordbook select modal props
       wordbookSelectModal={{
         id: wordbookSelectModalId, // modal id
-        wordbooks: MOCK_WORDBOOKS_10, // fetch data
+        wordbooks: userWordbooksData, // fetch data
         handleSelectTargetWordbook, // action
         handleWordbookCreateModalOpen: () => open(wordbookCreateModalId), // action
       }}
