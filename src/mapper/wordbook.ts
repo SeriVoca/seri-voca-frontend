@@ -1,30 +1,25 @@
-import type { GetWordbookListResponse, GetWordbookResponse } from '@/apis/wordbook/types';
+import type { OrderedWordbookResponse, WordbookResponse } from '@/apis/wordbook/types';
 import type { Wordbook } from '@/domain/wordbook';
 
-type WordbookResponseItem = GetWordbookListResponse[number];
-
-export const mapWordbook = (item: WordbookResponseItem): Wordbook => {
+// 평탄한 단어장 응답 → 도메인
+export const mapWordbook = (res: WordbookResponse): Wordbook => {
   return {
-    id: item.wordbook.id,
-    title: item.wordbook.title,
-    description: item.wordbook.description ?? '',
-    type: item.wordbook.type,
+    id: res.id,
+    title: res.title,
+    description: res.description ?? '',
+    type: res.type,
   };
 };
 
-export const mapUserWordbook = (item: GetWordbookResponse): Wordbook => {
-  return {
-    id: item.id,
-    title: item.title,
-    description: item.description ?? '',
-    type: item.type,
-  };
+// order_index로 감싼 응답 → 도메인 (order_index는 정렬에만 쓰고 도메인에는 넣지 않음)
+export const mapOrderedWordbook = (res: OrderedWordbookResponse): Wordbook => {
+  return mapWordbook(res.wordbook);
 };
 
-export const mapWordbookList = (response: GetWordbookListResponse): Wordbook[] => {
-  return response.map(mapWordbook);
+export const mapWordbookList = (res: WordbookResponse[]): Wordbook[] => {
+  return res.map(mapWordbook);
 };
 
-export const mapUserWordbookList = (response: GetWordbookResponse[]): Wordbook[] => {
-  return response.map(mapUserWordbook);
+export const mapOrderedWordbookList = (res: OrderedWordbookResponse[]): Wordbook[] => {
+  return res.map(mapOrderedWordbook);
 };
