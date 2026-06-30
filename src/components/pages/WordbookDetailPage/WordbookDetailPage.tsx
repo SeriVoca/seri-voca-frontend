@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
 import { getWordList } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
@@ -9,7 +9,7 @@ import { ROUTES } from '@/router/path';
 import { useModalStore } from '@/store/useModalStore';
 import type { Wordbook } from '@/domain/wordbook';
 import { useWordSelection } from '@/hooks/useWordSelection';
-import { getUserWordbookList } from '@/apis/wordbook';
+import { getUserWordbookList, createUserWordbook } from '@/apis/wordbook';
 
 export const WordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -41,6 +41,15 @@ export const WordbookDetailPage = () => {
     setSelectedWordbook(null);
     clear();
   };
+
+  const fetchUserWordbooks = useCallback(async () => {
+    try {
+      const data = await getUserWordbookList();
+      setUserWordbooks({ status: 'success', data });
+    } catch (_) {
+      setUserWordbooks({ status: 'error' });
+    }
+  }, []);
 
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS;
@@ -79,15 +88,20 @@ export const WordbookDetailPage = () => {
     selectModeClear();
   };
 
-  const handleWordbookCreateModalSubmit = () => {
+  const handleWordbookCreateModalSubmit = async () => {
     if (wordbookName.trim() === '') {
       alert('단어장 이름을 입력해주세요.');
       return;
     }
-    // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
-    alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
-    setWordbookName('');
-    close(wordbookCreateModalId);
+    try {
+      await createUserWordbook(wordbookName, null);
+      await fetchUserWordbooks(); // 생성 후 사용자 단어장 목록 갱신
+      setWordbookName('');
+      close(wordbookCreateModalId);
+    } catch (_) {
+      // TODO: 에러 발생 시 UI/UX 기획 필요
+      alert('단어장 생성 중에 오류가 발생했습니다.');
+    }
   };
 
   const handleWordbookCreateModalCancel = () => {
@@ -114,16 +128,8 @@ export const WordbookDetailPage = () => {
   }, [wordbookId]);
 
   useEffect(() => {
-    const fetchUserWordbooks = async () => {
-      try {
-        const data = await getUserWordbookList();
-        setUserWordbooks({ status: 'success', data });
-      } catch (_) {
-        setUserWordbooks({ status: 'error' });
-      }
-    };
     fetchUserWordbooks();
-  }, []);
+  }, [fetchUserWordbooks]);
 
   // page에서 모든 fetch data의 예외처리를 끝내고, template 이하는 완결된 데이터를 가정한다.
   // TODO: 로딩, 에러 UI/UX 기획 필요

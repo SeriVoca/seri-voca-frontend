@@ -22,7 +22,10 @@ export const getUserWordbookList = async (): Promise<Wordbook[]> => {
   }
 };
 
-export const createUserWordbook = async (title: string, description: string): Promise<Wordbook> => {
+export const createUserWordbook = async (
+  title: string,
+  description: string | null,
+): Promise<Wordbook> => {
   try {
     const res = await api.post('/wordbooks', { title, description });
     return mapWordbook(res.data);
