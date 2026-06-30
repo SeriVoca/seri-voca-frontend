@@ -1,6 +1,6 @@
 import type { PartOfSpeech, Word } from '@/domain/word';
 import { useModalStore } from '@/store/useModalStore';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordbookDetailPageTemplate/UserWordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
 import { useNavigate } from 'react-router-dom';
@@ -20,12 +20,21 @@ export const UserWordbookDetailPage = () => {
   const [words, setWords] = useState<Word[]>([]);
   const [newWord, setNewWord] = useState<Word>(createEmptyWord());
 
+  // Header kebab menu
+  const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
+  const kebabButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const openCreateWordModal = useModalStore((s) => s.open);
   const closeCreateWordModal = useModalStore((s) => s.close);
 
   const isCreateWordValid =
     newWord.textEn.trim() !== '' &&
     newWord.meanings.every((meaning) => meaning.textKo.trim() !== '');
+
+  const handleKebabMenuOpen = (flag: boolean) => {
+    if (flag) setIsKebabMenuOpen(true);
+    else setIsKebabMenuOpen(false);
+  };
 
   const handleEngChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -89,23 +98,27 @@ export const UserWordbookDetailPage = () => {
     });
   };
 
-  const CREATE_WORD_MODAL = 'create-word-modal';
+  const CREATE_WORD_MODAL_ID = 'create-word-modal';
+
+  const resetCreateWordForm = () => {
+    setNewWord(createEmptyWord());
+  };
 
   const handleCreateWordSubmit = () => {
     setWords((prev) => [...prev, newWord]);
 
-    setNewWord(createEmptyWord()); // 입력 폼 초기화
-    closeCreateWordModal(CREATE_WORD_MODAL);
+    resetCreateWordForm();
+    closeCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleCreateWordCancel = () => {
-    setNewWord(createEmptyWord());
-    closeCreateWordModal(CREATE_WORD_MODAL);
+    resetCreateWordForm();
+    closeCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleOpenCreateWordModal = () => {
-    setNewWord(createEmptyWord());
-    openCreateWordModal(CREATE_WORD_MODAL);
+    resetCreateWordForm();
+    openCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
   const handleNavigate = () => {
@@ -115,7 +128,12 @@ export const UserWordbookDetailPage = () => {
   return (
     <UserWordbookDetailPageTemplate
       words={words}
-      createWordModalId={CREATE_WORD_MODAL}
+      // kebab menu props
+      isKebabMenuOpen={isKebabMenuOpen}
+      handleKebabMenuOpen={handleKebabMenuOpen}
+      kebabAnchorRef={kebabButtonRef}
+      // create word modal props
+      createWordModalId={CREATE_WORD_MODAL_ID}
       newWord={newWord}
       isCreateWordValid={isCreateWordValid}
       onEngChange={handleEngChange}
@@ -125,6 +143,7 @@ export const UserWordbookDetailPage = () => {
       onDeleteMeaning={handleDeleteMeaning}
       onSubmit={handleCreateWordSubmit}
       onCancel={handleCreateWordCancel}
+      onClose={resetCreateWordForm}
       onNavigate={handleNavigate}
       onOpenCreateWordModal={handleOpenCreateWordModal}
     />

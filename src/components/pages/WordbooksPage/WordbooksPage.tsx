@@ -42,9 +42,20 @@ export const WordbooksPage = () => {
   const handleTabClick = (tab: Tab) => {
     if (tab.disabled) {
       alert('서비스 준비중입니다.');
-    } else if (tab.disabled === false) {
+    } else {
       setActiveTab(tab.id);
     }
+  };
+
+  const CREATE_WORDBOOK_MODAL_ID = 'create-wordbook-modal';
+
+  const resetCreateWordbookForm = () => {
+    setWordbookName('');
+  };
+
+  const handleCreateWordbookCancel = () => {
+    resetCreateWordbookForm();
+    close(CREATE_WORDBOOK_MODAL_ID);
   };
 
   const createWordbookModalContent = () => {
@@ -59,13 +70,10 @@ export const WordbooksPage = () => {
           }
           // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
           alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
-          setWordbookName('');
-          close('wordbook-create-modal');
+          resetCreateWordbookForm();
+          close(CREATE_WORDBOOK_MODAL_ID);
         }}
-        onCancel={() => {
-          setWordbookName('');
-          close('wordbook-create-modal');
-        }}
+        onCancel={handleCreateWordbookCancel}
       />
     );
   };
@@ -83,9 +91,15 @@ export const WordbooksPage = () => {
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={wordbooks.data}
+      wordbooks={wordbooks.data.filter((wordbook) =>
+        tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼'
+          ? wordbook.type === 'SYSTEM'
+          : wordbook.type === 'USER',
+      )}
       handleNavigate={handleNavigate}
-      openWordbookCreateModal={open}
+      createWordbookModalId={CREATE_WORDBOOK_MODAL_ID}
+      onOpenWordbookCreateModal={() => open(CREATE_WORDBOOK_MODAL_ID)}
+      onClose={resetCreateWordbookForm}
       createWordbookModalContent={createWordbookModalContent()}
     />
   );
@@ -94,5 +108,5 @@ export const WordbooksPage = () => {
 // 정적 데이터
 const tabs: Tab[] = [
   { id: 1, label: '커리큘럼' },
-  { id: 2, label: '내 단어장', disabled: true },
+  { id: 2, label: '내 단어장' },
 ];
