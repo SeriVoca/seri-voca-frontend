@@ -12,10 +12,12 @@ import { CreateWordbookModal } from '@/components/organisms/CreateWordbookModal/
 export const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
-  const [wordbooks, setWordbooks] = useState<AsyncState<Wordbook[]>>({ status: 'idle' });
+  const [systemWordbooks, setSystemWordbooks] = useState<AsyncState<Wordbook[]>>({
+    status: 'idle',
+  });
 
-  // 단어장 생성 플로우 - 단어장 이름 상태 및 모달 open/close 핸들러
-  const [wordbookName, setWordbookName] = useState<string>('');
+  // 사용자 단어장 생성 플로우 - 단어장 이름 상태 및 모달 open/close 핸들러
+  const [userWordbookName, setUserWordbookName] = useState<string>('');
   const open = useModalStore((s) => s.open);
   const close = useModalStore((s) => s.close);
 
@@ -25,18 +27,18 @@ export const WordbooksPage = () => {
   };
 
   useEffect(() => {
-    async function fetchWordbookList() {
+    const fetchSystemWordbookList = async () => {
       try {
-        setWordbooks({ status: 'loading' });
+        setSystemWordbooks({ status: 'loading' });
         const data = await getWordbookList();
-        setWordbooks({ status: 'success', data: data });
+        setSystemWordbooks({ status: 'success', data: data });
       } catch (_) {
         // TODO : 에러 발생 시 UI/UX 기획 필요
-        setWordbooks({ status: 'error' });
+        setSystemWordbooks({ status: 'error' });
         alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
       }
-    }
-    fetchWordbookList();
+    };
+    fetchSystemWordbookList();
   }, []);
 
   const handleTabClick = (tab: Tab) => {
@@ -50,7 +52,7 @@ export const WordbooksPage = () => {
   const CREATE_WORDBOOK_MODAL_ID = 'create-wordbook-modal';
 
   const resetCreateWordbookForm = () => {
-    setWordbookName('');
+    setUserWordbookName('');
   };
 
   const handleCreateWordbookCancel = () => {
@@ -61,15 +63,15 @@ export const WordbooksPage = () => {
   const createWordbookModalContent = () => {
     return (
       <CreateWordbookModal
-        value={wordbookName}
-        onChange={setWordbookName}
+        value={userWordbookName}
+        onChange={setUserWordbookName}
         onSubmit={() => {
-          if (wordbookName.trim() === '') {
+          if (userWordbookName.trim() === '') {
             alert('단어장 이름을 입력해주세요.');
             return;
           }
           // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
-          alert(`단어장 "${wordbookName}"이(가) 생성되었습니다!`);
+          alert(`단어장 "${userWordbookName}"이(가) 생성되었습니다!`);
           resetCreateWordbookForm();
           close(CREATE_WORDBOOK_MODAL_ID);
         }}
@@ -78,7 +80,7 @@ export const WordbooksPage = () => {
     );
   };
 
-  switch (wordbooks.status) {
+  switch (systemWordbooks.status) {
     case 'idle':
     case 'loading':
       return <div>Loading...</div>;
@@ -91,7 +93,7 @@ export const WordbooksPage = () => {
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={wordbooks.data.filter((wordbook) =>
+      wordbooks={systemWordbooks.data.filter((wordbook) =>
         tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼'
           ? wordbook.type === 'SYSTEM'
           : wordbook.type === 'USER',
