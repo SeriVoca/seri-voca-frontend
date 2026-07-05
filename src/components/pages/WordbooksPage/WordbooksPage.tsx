@@ -103,9 +103,10 @@ export const WordbooksPage = () => {
     );
   };
 
-  const pageData = combineAsyncStates(systemWordbooks, userWordbooks);
+  const isCurriculumTab = tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼';
+  const currentTabState = isCurriculumTab ? systemWordbooks : userWordbooks;
 
-  switch (pageData.status) {
+  switch (currentTabState.status) {
     case 'idle':
     case 'loading':
       return <div>Loading...</div>;
@@ -113,16 +114,14 @@ export const WordbooksPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
-  const [systemWordbooksData, userWordbooksData] = pageData.data;
-
-  const isCurriculumTab = tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼';
+  const wordbooksData = currentTabState.data;
 
   return (
     <WordbooksPageTemplate
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={isCurriculumTab ? systemWordbooksData : userWordbooksData}
+      wordbooks={wordbooksData}
       handleNavigate={isCurriculumTab ? handleSystemWordbookNavigate : handleUserWordbookNavigate}
       createWordbookModalId={CREATE_WORDBOOK_MODAL_ID}
       onOpenWordbookCreateModal={() => open(CREATE_WORDBOOK_MODAL_ID)}
