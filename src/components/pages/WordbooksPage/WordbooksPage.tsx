@@ -2,9 +2,9 @@ import { type Tab } from '@/components/organisms/TabSwitcher/TabSwitcher';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
-import { getWordbookList } from '@/apis/wordbook';
+import { getUserWordbookList, getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
-import type { AsyncState } from '@/shared/types/asyncState';
+import { combineAsyncStates, type AsyncState } from '@/shared/types/asyncState';
 import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
 import { useModalStore } from '@/store/useModalStore';
 import { CreateWordbookModal } from '@/components/organisms/CreateWordbookModal/CreateWordbookModal';
@@ -13,6 +13,9 @@ export const WordbooksPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<number>(1);
   const [systemWordbooks, setSystemWordbooks] = useState<AsyncState<Wordbook[]>>({
+    status: 'idle',
+  });
+  const [userWordbooks, setUserWordbooks] = useState<AsyncState<Wordbook[]>>({
     status: 'idle',
   });
 
@@ -39,6 +42,21 @@ export const WordbooksPage = () => {
       }
     };
     fetchSystemWordbookList();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserWordbookList = async () => {
+      try {
+        setUserWordbooks({ status: 'loading' });
+        const data = await getUserWordbookList();
+        setUserWordbooks({ status: 'success', data: data });
+      } catch (_) {
+        // TODO : 에러 발생 시 UI/UX 기획 필요
+        setUserWordbooks({ status: 'error' });
+        alert('사용자 단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+      }
+    };
+    fetchUserWordbookList();
   }, []);
 
   const handleTabClick = (tab: Tab) => {
@@ -80,7 +98,9 @@ export const WordbooksPage = () => {
     );
   };
 
-  switch (systemWordbooks.status) {
+  const pageData = combineAsyncStates(systemWordbooks, userWordbooks);
+
+  switch (pageData.status) {
     case 'idle':
     case 'loading':
       return <div>Loading...</div>;
@@ -88,16 +108,18 @@ export const WordbooksPage = () => {
       return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
   }
 
+  const [systemWordbooksData, userWordbooksData] = pageData.data;
+
   return (
     <WordbooksPageTemplate
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={systemWordbooks.data.filter((wordbook) =>
+      wordbooks={
         tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼'
-          ? wordbook.type === 'SYSTEM'
-          : wordbook.type === 'USER',
-      )}
+          ? systemWordbooksData
+          : userWordbooksData
+      }
       handleNavigate={handleNavigate}
       createWordbookModalId={CREATE_WORDBOOK_MODAL_ID}
       onOpenWordbookCreateModal={() => open(CREATE_WORDBOOK_MODAL_ID)}
