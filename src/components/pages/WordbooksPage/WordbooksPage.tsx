@@ -24,8 +24,13 @@ export const WordbooksPage = () => {
   const open = useModalStore((s) => s.open);
   const close = useModalStore((s) => s.close);
 
-  const handleNavigate = (id: string) => {
-    const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', String(id));
+  const handleSystemWordbookNavigate = (id: string) => {
+    const path = ROUTES.WORDBOOK_DETAIL.replace(':wordbookId', id);
+    navigate(path);
+  };
+
+  const handleUserWordbookNavigate = (id: string) => {
+    const path = ROUTES.USER_WORDBOOK_DETAIL.replace(':wordbookId', id);
     navigate(path);
   };
 
@@ -110,17 +115,15 @@ export const WordbooksPage = () => {
 
   const [systemWordbooksData, userWordbooksData] = pageData.data;
 
+  const isCurriculumTab = tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼';
+
   return (
     <WordbooksPageTemplate
       tabs={tabs}
       activeTab={activeTab}
       handleTabClick={handleTabClick}
-      wordbooks={
-        tabs.find((tab) => tab.id === activeTab)?.label === '커리큘럼'
-          ? systemWordbooksData
-          : userWordbooksData
-      }
-      handleNavigate={handleNavigate}
+      wordbooks={isCurriculumTab ? systemWordbooksData : userWordbooksData}
+      handleNavigate={isCurriculumTab ? handleSystemWordbookNavigate : handleUserWordbookNavigate}
       createWordbookModalId={CREATE_WORDBOOK_MODAL_ID}
       onOpenWordbookCreateModal={() => open(CREATE_WORDBOOK_MODAL_ID)}
       onClose={resetCreateWordbookForm}
