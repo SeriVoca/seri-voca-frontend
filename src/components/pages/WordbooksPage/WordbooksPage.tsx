@@ -1,8 +1,8 @@
 import { type Tab } from '@/components/organisms/TabSwitcher/TabSwitcher';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
-import { getUserWordbookList, getWordbookList } from '@/apis/wordbook';
+import { createUserWordbook, getUserWordbookList, getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
 import { type AsyncState } from '@/shared/types/asyncState';
 import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
@@ -49,20 +49,25 @@ export const WordbooksPage = () => {
     fetchSystemWordbookList();
   }, []);
 
-  useEffect(() => {
-    const fetchUserWordbookList = async () => {
-      try {
-        setUserWordbooks({ status: 'loading' });
-        const data = await getUserWordbookList();
-        setUserWordbooks({ status: 'success', data: data });
-      } catch (_) {
-        // TODO : 에러 발생 시 UI/UX 기획 필요
-        setUserWordbooks({ status: 'error' });
-        alert('사용자 단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
-      }
-    };
-    fetchUserWordbookList();
+  const fetchUserWordbookList = useCallback(async () => {
+    try {
+      setUserWordbooks({ status: 'loading' });
+      const data = await getUserWordbookList();
+      setUserWordbooks({ status: 'success', data: data });
+    } catch (error) {
+      // TODO : 에러 발생 시 UI/UX 기획 필요
+      // 호출부에서 alert 처리하기 위해 에러 throw만 수행
+      setUserWordbooks({ status: 'error' });
+      throw error;
+    }
   }, []);
+
+  useEffect(() => {
+    fetchUserWordbookList().catch(() => {
+      // TODO : 에러 발생 시 UI/UX 기획 필요
+      alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+    });
+  }, [fetchUserWordbookList]);
 
   const handleTabClick = (tab: Tab) => {
     if (tab.disabled) {
@@ -78,6 +83,32 @@ export const WordbooksPage = () => {
     setUserWordbookName('');
   };
 
+  const handleCreateWordbookSubmit = async () => {
+    if (userWordbookName.trim() === '') {
+      alert('단어장 이름을 입력해주세요.');
+      return;
+    }
+    // TODO: 에러 발생 시 UI/UX 기획 필요
+    try {
+      await createUserWordbook(userWordbookName, null);
+    } catch {
+      alert('단어장 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
+
+    alert(`단어장 "${userWordbookName}"이(가) 생성되었습니다!`);
+
+    try {
+      await fetchUserWordbookList();
+    } catch {
+      alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+      return;
+    }
+
+    resetCreateWordbookForm();
+    close(CREATE_WORDBOOK_MODAL_ID);
+  };
+
   const handleCreateWordbookCancel = () => {
     resetCreateWordbookForm();
     close(CREATE_WORDBOOK_MODAL_ID);
@@ -88,16 +119,7 @@ export const WordbooksPage = () => {
       <CreateWordbookModal
         value={userWordbookName}
         onChange={setUserWordbookName}
-        onSubmit={() => {
-          if (userWordbookName.trim() === '') {
-            alert('단어장 이름을 입력해주세요.');
-            return;
-          }
-          // TODO: 단어장 생성 API 연동 및 라우팅 로직 추가
-          alert(`단어장 "${userWordbookName}"이(가) 생성되었습니다!`);
-          resetCreateWordbookForm();
-          close(CREATE_WORDBOOK_MODAL_ID);
-        }}
+        onSubmit={handleCreateWordbookSubmit}
         onCancel={handleCreateWordbookCancel}
       />
     );
