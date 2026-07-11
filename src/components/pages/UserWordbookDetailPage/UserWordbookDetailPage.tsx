@@ -125,7 +125,7 @@ export const UserWordbookDetailPage = () => {
   const handleCreateWordSubmit = () => {
     setWords((prev) => {
       if (prev.status !== 'success') {
-        return { status: 'success', data: [newWord] };
+        return prev;
       }
 
       return { status: 'success', data: [...prev.data, newWord] };
