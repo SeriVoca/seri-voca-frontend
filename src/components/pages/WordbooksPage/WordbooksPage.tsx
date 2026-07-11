@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/router/path';
 import { getUserWordbookList, getWordbookList } from '@/apis/wordbook';
 import type { Wordbook } from '@/domain/wordbook';
-import { combineAsyncStates, type AsyncState } from '@/shared/types/asyncState';
+import { type AsyncState } from '@/shared/types/asyncState';
 import { WordbooksPageTemplate } from '@/components/templates/WordbooksPageTemplate/WordbooksPageTemplate';
 import { useModalStore } from '@/store/useModalStore';
 import { CreateWordbookModal } from '@/components/organisms/CreateWordbookModal/CreateWordbookModal';
