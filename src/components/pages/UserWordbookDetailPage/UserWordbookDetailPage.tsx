@@ -1,9 +1,11 @@
 import type { PartOfSpeech, Word } from '@/domain/word';
 import { useModalStore } from '@/store/useModalStore';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordbookDetailPageTemplate/UserWordbookDetailPageTemplate';
 import { ROUTES } from '@/router/path';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import type { AsyncState } from '@/shared/types/asyncState';
+import { getWordList } from '@/apis/word';
 
 export const UserWordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -17,8 +19,9 @@ export const UserWordbookDetailPage = () => {
       },
     ],
   });
-  const [words, setWords] = useState<Word[]>([]);
+  const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const [newWord, setNewWord] = useState<Word>(createEmptyWord());
+  const { wordbookId } = useParams<{ wordbookId: string }>();
 
   // Header kebab menu
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
@@ -30,6 +33,21 @@ export const UserWordbookDetailPage = () => {
   const isCreateWordValid =
     newWord.textEn.trim() !== '' &&
     newWord.meanings.every((meaning) => meaning.textKo.trim() !== '');
+
+  useEffect(() => {
+    if (!wordbookId) return;
+
+    const fetchWords = async () => {
+      try {
+        setWords({ status: 'loading' });
+        const data = await getWordList(wordbookId);
+        setWords({ status: 'success', data });
+      } catch (_) {
+        setWords({ status: 'error' });
+      }
+    };
+    fetchWords();
+  }, [wordbookId]);
 
   const handleKebabMenuOpen = (flag: boolean) => {
     if (flag) setIsKebabMenuOpen(true);
@@ -105,7 +123,13 @@ export const UserWordbookDetailPage = () => {
   };
 
   const handleCreateWordSubmit = () => {
-    setWords((prev) => [...prev, newWord]);
+    setWords((prev) => {
+      if (prev.status !== 'success') {
+        return prev;
+      }
+
+      return { status: 'success', data: [...prev.data, newWord] };
+    });
 
     resetCreateWordForm();
     closeCreateWordModal(CREATE_WORD_MODAL_ID);
@@ -125,9 +149,18 @@ export const UserWordbookDetailPage = () => {
     const path = ROUTES.WORDBOOKS; // TODO: '나의 단어장' 탭이 보여야 하는지 확인 필요
     navigate(path);
   };
+
+  switch (words.status) {
+    case 'idle':
+    case 'loading':
+      return <div>Loading...</div>;
+    case 'error':
+      return <div>오류가 발생했습니다. 다시 시도해주세요.</div>;
+  }
+
   return (
     <UserWordbookDetailPageTemplate
-      words={words}
+      words={words.data}
       // kebab menu props
       isKebabMenuOpen={isKebabMenuOpen}
       handleKebabMenuOpen={handleKebabMenuOpen}
