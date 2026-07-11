@@ -97,16 +97,14 @@ export const WordbooksPage = () => {
     }
 
     alert(`단어장 "${userWordbookName}"이(가) 생성되었습니다!`);
+    resetCreateWordbookForm();
+    close(CREATE_WORDBOOK_MODAL_ID);
 
     try {
       await fetchUserWordbookList();
     } catch {
       alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
-      return;
     }
-
-    resetCreateWordbookForm();
-    close(CREATE_WORDBOOK_MODAL_ID);
   };
 
   const handleCreateWordbookCancel = () => {
