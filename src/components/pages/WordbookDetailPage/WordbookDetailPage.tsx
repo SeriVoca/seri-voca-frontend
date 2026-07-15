@@ -80,7 +80,12 @@ export const WordbookDetailPage = () => {
 
     try {
       const added = await addSystemWordsToUserWordbook(selectedWordbook.id, [...selectedIds]);
-      alert(`${added.length}개의 단어를 추가했습니다.`);
+      const skipped = selectedIds.size - added.length;
+      if (skipped > 0) {
+        alert(`${added.length}개의 단어를 추가했습니다. (${skipped}개는 이미 있는 단어라 제외)`);
+      } else {
+        alert(`${added.length}개의 단어를 추가했습니다.`);
+      }
       selectModeClear();
     } catch (_) {
       // TODO: 에러 발생 시 UI/UX 기획 필요
