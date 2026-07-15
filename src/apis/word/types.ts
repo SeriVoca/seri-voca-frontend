@@ -18,3 +18,11 @@ export type PartOfSpeechResponse =
   | 'PREPOSITION'
   | 'CONJUNCTION'
   | 'INTERJECTION';
+
+export interface CreateUserWordRequest {
+  enText: string;
+  meanings: {
+    partOfSpeech: PartOfSpeechResponse;
+    meaning: string;
+  }[];
+}
