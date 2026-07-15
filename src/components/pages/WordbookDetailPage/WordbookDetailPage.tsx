@@ -80,9 +80,17 @@ export const WordbookDetailPage = () => {
 
     try {
       const added = await addSystemWordsToUserWordbook(selectedWordbook.id, [...selectedIds]);
-      const skipped = selectedIds.size - added.length;
-      if (skipped > 0) {
-        alert(`${added.length}개의 단어를 추가했습니다. (${skipped}개는 이미 있는 단어라 제외)`);
+
+      // 응답(실제 추가된 단어)에 없는 선택 단어 = 중복으로 제외된 단어
+      const normalize = (text: string) => text.trim().toLowerCase();
+      const addedTexts = new Set(added.map((word) => normalize(word.textEn)));
+      const selectedWords =
+        words.status === 'success' ? words.data.filter((word) => selectedIds.has(word.id)) : [];
+      const skippedWords = selectedWords.filter((word) => !addedTexts.has(normalize(word.textEn)));
+
+      if (skippedWords.length > 0) {
+        const skippedNames = skippedWords.map((word) => word.textEn).join(', ');
+        alert(`${added.length}개의 단어를 추가했습니다.\n이미 있어서 제외된 단어: ${skippedNames}`);
       } else {
         alert(`${added.length}개의 단어를 추가했습니다.`);
       }
