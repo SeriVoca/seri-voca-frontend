@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
-import { getWordList } from '@/apis/word';
+import { getWordList, addSystemWordsToUserWordbook } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { combineAsyncStates } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
@@ -68,7 +68,7 @@ export const WordbookDetailPage = () => {
     close(wordbookSelectModalId);
   };
 
-  const handleWordsAdditionConfirm = () => {
+  const handleWordsAdditionConfirm = async () => {
     if (!selectedWordbook) {
       alert('단어장을 선택해주세요.');
       return;
@@ -78,10 +78,14 @@ export const WordbookDetailPage = () => {
       return;
     }
 
-    // POST /wordbooks/:wordbookId/words/system api 요청
-    alert('POST /wordbooks/:wordbookId/words/system api 요청');
-
-    selectModeClear();
+    try {
+      const added = await addSystemWordsToUserWordbook(selectedWordbook.id, [...selectedIds]);
+      alert(`${added.length}개의 단어를 추가했습니다.`);
+      selectModeClear();
+    } catch (_) {
+      // TODO: 에러 발생 시 UI/UX 기획 필요
+      alert('단어 추가 중에 오류가 발생했습니다.');
+    }
   };
 
   const handleWordsAdditionCancel = () => {
