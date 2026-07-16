@@ -84,19 +84,23 @@ export const WordbooksPage = () => {
   };
 
   const handleCreateWordbookSubmit = async () => {
-    if (userWordbookName.trim() === '') {
+    if (isCreateWordbookSubmitting) return;
+
+    const trimmedUserWordbookName = userWordbookName.trim();
+
+    if (trimmedUserWordbookName === '') {
       alert('단어장 이름을 입력해주세요.');
       return;
     }
     // TODO: 에러 발생 시 UI/UX 기획 필요
     try {
-      await createUserWordbook(userWordbookName, null);
+      await createUserWordbook(trimmedUserWordbookName, null);
     } catch {
       alert('단어장 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
       return;
     }
 
-    alert(`단어장 "${userWordbookName}"이(가) 생성되었습니다!`);
+    alert(`단어장 "${trimmedUserWordbookName}"이(가) 생성되었습니다!`);
     resetCreateWordbookForm();
     close(CREATE_WORDBOOK_MODAL_ID);
 
