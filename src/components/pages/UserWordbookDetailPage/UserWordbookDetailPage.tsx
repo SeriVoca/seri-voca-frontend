@@ -6,7 +6,6 @@ import { ROUTES } from '@/router/path';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { createUserWord, getWordList } from '@/apis/word';
-import { mapWordDomainToCreateRequest, mapWordResponseToDomain } from '@/mapper/word';
 
 export const UserWordbookDetailPage = () => {
   const navigate = useNavigate();
