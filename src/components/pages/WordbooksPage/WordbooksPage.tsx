@@ -21,6 +21,7 @@ export const WordbooksPage = () => {
 
   // 사용자 단어장 생성 플로우 - 단어장 이름 상태 및 모달 open/close 핸들러
   const [userWordbookName, setUserWordbookName] = useState<string>('');
+  const [isCreateWordbookSubmitting, setIsCreateWordbookSubmitting] = useState<boolean>(false);
   const open = useModalStore((s) => s.open);
   const close = useModalStore((s) => s.close);
 
@@ -92,11 +93,15 @@ export const WordbooksPage = () => {
       alert('단어장 이름을 입력해주세요.');
       return;
     }
+
+    setIsCreateWordbookSubmitting(true);
+
     // TODO: 에러 발생 시 UI/UX 기획 필요
     try {
       await createUserWordbook(trimmedUserWordbookName, null);
     } catch {
       alert('단어장 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
+      setIsCreateWordbookSubmitting(false);
       return;
     }
 
@@ -108,6 +113,8 @@ export const WordbooksPage = () => {
       await fetchUserWordbookList();
     } catch {
       alert('단어장 목록을 불러오는 데에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsCreateWordbookSubmitting(false);
     }
   };
 
@@ -123,6 +130,7 @@ export const WordbooksPage = () => {
         onChange={setUserWordbookName}
         onSubmit={handleCreateWordbookSubmit}
         onCancel={handleCreateWordbookCancel}
+        isSubmitting={isCreateWordbookSubmitting}
       />
     );
   };
