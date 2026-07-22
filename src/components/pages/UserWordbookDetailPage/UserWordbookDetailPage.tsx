@@ -5,7 +5,7 @@ import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordb
 import { ROUTES } from '@/router/path';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { AsyncState } from '@/shared/types/asyncState';
-import { getWordList } from '@/apis/word';
+import { createUserWord, getWordList } from '@/apis/word';
 
 export const UserWordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -122,14 +122,24 @@ export const UserWordbookDetailPage = () => {
     setNewWord(createEmptyWord());
   };
 
-  const handleCreateWordSubmit = () => {
-    setWords((prev) => {
-      if (prev.status !== 'success') {
-        return prev;
-      }
+  const handleCreateWordSubmit = async () => {
+    if (!wordbookId || !isCreateWordValid) return;
 
-      return { status: 'success', data: [...prev.data, newWord] };
-    });
+    try {
+      const createdWord = await createUserWord(wordbookId, newWord);
+      alert('단어 생성에 성공했습니다.');
+
+      setWords((prev) => {
+        if (prev.status !== 'success') {
+          return prev;
+        }
+
+        return { status: 'success', data: [...prev.data, createdWord] };
+      });
+    } catch (_) {
+      // TODO: 에러 UI/UX 기획 필요
+      alert('단어 생성에 실패했습니다. 다시 시도해주세요.');
+    }
 
     resetCreateWordForm();
     closeCreateWordModal(CREATE_WORD_MODAL_ID);
