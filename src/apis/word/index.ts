@@ -61,3 +61,34 @@ export const createUserWord = async (
     throw error;
   }
 };
+
+// export const deleteUserWord = async (wordbookId: string, wordId: string): Promise<void> => {
+//   const body = { wordId };
+//   try {
+//     const res = await api.delete<void>(`/wordbooks/${wordbookId}/words/user`, {
+//       data: body,
+//     });
+//   } catch (error) {
+//     console.error('[ERROR] 단어 삭제 실패', error);
+//     throw error;
+//   }
+// };
+
+export const deleteUserWordList = async (
+  wordbookId: string,
+  wordIds: string[],
+): Promise<{ wordIds: string[] }> => {
+  const body = { wordIds };
+  try {
+    const res = await api.delete<{ wordIds: string[] }>(
+      `/wordbooks/${wordbookId}/words/user/bulk`,
+      {
+        data: body,
+      },
+    );
+    return res.data;
+  } catch (error) {
+    console.error('[ERROR] 단어 일괄 삭제 실패', error);
+    throw error;
+  }
+};
