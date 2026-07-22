@@ -180,8 +180,14 @@ export const UserWordbookDetailPage = () => {
 
     try {
       const requestedWordIds = Array.from(selectedIds);
-      const { wordIds: deletedWordIds } = await deleteUserWordList(wordbookId, requestedWordIds);
-      const deletedWordIdSet = new Set(deletedWordIds);
+      const { wordIds: responseDeletedWordIds } = await deleteUserWordList(
+        wordbookId,
+        requestedWordIds,
+      );
+      const requestedWordIdSet = new Set(requestedWordIds);
+      const deletedWordIdSet = new Set(
+        responseDeletedWordIds.filter((id) => requestedWordIdSet.has(id)),
+      );
 
       setWords((prev) => {
         if (prev.status !== 'success') return prev;
@@ -192,8 +198,8 @@ export const UserWordbookDetailPage = () => {
       });
       clearDeleteMode();
 
-      if (requestedWordIds.length !== deletedWordIds.length) {
-        const failedWordCount = requestedWordIds.length - deletedWordIds.length;
+      if (requestedWordIdSet.size !== deletedWordIdSet.size) {
+        const failedWordCount = requestedWordIdSet.size - deletedWordIdSet.size;
         alert(`${failedWordCount}개의 단어 삭제에 실패했습니다.`);
         return;
       }
