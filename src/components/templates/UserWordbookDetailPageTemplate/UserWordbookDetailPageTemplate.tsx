@@ -5,6 +5,7 @@ import { WordList } from '@/components/organisms/WordList/WordList';
 import { CreateWordModalContent } from '@/components/organisms/CreateWordModal/CreateWordModalContent';
 import type { PartOfSpeech, Word } from '@/domain/word';
 import { KebabMenu } from '@/components/organisms/KebabMenu/KebabMenu';
+import { SelectModeDashboard } from '@/components/organisms/SelectModeDashboard/SelectModeDashboard';
 
 interface Props {
   title?: string;
@@ -33,6 +34,15 @@ interface Props {
   /** Header actions */
   onNavigate: () => void;
   onOpenCreateWordModal: () => void;
+
+  /** Delete mode */
+  deleteMode: boolean;
+  selectedIds: Set<string>;
+  onToggleWordSelection: (id: string) => Promise<void> | void;
+  onAllSelect: () => Promise<void> | void;
+  onDeleteWords: () => Promise<void> | void;
+  onCancelDelete: () => Promise<void> | void;
+  onOpenDeleteMode: () => Promise<void> | void;
 }
 
 export const UserWordbookDetailPageTemplate = ({
@@ -54,6 +64,13 @@ export const UserWordbookDetailPageTemplate = ({
   onClose,
   onNavigate,
   onOpenCreateWordModal,
+  deleteMode,
+  selectedIds,
+  onToggleWordSelection,
+  onAllSelect,
+  onDeleteWords,
+  onCancelDelete,
+  onOpenDeleteMode,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col bg-gray-100">
@@ -67,8 +84,32 @@ export const UserWordbookDetailPageTemplate = ({
         RCTARef={kebabAnchorRef}
       />
 
-      <div className="mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto">
-        <WordList words={words} />
+      {deleteMode && (
+        <SelectModeDashboard
+          words={words}
+          title={`${title}`}
+          statusText="에서 삭제 중"
+          confirmLabel="삭제"
+          selectedIds={selectedIds}
+          onAllSelect={onAllSelect}
+          onConfirm={onDeleteWords}
+          onCancel={onCancelDelete}
+        />
+      )}
+
+      <div
+        className={`mt-[0.5rem] flex min-h-0 w-full flex-1 flex-col overflow-y-auto ${deleteMode ? 'pb-[6rem]' : ''}`}
+      >
+        {deleteMode ? (
+          <WordList
+            words={words}
+            mode="select"
+            selectedIds={selectedIds}
+            toggleWordSelection={onToggleWordSelection}
+          />
+        ) : (
+          <WordList words={words} />
+        )}
       </div>
 
       {/* 휘발성 오버레이 */}
@@ -83,7 +124,7 @@ export const UserWordbookDetailPageTemplate = ({
           },
           {
             label: '단어 삭제하기',
-            handleClick: () => alert('준비 중입니다.'),
+            handleClick: onOpenDeleteMode,
           },
           {
             label: '단어장 삭제하기',

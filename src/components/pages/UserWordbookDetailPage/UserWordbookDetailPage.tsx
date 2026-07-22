@@ -5,7 +5,8 @@ import { UserWordbookDetailPageTemplate } from '@/components/templates/UserWordb
 import { ROUTES } from '@/router/path';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { AsyncState } from '@/shared/types/asyncState';
-import { createUserWord, getWordList } from '@/apis/word';
+import { createUserWord, deleteUserWordList, getWordList } from '@/apis/word';
+import { useWordSelection } from '@/hooks/useWordSelection';
 
 export const UserWordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,11 @@ export const UserWordbookDetailPage = () => {
   const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const [newWord, setNewWord] = useState<Word>(createEmptyWord());
   const { wordbookId } = useParams<{ wordbookId: string }>();
+
+  // Delete mode
+  const [deleteMode, setDeleteMode] = useState(false);
+  const allWordIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
+  const { selectedIds, selectAll, toggle, clear } = useWordSelection(allWordIds);
 
   // Header kebab menu
   const [isKebabMenuOpen, setIsKebabMenuOpen] = useState<boolean>(false);
@@ -155,6 +161,50 @@ export const UserWordbookDetailPage = () => {
     openCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
+  const clearDeleteMode = () => {
+    setDeleteMode(false);
+    clear();
+  };
+
+  const handleOpenDeleteMode = () => {
+    handleKebabMenuOpen(false);
+    clear();
+    setDeleteMode(true);
+  };
+
+  const handleDeleteWords = async () => {
+    if (!wordbookId || selectedIds.size === 0) {
+      alert('삭제할 단어를 선택해주세요.');
+      return;
+    }
+
+    try {
+      const requestedWordIds = Array.from(selectedIds);
+      const { wordIds: deletedWordIds } = await deleteUserWordList(wordbookId, requestedWordIds);
+      const deletedWordIdSet = new Set(deletedWordIds);
+
+      setWords((prev) => {
+        if (prev.status !== 'success') return prev;
+        return {
+          status: 'success',
+          data: prev.data.filter((word) => !deletedWordIdSet.has(word.id)),
+        };
+      });
+      clearDeleteMode();
+
+      if (requestedWordIds.length !== deletedWordIds.length) {
+        const failedWordCount = requestedWordIds.length - deletedWordIds.length;
+        alert(`${failedWordCount}개의 단어 삭제에 실패했습니다.`);
+        return;
+      }
+
+      alert('단어 삭제에 성공했습니다.');
+    } catch (_) {
+      // TODO: 에러 UI/UX 기획 필요
+      alert('단어 삭제에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS; // TODO: '나의 단어장' 탭이 보여야 하는지 확인 필요
     navigate(path);
@@ -189,6 +239,14 @@ export const UserWordbookDetailPage = () => {
       onClose={resetCreateWordForm}
       onNavigate={handleNavigate}
       onOpenCreateWordModal={handleOpenCreateWordModal}
+      // delete word dashboard props
+      deleteMode={deleteMode}
+      selectedIds={selectedIds}
+      onToggleWordSelection={toggle}
+      onAllSelect={selectAll}
+      onDeleteWords={handleDeleteWords}
+      onCancelDelete={clearDeleteMode}
+      onOpenDeleteMode={handleOpenDeleteMode}
     />
   );
 };
