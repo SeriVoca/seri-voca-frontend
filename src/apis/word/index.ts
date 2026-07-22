@@ -13,20 +13,20 @@ export const getWordList = async (wordbookId: string): Promise<Word[]> => {
   }
 };
 
-export const addSystemWordToUserWordbook = async (
-  wordbookId: string,
-  systemWordId: string,
-): Promise<Word> => {
-  try {
-    const res = await api.post<WordResponse>(`/wordbooks/${wordbookId}/words/system`, {
-      systemWordId: systemWordId,
-    });
-    return mapWordResponseToDomain(res.data);
-  } catch (error) {
-    console.error('[ERROR] 단어 추가 실패', error);
-    throw error;
-  }
-};
+// export const addSystemWordToUserWordbook = async (
+//   wordbookId: string,
+//   systemWordId: string,
+// ): Promise<Word> => {
+//   try {
+//     const res = await api.post<WordResponse>(`/wordbooks/${wordbookId}/words/system`, {
+//       systemWordId: systemWordId,
+//     });
+//     return mapWordResponseToDomain(res.data);
+//   } catch (error) {
+//     console.error('[ERROR] 단어 추가 실패', error);
+//     throw error;
+//   }
+// };
 
 export const addSystemWordListToUserWordbook = async (
   wordbookId: string,
