@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
-import { getWordList } from '@/apis/word';
+import { getWordList, addSystemWordListToUserWordbook } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { combineAsyncStates } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
@@ -68,7 +68,7 @@ export const WordbookDetailPage = () => {
     close(wordbookSelectModalId);
   };
 
-  const handleWordsAdditionConfirm = () => {
+  const handleWordsAdditionConfirm = async () => {
     if (!selectedWordbook) {
       alert('단어장을 선택해주세요.');
       return;
@@ -78,10 +78,27 @@ export const WordbookDetailPage = () => {
       return;
     }
 
-    // POST /wordbooks/:wordbookId/words/system api 요청
-    alert('POST /wordbooks/:wordbookId/words/system api 요청');
+    try {
+      const added = await addSystemWordListToUserWordbook(selectedWordbook.id, [...selectedIds]);
 
-    selectModeClear();
+      // 응답(실제 추가된 단어)에 없는 선택 단어 = 중복으로 제외된 단어
+      const normalize = (text: string) => text.trim().toLowerCase();
+      const addedTexts = new Set(added.map((word) => normalize(word.textEn)));
+      const selectedWords =
+        words.status === 'success' ? words.data.filter((word) => selectedIds.has(word.id)) : [];
+      const skippedWords = selectedWords.filter((word) => !addedTexts.has(normalize(word.textEn)));
+
+      if (skippedWords.length > 0) {
+        const skippedNames = skippedWords.map((word) => word.textEn).join(', ');
+        alert(`${added.length}개의 단어를 추가했습니다.\n이미 있어서 제외된 단어: ${skippedNames}`);
+      } else {
+        alert(`${added.length}개의 단어를 추가했습니다.`);
+      }
+      selectModeClear();
+    } catch (_) {
+      // TODO: 에러 발생 시 UI/UX 기획 필요
+      alert('단어 추가 중에 오류가 발생했습니다.');
+    }
   };
 
   const handleWordsAdditionCancel = () => {
