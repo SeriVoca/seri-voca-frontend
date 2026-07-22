@@ -1,5 +1,7 @@
-import type { PartOfSpeechResponse, WordResponse } from '@/apis/word/types';
+import type { CreateUserWordRequest, PartOfSpeechResponse, WordResponse } from '@/apis/word/types';
 import type { Word, Meaning, PartOfSpeech } from '@/domain/word';
+
+export type CreateUserWordSource = Pick<Word, 'textEn' | 'meanings'>;
 
 export const mapWordResponseToDomain = (data: WordResponse): Word => {
   return {
@@ -18,6 +20,16 @@ export const mapWordListResponseToDomain = (data: WordResponse[]): Word[] => {
   return data.map(mapWordResponseToDomain);
 };
 
+export const mapWordDomainToCreateRequest = (
+  data: CreateUserWordSource,
+): CreateUserWordRequest => ({
+  enText: data.textEn,
+  meanings: data.meanings.map((meaning) => ({
+    partOfSpeech: POS_DOMAIN_RESPONSE_MAP[meaning.partOfSpeech],
+    meaning: meaning.textKo,
+  })),
+});
+
 export type PartOfSpeechLabel = 'n' | 'pron' | 'v' | 'adj' | 'adv' | 'prep' | 'conj' | 'interj';
 
 export const POS_RESPONSE_DOMAIN_MAP: Record<PartOfSpeechResponse, PartOfSpeech> = {
@@ -29,6 +41,17 @@ export const POS_RESPONSE_DOMAIN_MAP: Record<PartOfSpeechResponse, PartOfSpeech>
   PREPOSITION: 'preposition',
   CONJUNCTION: 'conjunction',
   INTERJECTION: 'interjection',
+};
+
+export const POS_DOMAIN_RESPONSE_MAP: Record<PartOfSpeech, PartOfSpeechResponse> = {
+  noun: 'NOUN',
+  pronoun: 'PRONOUN',
+  verb: 'VERB',
+  adjective: 'ADJECTIVE',
+  adverb: 'ADVERB',
+  preposition: 'PREPOSITION',
+  conjunction: 'CONJUNCTION',
+  interjection: 'INTERJECTION',
 };
 
 export const POS_DOMAIN_LABEL_MAP: Record<PartOfSpeech, PartOfSpeechLabel> = {
