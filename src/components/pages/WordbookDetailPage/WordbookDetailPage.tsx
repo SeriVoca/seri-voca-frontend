@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Word } from '@/domain/word';
-import { getWordList, addSystemWordsToUserWordbook } from '@/apis/word';
+import { getWordList, addSystemWordListToUserWordbook } from '@/apis/word';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { combineAsyncStates } from '@/shared/types/asyncState';
 import { WordbookDetailPageTemplate } from '@/components/templates/WordbookDetailPageTemplate/WordbookDetailPageTemplate';
@@ -79,7 +79,7 @@ export const WordbookDetailPage = () => {
     }
 
     try {
-      const added = await addSystemWordsToUserWordbook(selectedWordbook.id, [...selectedIds]);
+      const added = await addSystemWordListToUserWordbook(selectedWordbook.id, [...selectedIds]);
 
       // 응답(실제 추가된 단어)에 없는 선택 단어 = 중복으로 제외된 단어
       const normalize = (text: string) => text.trim().toLowerCase();

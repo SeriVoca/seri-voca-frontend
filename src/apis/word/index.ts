@@ -28,7 +28,7 @@ export const addSystemWordToUserWordbook = async (
   }
 };
 
-export const addSystemWordsToUserWordbook = async (
+export const addSystemWordListToUserWordbook = async (
   wordbookId: string,
   systemWordIds: string[],
 ): Promise<Word[]> => {
