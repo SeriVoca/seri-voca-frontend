@@ -6,6 +6,7 @@ import { ROUTES } from '@/router/path';
 import { useNavigate, useParams } from 'react-router-dom';
 import type { AsyncState } from '@/shared/types/asyncState';
 import { createUserWord, getWordList } from '@/apis/word';
+import { deleteUserWordbook } from '@/apis/wordbook';
 
 export const UserWordbookDetailPage = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ export const UserWordbookDetailPage = () => {
   });
   const [words, setWords] = useState<AsyncState<Word[]>>({ status: 'idle' });
   const [newWord, setNewWord] = useState<Word>(createEmptyWord());
+  const [isDeletingWordbook, setIsDeletingWordbook] = useState<boolean>(false);
+  const isDeletingWordbookRef = useRef<boolean>(false);
   const { wordbookId } = useParams<{ wordbookId: string }>();
 
   // Header kebab menu
@@ -155,6 +158,33 @@ export const UserWordbookDetailPage = () => {
     openCreateWordModal(CREATE_WORD_MODAL_ID);
   };
 
+  const handleDeleteWordbook = async () => {
+    if (!wordbookId || isDeletingWordbook || isDeletingWordbookRef.current) return;
+
+    // TODO: confirm이 동기 블로킹이라 위 setState가 화면에 반영되기 전에 다이얼로그가 뜬다.
+    // 커스텀 모달로 교체하면 해소될 예정.
+    setIsKebabMenuOpen(false);
+
+    const shouldDelete = window.confirm(
+      '단어장을 삭제하면 복구할 수 없습니다. 정말 삭제하시겠습니까?',
+    );
+    if (!shouldDelete) return;
+
+    isDeletingWordbookRef.current = true;
+    setIsDeletingWordbook(true);
+
+    try {
+      await deleteUserWordbook(wordbookId);
+      alert('단어장이 삭제되었습니다.');
+      navigate(ROUTES.WORDBOOKS);
+    } catch (_) {
+      alert('단어장 삭제에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      isDeletingWordbookRef.current = false;
+      setIsDeletingWordbook(false);
+    }
+  };
+
   const handleNavigate = () => {
     const path = ROUTES.WORDBOOKS; // TODO: '나의 단어장' 탭이 보여야 하는지 확인 필요
     navigate(path);
@@ -189,6 +219,7 @@ export const UserWordbookDetailPage = () => {
       onClose={resetCreateWordForm}
       onNavigate={handleNavigate}
       onOpenCreateWordModal={handleOpenCreateWordModal}
+      onDeleteWordbook={handleDeleteWordbook}
     />
   );
 };

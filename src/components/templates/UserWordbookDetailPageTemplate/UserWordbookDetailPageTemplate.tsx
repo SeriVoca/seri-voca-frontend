@@ -33,6 +33,7 @@ interface Props {
   /** Header actions */
   onNavigate: () => void;
   onOpenCreateWordModal: () => void;
+  onDeleteWordbook: () => Promise<void> | void;
 }
 
 export const UserWordbookDetailPageTemplate = ({
@@ -54,6 +55,7 @@ export const UserWordbookDetailPageTemplate = ({
   onClose,
   onNavigate,
   onOpenCreateWordModal,
+  onDeleteWordbook,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col bg-gray-100">
@@ -87,7 +89,7 @@ export const UserWordbookDetailPageTemplate = ({
           },
           {
             label: '단어장 삭제하기',
-            handleClick: () => alert('준비 중입니다.'),
+            handleClick: onDeleteWordbook,
           },
         ]}
       />
