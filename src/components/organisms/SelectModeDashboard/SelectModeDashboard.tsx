@@ -9,6 +9,7 @@ type Props = {
   onAllSelect: () => Promise<void> | void;
   onConfirm: () => Promise<void> | void;
   onCancel: () => Promise<void> | void;
+  isSubmitting?: boolean;
 };
 
 export const SelectModeDashboard = ({
@@ -20,6 +21,7 @@ export const SelectModeDashboard = ({
   onAllSelect,
   onConfirm,
   onCancel,
+  isSubmitting = false,
 }: Props) => {
   return (
     <div className="fixed bottom-0 left-1/2 z-10 w-full -translate-x-1/2 bg-white shadow-[0_-8px_30px_rgb(0,0,0,0.2)] sm:max-w-[360px]">
@@ -38,6 +40,7 @@ export const SelectModeDashboard = ({
           onAllSelect={onAllSelect}
           onConfirm={onConfirm}
           onCancel={onCancel}
+          isSubmitting={isSubmitting}
         />
       </div>
     </div>
@@ -69,14 +72,23 @@ type ActionSectionProps = {
   onAllSelect: () => Promise<void> | void;
   onConfirm: () => Promise<void> | void;
   onCancel: () => Promise<void> | void;
+  isSubmitting: boolean;
 };
 
-const ActionSection = ({ confirmLabel, onAllSelect, onConfirm, onCancel }: ActionSectionProps) => {
+const ActionSection = ({
+  confirmLabel,
+  onAllSelect,
+  onConfirm,
+  onCancel,
+  isSubmitting,
+}: ActionSectionProps) => {
   return (
     <div className="flex w-full items-center justify-between font-medium text-gray-700">
       <button onClick={onAllSelect}>전체 선택</button>
       <div className="flex gap-[1rem]">
-        <button onClick={onConfirm}>{confirmLabel}</button>
+        <button disabled={isSubmitting} onClick={onConfirm}>
+          {confirmLabel}
+        </button>
         <button onClick={onCancel} className="text-red-500">
           취소
         </button>

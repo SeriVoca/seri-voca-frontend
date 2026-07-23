@@ -26,6 +26,8 @@ export const UserWordbookDetailPage = () => {
 
   // Delete mode
   const [deleteMode, setDeleteMode] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const isDeletingRef = useRef(false);
   const allWordIds = words.status === 'success' ? words.data.map((word) => word.id) : [];
   const { selectedIds, selectAll, toggle, clear } = useWordSelection(allWordIds);
 
@@ -173,10 +175,15 @@ export const UserWordbookDetailPage = () => {
   };
 
   const handleDeleteWords = async () => {
+    if (isDeletingRef.current) return;
+
     if (!wordbookId || selectedIds.size === 0) {
       alert('삭제할 단어를 선택해주세요.');
       return;
     }
+
+    isDeletingRef.current = true;
+    setIsDeleting(true);
 
     try {
       const requestedWordIds = Array.from(selectedIds);
@@ -208,6 +215,9 @@ export const UserWordbookDetailPage = () => {
     } catch (_) {
       // TODO: 에러 UI/UX 기획 필요
       alert('단어 삭제에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      isDeletingRef.current = false;
+      setIsDeleting(false);
     }
   };
 
@@ -253,6 +263,7 @@ export const UserWordbookDetailPage = () => {
       onDeleteWords={handleDeleteWords}
       onCancelDelete={clearDeleteMode}
       onOpenDeleteMode={handleOpenDeleteMode}
+      isDeleting={isDeleting}
     />
   );
 };

@@ -43,6 +43,7 @@ interface Props {
   onDeleteWords: () => Promise<void> | void;
   onCancelDelete: () => Promise<void> | void;
   onOpenDeleteMode: () => Promise<void> | void;
+  isDeleting: boolean;
 }
 
 export const UserWordbookDetailPageTemplate = ({
@@ -71,6 +72,7 @@ export const UserWordbookDetailPageTemplate = ({
   onDeleteWords,
   onCancelDelete,
   onOpenDeleteMode,
+  isDeleting,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col bg-gray-100">
@@ -94,6 +96,7 @@ export const UserWordbookDetailPageTemplate = ({
           onAllSelect={onAllSelect}
           onConfirm={onDeleteWords}
           onCancel={onCancelDelete}
+          isSubmitting={isDeleting}
         />
       )}
 
