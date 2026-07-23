@@ -35,7 +35,7 @@ interface Props {
   onNavigate: () => void;
   onOpenCreateWordModal: () => void;
 
-  /** Delete mode */
+  /** Delete Word props */
   deleteMode: boolean;
   selectedIds: Set<string>;
   onToggleWordSelection: (id: string) => Promise<void> | void;
@@ -44,6 +44,9 @@ interface Props {
   onCancelDelete: () => Promise<void> | void;
   onOpenDeleteMode: () => Promise<void> | void;
   isDeleting: boolean;
+
+  /** Delete Wordbook props */
+  onDeleteWordbook: () => Promise<void> | void;
 }
 
 export const UserWordbookDetailPageTemplate = ({
@@ -73,6 +76,7 @@ export const UserWordbookDetailPageTemplate = ({
   onCancelDelete,
   onOpenDeleteMode,
   isDeleting,
+  onDeleteWordbook,
 }: Props) => {
   return (
     <div className="flex h-full w-full flex-col bg-gray-100">
@@ -131,7 +135,7 @@ export const UserWordbookDetailPageTemplate = ({
           },
           {
             label: '단어장 삭제하기',
-            handleClick: () => alert('준비 중입니다.'),
+            handleClick: onDeleteWordbook,
           },
         ]}
       />

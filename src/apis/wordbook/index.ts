@@ -34,3 +34,12 @@ export const createUserWordbook = async (
     throw error;
   }
 };
+
+export const deleteUserWordbook = async (wordbookId: string): Promise<void> => {
+  try {
+    await api.delete<void>(`/wordbooks/${wordbookId}`);
+  } catch (error) {
+    console.error('[ERROR] 사용자 단어장 삭제 실패: ', error);
+    throw error;
+  }
+};
