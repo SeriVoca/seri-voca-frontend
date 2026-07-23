@@ -161,6 +161,8 @@ export const UserWordbookDetailPage = () => {
   const handleDeleteWordbook = async () => {
     if (!wordbookId || isDeletingWordbook || isDeletingWordbookRef.current) return;
 
+    // TODO: confirm이 동기 블로킹이라 위 setState가 화면에 반영되기 전에 다이얼로그가 뜬다.
+    // 커스텀 모달로 교체하면 해소될 예정.
     setIsKebabMenuOpen(false);
 
     const shouldDelete = window.confirm(
