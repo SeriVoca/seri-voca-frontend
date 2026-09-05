@@ -4,10 +4,17 @@ import { supabase } from '@/apis/supabase';
 import { useAuthStore } from '@/store/useAuthStore';
 import { router } from '@/router';
 import { authTokenStore } from '@/store/authTokenStore';
+import { initNativeAuthListener } from '@/apis/auth/nativeAuth';
 
 export const App = () => {
   const { setLogin, setLogout } = useAuthStore();
   const [isAuthInitialized, setIsAuthInitialized] = useState(false);
+
+  // 네이티브 앱: OAuth 딥링크 콜백 수신 리스너 등록
+  useEffect(() => {
+    const cleanup = initNativeAuthListener();
+    return cleanup;
+  }, []);
 
   useEffect(() => {
     // 1. 앱 켜지자마자 현재 세션 확인
