@@ -75,7 +75,8 @@ export const WordbookDetailPageTemplate = ({
       {selectMode && selectedWordbook && (
         <SelectModeDashboard
           words={words}
-          selectedWordbook={selectedWordbook}
+          title={selectedWordbook.title}
+          statusText="에 추가 중"
           selectedIds={selectedIds}
           onAllSelect={onAllSelect}
           onConfirm={onConfirm}
